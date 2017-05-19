@@ -1,0 +1,8 @@
+{
+  "name": "fetch-actions",
+  "version": "0.0.1",
+  "description": "Manage fetch with flux-standard-actions dispatched from a redux saga or thunk.",
+  "main": "src/index.js",
+  "author": "Grady Kuhnline <github@heygrady.net> (https://github.com/heygrady)",
+  "license": "MIT"
+}
