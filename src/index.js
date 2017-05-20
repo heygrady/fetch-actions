@@ -1,24 +1,15 @@
-export const IDENTITY_FETCH_HANDLER_WARNING = '@@fetch-actions/IDENTITY_FETCH_HANDLER_WARNING'
+import createFetchAction from './createFetchAction'
+import handleFetchActions, { DEFAULT_HANDLER as DEFAULT_FETCH_HANDLER, makeRequest } from './handleFetchActions'
+import handleRequestActions, { DEFAULT_HANDLER as DEFAULT_REQUEST_HANDLER, makeRequestResponse } from './handleRequestActions'
+import handleResponseActions, { DEFAULT_HANDLER as DEFAULT_RESPONSE_HANDLER, makeResponse } from './handleResponseActions'
+import handleTransformActions, { DEFAULT_TRANSFORMER, makeJson } from './handleTransformActions'
+import { identityFetchHandler, identityRequestHandler, identityHandler } from './identityHandlers'
 
-export const identityFetchHandler = (payload, action) => {
-  console.warn(IDENTITY_FETCH_HANDLER_WARNING)
-  return new Request()
+export {
+  handleFetchActions, DEFAULT_FETCH_HANDLER, makeRequest,
+  handleRequestActions, DEFAULT_REQUEST_HANDLER, makeRequestResponse,
+  handleResponseActions, DEFAULT_RESPONSE_HANDLER, makeResponse,
+  handleTransformActions, DEFAULT_TRANSFORMER, makeJson,
+  identityFetchHandler, identityRequestHandler, identityHandler
 }
-export const identityRequestHandler = (payload, action) => false
-export const identityHandler = (payload, action) => payload
-
-
-const createFetchAction = ({
-  fetch,
-  fetchHandler = identityFetchHandler,
-  requestHandler = identityRequestHandler,
-  responseHandler = identityHandler,
-  transformer = identityHandler
-}) => action => Promise.resolve()
-  .then(() => fetchHandler(action))
-  .then(request => requestHandler && requestHandler(request, action) || fetch(request))
-  .then(response => responseHandler(response, action))
-  .then(response => response.json())
-  .then(json => transformer(json, action))
-
-  export default createFetchAction
+export default createFetchAction
