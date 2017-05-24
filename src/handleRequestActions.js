@@ -1,6 +1,6 @@
-import { Response } from 'fetch-everywhere'
+// import { Response } from 'fetch-everywhere'
 import selectActionType from './selectActionType'
-import { identityRequestHandler } from './'
+import { identityRequestHandler } from './identityHandlers'
 
 export const DEFAULT_HANDLER = '@@fetch-actions/handleRequestActions/DEFAULT_HANDLER'
 

@@ -1,5 +1,5 @@
 import selectActionType from './selectActionType'
-import { identityHandler } from './'
+import { identityHandler } from './identityHandlers'
 
 export const DEFAULT_HANDLER = '@@fetch-actions/handleResponseActions/DEFAULT_HANDLER'
 
