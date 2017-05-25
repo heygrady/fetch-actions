@@ -17,7 +17,7 @@ export const makeJson = json => {
 
 const handleTransformActions = map => (json, action) => {
   const type = selectActionType(action)
-  invariant(type !== undefined, '@@fetch-actions/handleTransformActions action type must be defined')
+  invariant(type !== undefined, '@@fetch-actions/handleTransformActions action type must be defined. It is recommended that action be a valid flux-standard-action (https://github.com/acdlite/flux-standard-action)')
   invariant(map, '@@fetch-actions/handleTransformActions map must be defined')
   const transformer = map[type] || map[DEFAULT_TRANSFORMER]
   console.log(transformer)

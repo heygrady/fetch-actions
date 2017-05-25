@@ -121,9 +121,21 @@ describe('handleRequestActions', () => {
       })
     })
 
-    it('returns response from array of args', () => {
+    it('returns response from array of args, undefined init', () => {
       expect.assertions(1)
-      const response = [{ data: true }, { status: 200, statusText: 'ok' }]
+      const response = [{ data: true }, undefined]
+      return makeResponse(response).json().then(json => {
+        expect(
+          json.data
+        ).toEqual(
+          true
+        )
+      })
+    })
+
+    it('returns response from array of args, empty init', () => {
+      expect.assertions(1)
+      const response = [{ data: true }, {}]
       return makeResponse(response).json().then(json => {
         expect(
           json.data

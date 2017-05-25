@@ -21,7 +21,7 @@ export const makeRequest = request => {
 const handleFetchActions = map => action => {
   const type = selectActionType(action)
   const handler = map[type] || map[DEFAULT_HANDLER]
-  invariant(type !== undefined, '@@fetch-actions/handleFetchActions action type must be defined')
+  invariant(type !== undefined, '@@fetch-actions/handleFetchActions action type must be defined. It is recommended that action be a valid flux-standard-action (https://github.com/acdlite/flux-standard-action)')
   invariant(map, '@@fetch-actions/handleFetchActions map must be defined')
   if (!handler) {
     // TODO: invariant

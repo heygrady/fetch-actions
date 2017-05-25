@@ -93,8 +93,9 @@ describe('handleFetchActions', () => {
     })
 
     it('returns request from array of args', () => {
+      const body = JSON.stringify({ data: true })
       const request = makeRequest([
-        'http://array', { body: JSON.stringify({ data: true }) }
+        'http://array', { body }
       ])
       expect(
         request.url
@@ -104,7 +105,7 @@ describe('handleFetchActions', () => {
       expect(
         request.body
       ).toEqual(
-        JSON.stringify({ data: true })
+        body
       )
     })
 
