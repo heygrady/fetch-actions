@@ -4,7 +4,7 @@ The core mechanics are that if you pass it an action it will pass you a promise 
 You can call fetchAction from anywhere in your app.  If you're trying to do something more complex, you probably want to use a saga. Here we're writing a saga that will watch for `fetchPosts()` to be dispatched from a container. We're dispatching a host of housekeeping actions so that the app can properly respond to the fetching process.
 
 ```js
-// modules/mosts/sagas/fetchPosts
+// modules/posts/sagas/fetchPosts
 import { put, call } from 'redux-saga/effects'
 import { fetchAction } from '../utils/api'
 import { startFetchingPosts, endFetchingPosts, errorFetchingPosts, failFetchingPosts, loadPosts } from '../actions'

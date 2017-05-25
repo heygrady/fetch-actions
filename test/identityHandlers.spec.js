@@ -1,10 +1,10 @@
 import { identityFetchHandler, identityRequestHandler, identityHandler } from '../src/identityHandlers'
 import 'fetch-everywhere'
-global.console = { error: jest.fn(), warn: jest.fn(), log: jest.fn() }
 
 describe('identityHandlers', () => {
   describe('identityFetchHandler', () => {
     it('throws an invariant error', () => {
+      global.console = { error: jest.fn() }
       const emptyRequest = new Request('')
       expect(
         identityFetchHandler()

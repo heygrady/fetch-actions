@@ -24,8 +24,7 @@ const handleFetchActions = map => action => {
   invariant(type !== undefined, '@@fetch-actions/handleFetchActions action type must be defined. It is recommended that action be a valid flux-standard-action (https://github.com/acdlite/flux-standard-action)')
   invariant(map, '@@fetch-actions/handleFetchActions map must be defined')
   if (!handler) {
-    // TODO: invariant
-    warning(handler, `@@fetch-actions/handleResponseActions No handler matched action.type of ${type}. Using identityFetchHandler which simply returns an.`)
+    warning(handler, `@@fetch-actions/handleResponseActions No handler matched action.type of ${type}. Using identityFetchHandler which simply returns an empty request.`)
     return identityFetchHandler()
   }
   return makeRequest(handler(action))

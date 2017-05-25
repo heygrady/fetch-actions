@@ -1,6 +1,5 @@
 import handleRequestActions, { DEFAULT_HANDLER, makeResponse } from '../src/handleRequestActions'
 import 'fetch-everywhere'
-global.console = { error: jest.fn(), warn: jest.fn(), log: jest.fn() }
 
 describe('handleRequestActions', () => {
   const type = 'TEST_ACTION'
@@ -36,6 +35,7 @@ describe('handleRequestActions', () => {
   })
 
   it('warns on missing handler', () => {
+    global.console = { error: jest.fn() }
     const action = { type: 'missing' }
     const handler = handleRequestActions({ noMatch: request => new Response() })
     expect(

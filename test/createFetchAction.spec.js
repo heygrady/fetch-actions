@@ -1,7 +1,7 @@
 import createFetchAction from '../src/createFetchAction'
 import createFakeFetch from './helpers/createFakeFetch'
 import 'fetch-everywhere'
-global.console = { error: jest.fn(), warn: jest.fn(), log: jest.fn() }
+global.console = { error: jest.fn() }
 
 describe('createFetchAction', () => {
   const type = 'TEST_ACTION'
@@ -10,14 +10,20 @@ describe('createFetchAction', () => {
   const request = new Request('http://test')
   const createResponse = () => new Response(JSON.stringify({ data }))
 
-  const fetch = jest.fn(createFakeFetch(createResponse))
-  const fetchHandler = jest.fn(() => request)
-  const requestHandler = jest.fn(() => false)
-  const responseHandler = jest.fn(response => response)
-  const transformer = jest.fn(json => json)
-
+  let fetch
+  let fetchHandler
+  let requestHandler
+  let responseHandler
+  let transformer
   let fetchAction
+
   beforeEach(() => {
+    fetch = jest.fn(createFakeFetch(createResponse))
+    fetchHandler = jest.fn(() => request)
+    requestHandler = jest.fn(() => false)
+    responseHandler = jest.fn(response => response)
+    transformer = jest.fn(json => json)
+
     fetchAction = createFetchAction({
       fetch,
       fetchHandler,
@@ -26,6 +32,7 @@ describe('createFetchAction', () => {
       transformer
     })
   })
+
   it('returns a function', () => {
     const fetchAction = createFetchAction()
     expect(
@@ -52,6 +59,7 @@ describe('createFetchAction', () => {
 
   // NOTE: this is double-testing the identityFetchHandler
   it('warns on missing fetchHandler', () => {
+    global.console = { error: jest.fn() }
     const fetchAction = createFetchAction({ fetch })
     expect.assertions(1)
     return fetchAction(action).then((data) => {

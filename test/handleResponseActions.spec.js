@@ -1,6 +1,5 @@
 import handleResponseActions, { DEFAULT_HANDLER, makeResponse } from '../src/handleResponseActions'
 import 'fetch-everywhere'
-global.console = { error: jest.fn(), warn: jest.fn(), log: jest.fn() }
 
 describe('handleResponseActions', () => {
   const type = 'TEST_ACTION'
@@ -36,6 +35,7 @@ describe('handleResponseActions', () => {
   })
 
   it('warns on missing handler', () => {
+    global.console = { error: jest.fn() }
     const action = { type: 'missing' }
     const handler = handleResponseActions({ noMatch: response => response })
     expect(
@@ -89,6 +89,7 @@ describe('handleResponseActions', () => {
     })
 
     it('returns undefined after resolving promises when not response-like', () => {
+      global.console = { error: jest.fn() }
       expect.assertions(2)
       const promise = Promise.resolve({})
       return makeResponse(promise).then(response => {
@@ -102,7 +103,6 @@ describe('handleResponseActions', () => {
     })
 
     it('returns undefined when not response-like', () => {
-      expect(console.error).toBeCalled()
       expect(
         makeResponse({})
       ).toEqual(
