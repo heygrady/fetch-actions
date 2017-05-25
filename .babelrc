@@ -1,5 +1,6 @@
 {
   "plugins": [
+    "babel-plugin-dev-expression",
     ["transform-es2015-template-literals", { "loose": true }],
     "transform-es2015-literals",
     "transform-es2015-function-name",

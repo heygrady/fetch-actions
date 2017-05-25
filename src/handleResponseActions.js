@@ -1,5 +1,7 @@
 import selectActionType from './selectActionType'
 import { identityHandler } from './identityHandlers'
+import invariant from 'invariant'
+import warning from 'warning'
 
 export const DEFAULT_HANDLER = '@@fetch-actions/handleResponseActions/DEFAULT_HANDLER'
 
@@ -10,26 +12,18 @@ export const makeResponse = response => {
   } else if (typeof response.json === 'function') {
     return response
   } else {
-    // TODO: invariant
-    console.warn(
-      '@@fetch-actions/handleResponseActions { makeResponse }',
-      `undefined response object. response must have a json method that returns json or be a thennable that returns a response with a json method`,
-      { response }
-    )
+    warning(undefined, '@@fetch-actions/handleResponseActions/makeResponse undefined response object. response must have a json method that returns json or be a thennable that returns a response with a json method')
     return undefined
   }
 }
 
 const handleResponseActions = (map) => (response, action) => {
   const type = selectActionType(action)
+  invariant(type !== undefined, '@@fetch-actions/handleResponseActions action type must be defined')
+  invariant(map, '@@fetch-actions/handleResponseActions map must be defined')
   const handler = map[type] || map[DEFAULT_HANDLER]
   if (!handler) {
-    // TODO: invariant
-    console.warn(
-      '@@fetch-actions/handleResponseActions',
-      `No handler matched action.type of ${type}`,
-      { map, response, action }
-    )
+    warning(handler, `@@fetch-actions/handleResponseActions No handler matched action.type of ${type}. Using identityHandler which simply returns the response unchanged.`)
     return identityHandler(response, action)
   }
   return makeResponse(handler(response, action))

@@ -1,17 +1,16 @@
 import { ADD_TODO, DISPATCH_IN_MIDDLE, THROW_ERROR } from './actionTypes'
 
-
-function id(state = []) {
+function id (state = []) {
   return state.reduce((result, item) => (
     item.id > result ? item.id : result
   ), 0) + 1
 }
 
-export function todos(state = [], action) {
+export function todos (state = [], action) {
   switch (action.type) {
     case ADD_TODO:
-      return [ 
-        ...state, 
+      return [
+        ...state,
         {
           id: id(state),
           text: action.text
@@ -22,7 +21,7 @@ export function todos(state = [], action) {
   }
 }
 
-export function todosReverse(state = [], action) {
+export function todosReverse (state = [], action) {
   switch (action.type) {
     case ADD_TODO:
       return [
@@ -36,7 +35,7 @@ export function todosReverse(state = [], action) {
   }
 }
 
-export function dispatchInTheMiddleOfReducer(state = [], action) {
+export function dispatchInTheMiddleOfReducer (state = [], action) {
   switch (action.type) {
     case DISPATCH_IN_MIDDLE:
       action.boundDispatchFn()
@@ -46,7 +45,7 @@ export function dispatchInTheMiddleOfReducer(state = [], action) {
   }
 }
 
-export function errorThrowingReducer(state = [], action) {
+export function errorThrowingReducer (state = [], action) {
   switch (action.type) {
     case THROW_ERROR:
       throw new Error()

@@ -1,9 +1,8 @@
-// import { Request } from 'fetch-everywhere'
-export const IDENTITY_FETCH_HANDLER_WARNING = '@@fetch-actions/IDENTITY_FETCH_HANDLER_WARNING'
+import warning from 'warning'
 
 export const identityFetchHandler = (payload, action) => {
-  console.warn(IDENTITY_FETCH_HANDLER_WARNING)
-  return new Request()
+  warning(false, '@@fetch-actions/identityFetchHandler you should define a fetchHandler for all actions. The identity fetch handler generates blank requests.')
+  return new Request('')
 }
 export const identityRequestHandler = (payload, action) => undefined
 export const identityHandler = (payload, action) => payload
