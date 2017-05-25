@@ -1,7 +1,7 @@
 import createFetchAction from '../src/createFetchAction'
 import createFakeFetch from './helpers/createFakeFetch'
 import 'fetch-everywhere'
-global.console = { error: jest.fn() }
+global.console = { error: () => undefined } // suppress errors
 
 describe('createFetchAction', () => {
   const type = 'TEST_ACTION'
