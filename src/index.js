@@ -3,7 +3,7 @@ import handleFetchActions, { DEFAULT_HANDLER as DEFAULT_FETCH_HANDLER, makeReque
 import handleRequestActions, { DEFAULT_HANDLER as DEFAULT_REQUEST_HANDLER, makeResponse as makeRequestResponse } from './handleRequestActions'
 import handleResponseActions, { DEFAULT_HANDLER as DEFAULT_RESPONSE_HANDLER, makeResponse } from './handleResponseActions'
 import handleTransformActions, { DEFAULT_TRANSFORMER, makeJson } from './handleTransformActions'
-import reduceHandlers from './reduceHandlers'
+import reduceHandlers, { someFetchHandlers, someRequestHandlers } from './reduceHandlers'
 import { identityFetchHandler, identityRequestHandler, identityHandler } from './identityHandlers'
 import warning from 'warning'
 
@@ -33,7 +33,7 @@ export {
   handleRequestActions, DEFAULT_REQUEST_HANDLER, makeRequestResponse,
   handleResponseActions, DEFAULT_RESPONSE_HANDLER, makeResponse,
   handleTransformActions, DEFAULT_TRANSFORMER, makeJson,
-  identityFetchHandler, identityRequestHandler, identityHandler,
-  reduceHandlers
+  reduceHandlers, someFetchHandlers, someRequestHandlers,
+  identityFetchHandler, identityRequestHandler, identityHandler
 }
 export default createFetchAction
