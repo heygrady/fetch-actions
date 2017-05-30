@@ -1,4 +1,5 @@
-_fun/
+_fun
+_old
 .DS_Store
 *.log
 node_modules
