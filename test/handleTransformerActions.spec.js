@@ -1,4 +1,4 @@
-import handleTransformActions, { makeJson, DEFAULT_TRANSFORMER } from '../src/handleTransformActions'
+import handleTransformerActions, { makeJson, DEFAULT_TRANSFORMER } from '../src/handleTransformerActions'
 
 describe('handleTransformAction', () => {
   const type = 'TEST_ACTION'
@@ -11,7 +11,7 @@ describe('handleTransformAction', () => {
 
   let transformer
   beforeEach(() => {
-    transformer = handleTransformActions({
+    transformer = handleTransformerActions({
       [type]: testTransformer,
       [DEFAULT_TRANSFORMER]: () => 'default'
     })
@@ -19,7 +19,7 @@ describe('handleTransformAction', () => {
 
   it('throws on missing map', () => {
     expect(
-      () => handleTransformActions()(json, action)
+      () => handleTransformerActions()(json, action)
     ).toThrow(
       undefined
     )
@@ -35,7 +35,7 @@ describe('handleTransformAction', () => {
   it('warns on missing transformer', () => {
     global.console = { error: jest.fn() }
     const action = { type: 'missing' }
-    const transformer = handleTransformActions({ noMatch: json => json })
+    const transformer = handleTransformerActions({ noMatch: json => json })
     expect(
       transformer(json, action)
     ).toEqual(json)

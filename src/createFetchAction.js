@@ -1,11 +1,11 @@
-import { identityFetchHandler, identityHandler } from './identityHandlers'
+import { identityRequestCreator, identityHandler } from './identityHandlers'
 import selectActionType from './selectActionType'
 import invariant from 'invariant'
 import warning from 'warning'
 
 const createFetchAction = ({
   fetch,
-  fetchHandler = identityFetchHandler,
+  fetchHandler = identityRequestCreator,
   requestHandler,
   responseHandler = identityHandler,
   transformer = identityHandler,

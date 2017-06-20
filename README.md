@@ -151,6 +151,6 @@ export default PostListContainer
   - [`handleRequestCreatorActions`](./docs/handleRequestCreatorActions.md)
   - [`handleResponderActions`](./docs/handleResponderActions.md)
   - [`handleResponseActions`](./docs/handleResponseActions.md)
-  - [`handleTransformActions`](./docs/handleTransformActions.md)
+  - [`handleTransformerActions`](./docs/handleTransformerActions.md)
 - [More examples](./docs/examples/README.md)
 - [Example applications](./examples/README.md)

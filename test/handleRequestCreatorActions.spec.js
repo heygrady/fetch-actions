@@ -1,7 +1,7 @@
-import handleFetchActions, { DEFAULT_HANDLER, makeRequest } from '../src/handleFetchActions'
+import handleRequestCreatorActions, { DEFAULT_HANDLER, makeRequest } from '../src/handleRequestCreatorActions'
 import 'fetch-everywhere'
 
-describe('handleFetchActions', () => {
+describe('handleRequestCreatorActions', () => {
   const type = 'TEST_ACTION'
   const payload = { hello: true }
   const action = { type, payload }
@@ -12,7 +12,7 @@ describe('handleFetchActions', () => {
 
   let handler
   beforeEach(() => {
-    handler = handleFetchActions({
+    handler = handleRequestCreatorActions({
       [type]: testHandler,
       [DEFAULT_HANDLER]: () => new Request('http://default')
     })
@@ -20,7 +20,7 @@ describe('handleFetchActions', () => {
 
   it('throws on missing map', () => {
     expect(
-      () => handleFetchActions()(action)
+      () => handleRequestCreatorActions()(action)
     ).toThrow(
       undefined
     )
@@ -36,7 +36,7 @@ describe('handleFetchActions', () => {
   it('warns on missing handler', () => {
     global.console = { error: jest.fn() }
     const action = { type: 'missing' }
-    const handler = handleFetchActions({ noMatch: action => new Request('http://no-match') })
+    const handler = handleRequestCreatorActions({ noMatch: action => new Request('http://no-match') })
     expect(
       handler(action)
     ).toEqual(

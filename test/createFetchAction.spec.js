@@ -57,7 +57,7 @@ describe('createFetchAction', () => {
     }).toThrow()
   })
 
-  // NOTE: this is double-testing the identityFetchHandler
+  // NOTE: this is double-testing the identityRequestCreator
   it('warns on missing fetchHandler', () => {
     global.console = { error: jest.fn() }
     const fetchAction = createFetchAction({ fetch })

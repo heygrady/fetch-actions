@@ -1,8 +1,7 @@
-// import { handleRequestActions } from 'fetch-actions'
-import { handleFetchActions } from '../../../../../../src'
+import { handleRequestCreatorActions } from '../../../../../../src'
 import doubleHandler from './doubleHandler'
 import { COUNTER_DOUBLE_ASYNC } from '../../../routes/Counter/modules/counter/constants'
 
-export default handleFetchActions({
+export default handleRequestCreatorActions({
   [COUNTER_DOUBLE_ASYNC]: doubleHandler
 })

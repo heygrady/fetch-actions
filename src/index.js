@@ -1,10 +1,10 @@
 import createFetchAction from './createFetchAction'
-import handleFetchActions, { DEFAULT_HANDLER as DEFAULT_FETCH_HANDLER, makeRequest } from './handleFetchActions'
-import handleRequestActions, { DEFAULT_HANDLER as DEFAULT_REQUEST_HANDLER, makeResponse as makeRequestResponse } from './handleRequestActions'
+import handleRequestCreatorActions, { DEFAULT_HANDLER as DEFAULT_FETCH_HANDLER, makeRequest } from './handleRequestCreatorActions'
+import handleRespondorActions, { DEFAULT_HANDLER as DEFAULT_REQUEST_HANDLER, makeResponse as makeRequestResponse } from './handleRespondorActions'
 import handleResponseActions, { DEFAULT_HANDLER as DEFAULT_RESPONSE_HANDLER, makeResponse } from './handleResponseActions'
-import handleTransformActions, { DEFAULT_TRANSFORMER, makeJson } from './handleTransformActions'
-import reduceHandlers, { someFetchHandlers, someRequestHandlers } from './reduceHandlers'
-import { identityFetchHandler, identityRequestHandler, identityHandler } from './identityHandlers'
+import handleTransformerActions, { DEFAULT_TRANSFORMER, makeJson } from './handleTransformerActions'
+import reduceHandlers, { someRequestCreators, someResponders } from './reduceHandlers'
+import { identityRequestCreator, identityResponder, identityHandler } from './identityHandlers'
 import warning from 'warning'
 
 /*
@@ -29,11 +29,11 @@ if (
 
 export {
   createFetchAction,
-  handleFetchActions, DEFAULT_FETCH_HANDLER, makeRequest,
-  handleRequestActions, DEFAULT_REQUEST_HANDLER, makeRequestResponse,
+  handleRequestCreatorActions, DEFAULT_FETCH_HANDLER, makeRequest,
+  handleRespondorActions, DEFAULT_REQUEST_HANDLER, makeRequestResponse,
   handleResponseActions, DEFAULT_RESPONSE_HANDLER, makeResponse,
-  handleTransformActions, DEFAULT_TRANSFORMER, makeJson,
-  reduceHandlers, someFetchHandlers, someRequestHandlers,
-  identityFetchHandler, identityRequestHandler, identityHandler
+  handleTransformerActions, DEFAULT_TRANSFORMER, makeJson,
+  reduceHandlers, someRequestCreators, someResponders,
+  identityRequestCreator, identityResponder, identityHandler
 }
 export default createFetchAction

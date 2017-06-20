@@ -1,4 +1,4 @@
-import reduceHandlers, { someFetchHandlers, someRequestHandlers } from '../src/reduceHandlers'
+import reduceHandlers, { someRequestCreators, someResponders } from '../src/reduceHandlers'
 import 'fetch-everywhere'
 
 describe('reduceHandlers', () => {
@@ -79,7 +79,7 @@ describe('reduceHandlers', () => {
     handler(state, action)
   })
 
-  describe('someFetchHandlers', () => {
+  describe('someRequestCreators', () => {
     let firstFetchHandler
     let secondFetchHandler
 
@@ -89,19 +89,19 @@ describe('reduceHandlers', () => {
     })
 
     it('returns undefined on empty handlers, no action', () => {
-      const handler = someFetchHandlers()
+      const handler = someRequestCreators()
       const final = handler()
       expect(final).toEqual(undefined)
     })
 
     it('returns undefined on empty handlers', () => {
-      const handler = someFetchHandlers()
+      const handler = someRequestCreators()
       const final = handler(action)
       expect(final).toEqual(undefined)
     })
 
     it('calls all handlers', () => {
-      const handler = someFetchHandlers(firstFetchHandler, secondFetchHandler)
+      const handler = someRequestCreators(firstFetchHandler, secondFetchHandler)
       handler()
       expect(firstFetchHandler).toBeCalled()
       expect(secondFetchHandler).toBeCalled()
@@ -109,7 +109,7 @@ describe('reduceHandlers', () => {
 
     it('calls only first handler', () => {
       const firstFetchHandler = jest.fn(() => new Request('http://first'))
-      const handler = someFetchHandlers(firstFetchHandler, secondFetchHandler)
+      const handler = someRequestCreators(firstFetchHandler, secondFetchHandler)
       handler()
       expect(firstFetchHandler).toBeCalled()
       expect(secondFetchHandler).not.toBeCalled()
@@ -118,13 +118,13 @@ describe('reduceHandlers', () => {
     it('return request from first handler', () => {
       const request = new Request('http://first')
       const firstFetchHandler = jest.fn(() => request)
-      const handler = someFetchHandlers(firstFetchHandler, secondFetchHandler)
+      const handler = someRequestCreators(firstFetchHandler, secondFetchHandler)
       const final = handler()
       expect(final).toEqual(request)
     })
 
     it('calls each handler with same action', () => {
-      const handler = someRequestHandlers(
+      const handler = someResponders(
         (innerAction) => {
           expect(innerAction).toEqual(action)
           return undefined
@@ -138,7 +138,7 @@ describe('reduceHandlers', () => {
     })
   })
 
-  describe('someRequestHandlers', () => {
+  describe('someResponders', () => {
     let request
     let firstRequestHandler
     let secondRequestHandler
@@ -150,19 +150,19 @@ describe('reduceHandlers', () => {
     })
 
     it('returns undefined on empty handlers, no action', () => {
-      const handler = someRequestHandlers()
+      const handler = someResponders()
       const final = handler()
       expect(final).toEqual(undefined)
     })
 
     it('returns undefined on empty handlers', () => {
-      const handler = someRequestHandlers()
+      const handler = someResponders()
       const final = handler(request, action)
       expect(final).toEqual(undefined)
     })
 
     it('calls all handlers', () => {
-      const handler = someRequestHandlers(firstRequestHandler, secondRequestHandler)
+      const handler = someResponders(firstRequestHandler, secondRequestHandler)
       handler()
       expect(firstRequestHandler).toBeCalled()
       expect(secondRequestHandler).toBeCalled()
@@ -170,7 +170,7 @@ describe('reduceHandlers', () => {
 
     it('calls only first handler', () => {
       const firstRequestHandler = jest.fn(() => new Response(''))
-      const handler = someRequestHandlers(firstRequestHandler, secondRequestHandler)
+      const handler = someResponders(firstRequestHandler, secondRequestHandler)
       handler()
       expect(firstRequestHandler).toBeCalled()
       expect(secondRequestHandler).not.toBeCalled()
@@ -179,13 +179,13 @@ describe('reduceHandlers', () => {
     it('return response from first handler', () => {
       const response = new Response()
       const firstRequestHandler = jest.fn(() => response)
-      const handler = someRequestHandlers(firstRequestHandler, secondRequestHandler)
+      const handler = someResponders(firstRequestHandler, secondRequestHandler)
       const final = handler()
       expect(final).toEqual(response)
     })
 
     it('calls each handler with same request and action', () => {
-      const handler = someRequestHandlers(
+      const handler = someResponders(
         (innerRequest, innerAction) => {
           expect(innerAction).toEqual(action)
           expect(innerRequest).toEqual(request)

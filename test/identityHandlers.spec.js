@@ -1,13 +1,13 @@
-import { identityFetchHandler, identityRequestHandler, identityHandler } from '../src/identityHandlers'
+import { identityRequestCreator, identityResponder, identityHandler } from '../src/identityHandlers'
 import 'fetch-everywhere'
 
 describe('identityHandlers', () => {
-  describe('identityFetchHandler', () => {
+  describe('identityRequestCreator', () => {
     it('throws an invariant error', () => {
       global.console = { error: jest.fn() }
       const emptyRequest = new Request('')
       expect(
-        identityFetchHandler()
+        identityRequestCreator()
       ).toEqual(
         emptyRequest
       )
@@ -15,10 +15,10 @@ describe('identityHandlers', () => {
     })
   })
 
-  describe('identityRequestHandler', () => {
+  describe('identityResponder', () => {
     it('returns undefined for empty args', () => {
       expect(
-        identityRequestHandler()
+        identityResponder()
       ).toEqual(
         undefined
       )
@@ -28,7 +28,7 @@ describe('identityHandlers', () => {
       const payload = {}
       const action = {}
       expect(
-        identityRequestHandler(payload, action)
+        identityResponder(payload, action)
       ).toEqual(
         undefined
       )
@@ -39,7 +39,7 @@ describe('identityHandlers', () => {
       const payload = new Request('')
       const action = { type }
       expect(
-        identityRequestHandler(payload, action)
+        identityResponder(payload, action)
       ).toEqual(
         undefined
       )

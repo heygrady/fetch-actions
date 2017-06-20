@@ -1,9 +1,9 @@
 import selectActionType from './selectActionType'
-import { identityRequestHandler } from './identityHandlers'
+import { identityResponder } from './identityHandlers'
 import invariant from 'invariant'
 import warning from 'warning'
 
-export const DEFAULT_HANDLER = '@@fetch-actions/handleRequestActions/DEFAULT_HANDLER'
+export const DEFAULT_HANDLER = '@@fetch-actions/handleRespondorActions/DEFAULT_HANDLER'
 
 const isEmpty = obj => Object.keys(obj).length === 0 && obj.constructor === Object
 
@@ -30,16 +30,16 @@ export const makeResponse = response => {
   }
 }
 
-const handleRequestActions = (map) => (request, action) => {
+const handleRespondorActions = (map) => (request, action) => {
   const type = selectActionType(action)
-  invariant(type !== undefined, '@@fetch-actions/handleRequestActions action type must be defined. It is recommended that action be a valid flux-standard-action (https://github.com/acdlite/flux-standard-action)')
-  invariant(map, '@@fetch-actions/handleRequestActions map must be defined')
+  invariant(type !== undefined, '@@fetch-actions/handleRespondorActions action type must be defined. It is recommended that action be a valid flux-standard-action (https://github.com/acdlite/flux-standard-action)')
+  invariant(map, '@@fetch-actions/handleRespondorActions map must be defined')
   const handler = map[type] || map[DEFAULT_HANDLER]
   if (!handler) {
-    warning(handler, `@@fetch-actions/handleResponseActions No handler matched action.type of ${type}. Using identityRequestHandler which simply returns undefined.`)
-    return identityRequestHandler()
+    warning(handler, `@@fetch-actions/handleResponseActions No handler matched action.type of ${type}. Using identityResponder which simply returns undefined.`)
+    return identityResponder()
   }
   const response = handler(request, action)
   return makeResponse(response)
 }
-export default handleRequestActions
+export default handleRespondorActions

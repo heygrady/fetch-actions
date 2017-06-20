@@ -1,4 +1,4 @@
-export const someFetchHandlers = (...handlers) => {
+export const someRequestCreators = (...handlers) => {
   return action => {
     let request
     handlers.some(handler => {
@@ -9,7 +9,7 @@ export const someFetchHandlers = (...handlers) => {
   }
 }
 
-export const someRequestHandlers = (...handlers) => {
+export const someResponders = (...handlers) => {
   return (request, action) => {
     let response
     handlers.some(handler => {
