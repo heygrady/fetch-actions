@@ -80,12 +80,12 @@ describe('reduceHandlers', () => {
   })
 
   describe('someRequestCreators', () => {
-    let firstFetchHandler
-    let secondFetchHandler
+    let firstrequestCreator
+    let secondrequestCreator
 
     beforeEach(() => {
-      firstFetchHandler = jest.fn(action => undefined)
-      secondFetchHandler = jest.fn(action => undefined)
+      firstrequestCreator = jest.fn(action => undefined)
+      secondrequestCreator = jest.fn(action => undefined)
     })
 
     it('returns undefined on empty handlers, no action', () => {
@@ -101,24 +101,24 @@ describe('reduceHandlers', () => {
     })
 
     it('calls all handlers', () => {
-      const handler = someRequestCreators(firstFetchHandler, secondFetchHandler)
+      const handler = someRequestCreators(firstrequestCreator, secondrequestCreator)
       handler()
-      expect(firstFetchHandler).toBeCalled()
-      expect(secondFetchHandler).toBeCalled()
+      expect(firstrequestCreator).toBeCalled()
+      expect(secondrequestCreator).toBeCalled()
     })
 
     it('calls only first handler', () => {
-      const firstFetchHandler = jest.fn(() => new Request('http://first'))
-      const handler = someRequestCreators(firstFetchHandler, secondFetchHandler)
+      const firstrequestCreator = jest.fn(() => new Request('http://first'))
+      const handler = someRequestCreators(firstrequestCreator, secondrequestCreator)
       handler()
-      expect(firstFetchHandler).toBeCalled()
-      expect(secondFetchHandler).not.toBeCalled()
+      expect(firstrequestCreator).toBeCalled()
+      expect(secondrequestCreator).not.toBeCalled()
     })
 
     it('return request from first handler', () => {
       const request = new Request('http://first')
-      const firstFetchHandler = jest.fn(() => request)
-      const handler = someRequestCreators(firstFetchHandler, secondFetchHandler)
+      const firstrequestCreator = jest.fn(() => request)
+      const handler = someRequestCreators(firstrequestCreator, secondrequestCreator)
       const final = handler()
       expect(final).toEqual(request)
     })
@@ -140,13 +140,13 @@ describe('reduceHandlers', () => {
 
   describe('someResponders', () => {
     let request
-    let firstRequestHandler
-    let secondRequestHandler
+    let firstresponder
+    let secondresponder
 
     beforeEach(() => {
       request = new Request('http://test')
-      firstRequestHandler = jest.fn((request, action) => undefined)
-      secondRequestHandler = jest.fn((request, action) => undefined)
+      firstresponder = jest.fn((request, action) => undefined)
+      secondresponder = jest.fn((request, action) => undefined)
     })
 
     it('returns undefined on empty handlers, no action', () => {
@@ -162,24 +162,24 @@ describe('reduceHandlers', () => {
     })
 
     it('calls all handlers', () => {
-      const handler = someResponders(firstRequestHandler, secondRequestHandler)
+      const handler = someResponders(firstresponder, secondresponder)
       handler()
-      expect(firstRequestHandler).toBeCalled()
-      expect(secondRequestHandler).toBeCalled()
+      expect(firstresponder).toBeCalled()
+      expect(secondresponder).toBeCalled()
     })
 
     it('calls only first handler', () => {
-      const firstRequestHandler = jest.fn(() => new Response(''))
-      const handler = someResponders(firstRequestHandler, secondRequestHandler)
+      const firstresponder = jest.fn(() => new Response(''))
+      const handler = someResponders(firstresponder, secondresponder)
       handler()
-      expect(firstRequestHandler).toBeCalled()
-      expect(secondRequestHandler).not.toBeCalled()
+      expect(firstresponder).toBeCalled()
+      expect(secondresponder).not.toBeCalled()
     })
 
     it('return response from first handler', () => {
       const response = new Response()
-      const firstRequestHandler = jest.fn(() => response)
-      const handler = someResponders(firstRequestHandler, secondRequestHandler)
+      const firstresponder = jest.fn(() => response)
+      const handler = someResponders(firstresponder, secondresponder)
       const final = handler()
       expect(final).toEqual(response)
     })

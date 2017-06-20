@@ -1,7 +1,7 @@
-import handleRespondorActions, { DEFAULT_HANDLER, makeResponse } from '../src/handleRespondorActions'
+import handleResponderActions, { DEFAULT_HANDLER, makeResponse } from '../src/handleResponderActions'
 import 'fetch-everywhere'
 
-describe('handleRespondorActions', () => {
+describe('handleResponderActions', () => {
   const type = 'TEST_ACTION'
   const payload = { hello: true }
   const action = { type, payload }
@@ -13,7 +13,7 @@ describe('handleRespondorActions', () => {
 
   let handler
   beforeEach(() => {
-    handler = handleRespondorActions({
+    handler = handleResponderActions({
       [type]: testHandler,
       [DEFAULT_HANDLER]: () => new Response(JSON.stringify({ default: true }))
     })
@@ -21,7 +21,7 @@ describe('handleRespondorActions', () => {
 
   it('throws on missing map', () => {
     expect(
-      () => handleRespondorActions()(request, action)
+      () => handleResponderActions()(request, action)
     ).toThrow(
       undefined
     )
@@ -37,7 +37,7 @@ describe('handleRespondorActions', () => {
   it('warns on missing handler', () => {
     global.console = { error: jest.fn() }
     const action = { type: 'missing' }
-    const handler = handleRespondorActions({ noMatch: request => new Response() })
+    const handler = handleResponderActions({ noMatch: request => new Response() })
     expect(
       handler(request, action)
     ).toEqual(undefined)

@@ -33,6 +33,7 @@
     "testPathIgnorePatterns": [
       "node_modules",
       "_fun",
+      "_book",
       "examples"
     ]
   },

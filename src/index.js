@@ -1,6 +1,6 @@
 import createFetchAction from './createFetchAction'
 import handleRequestCreatorActions, { DEFAULT_HANDLER as DEFAULT_FETCH_HANDLER, makeRequest } from './handleRequestCreatorActions'
-import handleRespondorActions, { DEFAULT_HANDLER as DEFAULT_REQUEST_HANDLER, makeResponse as makeRequestResponse } from './handleRespondorActions'
+import handleResponderActions, { DEFAULT_HANDLER as DEFAULT_REQUEST_HANDLER, makeResponse as makeRequestResponse } from './handleResponderActions'
 import handleResponseActions, { DEFAULT_HANDLER as DEFAULT_RESPONSE_HANDLER, makeResponse } from './handleResponseActions'
 import handleTransformerActions, { DEFAULT_TRANSFORMER, makeJson } from './handleTransformerActions'
 import reduceHandlers, { someRequestCreators, someResponders } from './reduceHandlers'
@@ -30,7 +30,7 @@ if (
 export {
   createFetchAction,
   handleRequestCreatorActions, DEFAULT_FETCH_HANDLER, makeRequest,
-  handleRespondorActions, DEFAULT_REQUEST_HANDLER, makeRequestResponse,
+  handleResponderActions, DEFAULT_REQUEST_HANDLER, makeRequestResponse,
   handleResponseActions, DEFAULT_RESPONSE_HANDLER, makeResponse,
   handleTransformerActions, DEFAULT_TRANSFORMER, makeJson,
   reduceHandlers, someRequestCreators, someResponders,

@@ -1,4 +1,4 @@
-import requestHandlers from './requestHandlers'
+import responders from './responders'
 
 const getRandomInt = (min, max) => {
   min = Math.ceil(min)
@@ -13,6 +13,6 @@ export const mock = response => {
 }
 
 export default (request, action) => {
-  const response = requestHandlers(request, action)
+  const response = responders(request, action)
   return mock(response)
 }

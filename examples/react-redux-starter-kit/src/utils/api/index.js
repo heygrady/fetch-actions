@@ -1,6 +1,6 @@
 import createFetchAction from '../../../../../src/createFetchAction'
 import fetch from 'fetch-everywhere'
-import fetchHandler from './fetchHandlers'
+import requestCreator from './requestCreators'
 import fakeFetch from './mock/fakeFetch'
 import transformer from './transformers'
 
@@ -13,8 +13,8 @@ if (__DEV__) {
 console.log(fetch)
 
 const fetchAction = createFetchAction({
-  fetchHandler,
-  requestHandler: useMock ? fakeFetch : undefined,
+  requestCreator,
+  responder: useMock ? fakeFetch : undefined,
   fetch,
   transformer
 })

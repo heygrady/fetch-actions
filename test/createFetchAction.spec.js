@@ -1,7 +1,13 @@
 import createFetchAction from '../src/createFetchAction'
 import createFakeFetch from './helpers/createFakeFetch'
 import 'fetch-everywhere'
-global.console = { error: () => undefined } // suppress errors
+const local = {
+  log: console.log
+}
+global.console = {
+  error: () => undefined,
+  log: local.log
+} // suppress errors
 
 describe('createFetchAction', () => {
   const type = 'TEST_ACTION'
@@ -11,23 +17,23 @@ describe('createFetchAction', () => {
   const createResponse = () => new Response(JSON.stringify({ data }))
 
   let fetch
-  let fetchHandler
-  let requestHandler
+  let requestCreator
+  let responder
   let responseHandler
   let transformer
   let fetchAction
 
   beforeEach(() => {
     fetch = jest.fn(createFakeFetch(createResponse))
-    fetchHandler = jest.fn(() => request)
-    requestHandler = jest.fn(() => false)
+    requestCreator = jest.fn(() => request)
+    responder = jest.fn(() => false)
     responseHandler = jest.fn(response => response)
     transformer = jest.fn(json => json)
 
     fetchAction = createFetchAction({
       fetch,
-      fetchHandler,
-      requestHandler,
+      requestCreator,
+      responder,
       responseHandler,
       transformer
     })
@@ -45,9 +51,12 @@ describe('createFetchAction', () => {
   it('throws on empty handlers', () => {
     const fetchAction = createFetchAction()
     expect.assertions(1)
-    return fetchAction(action).catch((e) => {
-      expect(true).toEqual(true)
-    })
+    return fetchAction(action)
+      .then(response => local.log(response))
+      .catch((e) => {
+        // local.log(e) // Invariant
+        expect(true).toEqual(true)
+      })
   })
 
   it('throws on action missing type', () => {
@@ -58,7 +67,7 @@ describe('createFetchAction', () => {
   })
 
   // NOTE: this is double-testing the identityRequestCreator
-  it('warns on missing fetchHandler', () => {
+  it('warns on missing requestCreator', () => {
     global.console = { error: jest.fn() }
     const fetchAction = createFetchAction({ fetch })
     expect.assertions(1)
@@ -70,57 +79,78 @@ describe('createFetchAction', () => {
   it('throws on bad fetch function', () => {
     const fetchAction = createFetchAction({ fetch: 'bad' })
     expect.assertions(1)
-    return fetchAction(action).catch((e) => {
-      expect(true).toEqual(true)
-    })
+    return fetchAction(action)
+      .then(response => local.log(response))
+      .catch((e) => {
+        // local.log(e) // Invariant
+        expect(true).toEqual(true)
+      })
   })
 
-  it('throws on bad fetch function, even with good requestHandler', () => {
-    const fetchAction = createFetchAction({ fetch: 'bad', requestHandler: createResponse })
+  it('throws on bad fetch function, even with good responder', () => {
+    const fetchAction = createFetchAction({ fetch: 'bad', responder: createResponse })
     expect.assertions(1)
-    return fetchAction(action).catch((e) => {
-      expect(true).toEqual(true)
-    })
+    return fetchAction(action)
+      .then(response => local.log(response))
+      .catch((e) => {
+        // local.log(e) // Invariant
+        expect(true).toEqual(true)
+      })
   })
 
-  it('throws on bad requestHandler function', () => {
-    const fetchAction = createFetchAction({ requestHandler: 'bad' })
+  it('throws on bad responder function', () => {
+    const fetchAction = createFetchAction({ responder: 'bad' })
     expect.assertions(1)
-    return fetchAction(action).catch((e) => {
-      expect(true).toEqual(true)
-    })
+    return fetchAction(action)
+      .then(response => local.log(response))
+      .catch((e) => {
+        // local.log(e) // Invariant
+        expect(true).toEqual(true)
+      })
   })
 
-  it('throws on bad requestHandler function, even with good fetch', () => {
-    const fetchAction = createFetchAction({ requestHandler: 'bad', fetch })
+  it('throws on bad responder function, even with good fetch', () => {
+    const fetchAction = createFetchAction({ responder: 'bad', fetch })
     expect.assertions(1)
-    return fetchAction(action).catch((e) => {
-      expect(true).toEqual(true)
-    })
+    return fetchAction(action)
+      .then(response => local.log(response))
+      .catch((e) => {
+        // local.log(e) // Invariant
+        expect(true).toEqual(true)
+      })
   })
 
-  it('throws on good requestHandler function when fetch is missing and requestHandler returns false', () => {
-    const fetchAction = createFetchAction({ requestHandler })
+  it('throws on good responder function when fetch is missing and responder returns false', () => {
+    const fetchAction = createFetchAction({ responder })
     expect.assertions(1)
-    return fetchAction(action).catch((e) => {
-      expect(true).toEqual(true)
-    })
+    return fetchAction(action)
+      .then(response => local.log(response))
+      .catch((e) => {
+        // local.log(e) // Invariant
+        expect(true).toEqual(true)
+      })
   })
 
   it('throws on bad response, missing json method', () => {
-    const fetchAction = createFetchAction({ requestHandler: () => ({ bad: true }) })
+    const fetchAction = createFetchAction({ responder: () => ({ bad: true }) })
     expect.assertions(1)
-    return fetchAction(action).catch((e) => {
-      expect(true).toEqual(true)
-    })
+    return fetchAction(action)
+      .then(response => local.log(response))
+      .catch((e) => {
+        // local.log(e) // Invariant
+        expect(true).toEqual(true)
+      })
   })
 
   it('throws on bad response, missing json method', () => {
     const fetchAction = createFetchAction({ fetch, responseHandler: () => ({ bad: true }) })
     expect.assertions(1)
-    return fetchAction(action).catch((e) => {
-      expect(true).toEqual(true)
-    })
+    return fetchAction(action)
+      .then(response => local.log(response))
+      .catch((e) => {
+        // local.log(e) // Invariant
+        expect(true).toEqual(true)
+      })
   })
 
   it('throws on bad response, json must return thennable', () => {
@@ -129,17 +159,20 @@ describe('createFetchAction', () => {
       responseHandler: () => ({ json: () => ({ bad: true }) })
     })
     expect.assertions(1)
-    return fetchAction(action).catch((e) => {
-      expect(true).toEqual(true)
-    })
+    return fetchAction(action)
+      .then(response => local.log(response))
+      .catch((e) => {
+        // local.log(e) // Invariant
+        expect(true).toEqual(true)
+      })
   })
 
   it('calls all handlers', () => {
     expect.assertions(5)
     return fetchAction(action).then(() => {
       expect(fetch).toBeCalled()
-      expect(fetchHandler).toBeCalled()
-      expect(requestHandler).toBeCalled()
+      expect(requestCreator).toBeCalled()
+      expect(responder).toBeCalled()
       expect(responseHandler).toBeCalled()
       expect(transformer).toBeCalled()
     })
