@@ -24,7 +24,7 @@ const handleRequestCreatorActions = map => action => {
   invariant(type !== undefined, '@@fetch-actions/handleRequestCreatorActions action type must be defined. It is recommended that action be a valid flux-standard-action (https://github.com/acdlite/flux-standard-action)')
   invariant(map, '@@fetch-actions/handleRequestCreatorActions map must be defined')
   if (!handler) {
-    warning(handler, `@@fetch-actions/handleResponseActions No handler matched action.type of ${type}. Using identityRequestCreator which simply returns an empty request.`)
+    warning(handler, `@@fetch-actions/handleRequestCreatorActions No handler matched action.type of ${type}. Using identityRequestCreator which simply returns an empty request.`)
     return identityRequestCreator()
   }
   return makeRequest(handler(action))

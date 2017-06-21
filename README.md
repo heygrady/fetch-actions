@@ -9,7 +9,7 @@ Fetch-actions provides functions &mdash; intended to be called from [redux middl
 
 This library tries to conform to redux best practices, like using pure functions and avoiding side effects. It borrows liberally from concepts like actions, middleware and reducers and should fit cleanly into a redux-like workflow. Hopefully fetch-actions can bring some sanity to the process of handling asynchronous external requests in a redux-like app.
 
-If you are already using redux with middleware to fetch data from the server, this should make your life a little easier. If have been wondering how to cleanly integrate a react-redux application with an API, keep reading.
+If you are already using redux with middleware to fetch data from the server, this should make your life a little easier. If you have been wondering how to cleanly integrate a react-redux application with an API, keep reading.
 
 ## Installation
 
@@ -28,9 +28,9 @@ The fetch standard is [replacing XMLHttpRequest](https://developers.google.com/w
 You can read [more about fetch](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) on MDN.
 
 ## fetchAction in action
-In our application we want to [`dispatch`](http://redux.js.org/docs/api/Store.html#dispatch) an [`action`](http://redux.js.org/docs/basics/Actions.html) that triggers a fetch call. Ultimately we want to inject the resulting data into our app (using a [`reducer`](http://redux.js.org/docs/basics/Reducers.html)). Of course, redux has a strictly synchronous, [unidirectional workflow](http://redux.js.org/docs/basics/DataFlow.html). There are ways to integrate redux with [an asynchronous flow](http://redux.js.org/docs/advanced/AsyncActions.html).
+In our redux application we want to [`dispatch`](http://redux.js.org/docs/api/Store.html#dispatch) an [`action`](http://redux.js.org/docs/basics/Actions.html) that triggers a fetch call. Ultimately we want to inject the resulting data into our app (using a [`reducer`](http://redux.js.org/docs/basics/Reducers.html)). Of course, redux has a strictly synchronous, [unidirectional workflow](http://redux.js.org/docs/basics/DataFlow.html). There are ways &mdash; middleware &mdash; to integrate redux with [an asynchronous flow](http://redux.js.org/docs/advanced/AsyncActions.html).
 
-Most redux examples leave this asynchronous middle step completely up to the implementor. This is purposely exposed in the redux ecosystem as [middleware](http://redux.js.org/docs/advanced/Middleware.html). We'll see later that fetch-actions is designed to work with redux-like middleware like [redux-thunk](https://github.com/gaearon/redux-thunk) or [redux-saga](https://github.com/redux-saga/redux-saga).
+Most redux examples leave this asynchronous middle step &mdash; exposed in the redux ecosystem as [middleware](http://redux.js.org/docs/advanced/Middleware.html) &mdash; completely up to the implementor. We'll see later that fetch-actions is designed to work with redux-like middleware like [redux-thunk](https://github.com/gaearon/redux-thunk) or [redux-saga](https://github.com/redux-saga/redux-saga).
 
 In the [fetch example from the redux manual](http://redux.js.org/docs/advanced/ExampleRedditAPI.html), they show the `fetch` call embedded in a `thunk`. They completely ignore any complexity, like translating an action into a proper URI or transforming the API response. The redux manual is purposely naive in this regard because they are trying to highlight redux, not fetch.
 
@@ -50,14 +50,14 @@ import 'fetch-everywhere'
 
 // make your own handlers
 // we'll see what these look like later
-import createRequest from './requestCreators'
+import requestCreator from './requestCreators'
 import transformer from './transformers'
 
 // provide an interface between your API and your app
 export const fetchAction = createFetchAction({
   fetch, // <-- inject your own fetch
-  createRequest,
-  transformer
+  requestCreator, // <-- create requests from actions
+  transformer // <-- transform responses before returning them
 })
 ```
 
@@ -69,10 +69,12 @@ You can see below that `fetchAction` accepts an action and returns a promise whi
 For now, let's feed `fetchAction` an action and get back a promise that returns `data`.
 
 ```js
+// pull in our custom fetchAction function (see above)
 import fetchAction from './utils/api/fetchAction'
 import { fetchPosts } './modules/posts/actions'
 
 const action = fetchPosts() // <-- an action creator
+console.log(action) // --> { type: 'FETCH_POSTS' }
 
 // feed it an action, get a promise
 const promise = fetchAction(action)
@@ -95,13 +97,13 @@ import { identityRequestCreator, identityHandler } from './identityHandlers'
 
 export const createFetchAction = ({
   fetch,
-  createRequest = identityRequestCreator,
+  requestCreator = identityRequestCreator,
   responder,
   responseHandler = identityHandler,
   transformer = identityHandler,
   fatalHandler
 }) => action => Promise.resolve()
-  .then(() => createRequest(action))
+  .then(() => requestCreator(action))
   .then(request => responder && responder(request, action) || fetch(request))
   .then(response => responseHandler(response, action).json())
   .then(json => transformer(json, action))
@@ -147,10 +149,10 @@ export default PostListContainer
 
 ## Next steps
 - [API](./docs/api.md)
-  - [`createFetchAction`](./docs/createFetchAction.md)
-  - [`handleRequestCreatorActions`](./docs/handleRequestCreatorActions.md)
-  - [`handleResponderActions`](./docs/handleResponderActions.md)
-  - [`handleResponseActions`](./docs/handleResponseActions.md)
-  - [`handleTransformerActions`](./docs/handleTransformerActions.md)
+  - [`createFetchAction`](./docs/api/createFetchAction.md)
+  - [`handleRequestCreatorActions`](./docs/api/handleRequestCreatorActions.md)
+  - [`handleResponderActions`](./docs/api/handleResponderActions.md)
+  - [`handleResponseActions`](./docs/api/handleResponseActions.md)
+  - [`handleTransformerActions`](./docs/api/handleTransformerActions.md)
 - [More examples](./docs/examples/README.md)
 - [Example applications](./examples/README.md)

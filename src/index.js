@@ -3,6 +3,7 @@ import handleRequestCreatorActions, { DEFAULT_HANDLER as DEFAULT_FETCH_HANDLER, 
 import handleResponderActions, { DEFAULT_HANDLER as DEFAULT_REQUEST_HANDLER, makeResponse as makeRequestResponse } from './handleResponderActions'
 import handleResponseActions, { DEFAULT_HANDLER as DEFAULT_RESPONSE_HANDLER, makeResponse } from './handleResponseActions'
 import handleTransformerActions, { DEFAULT_TRANSFORMER, makeJson } from './handleTransformerActions'
+import handleFatalActions, { DEFAULT_FATAL_HANDLER } from './handleFatalActions'
 import reduceHandlers, { someRequestCreators, someResponders } from './reduceHandlers'
 import { identityRequestCreator, identityResponder, identityHandler } from './identityHandlers'
 import warning from 'warning'
@@ -33,6 +34,7 @@ export {
   handleResponderActions, DEFAULT_REQUEST_HANDLER, makeRequestResponse,
   handleResponseActions, DEFAULT_RESPONSE_HANDLER, makeResponse,
   handleTransformerActions, DEFAULT_TRANSFORMER, makeJson,
+  handleFatalActions, DEFAULT_FATAL_HANDLER,
   reduceHandlers, someRequestCreators, someResponders,
   identityRequestCreator, identityResponder, identityHandler
 }

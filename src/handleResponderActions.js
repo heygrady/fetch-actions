@@ -36,7 +36,7 @@ const handleResponderActions = (map) => (request, action) => {
   invariant(map, '@@fetch-actions/handleResponderActions map must be defined')
   const handler = map[type] || map[DEFAULT_HANDLER]
   if (!handler) {
-    warning(handler, `@@fetch-actions/handleResponseActions No handler matched action.type of ${type}. Using identityResponder which simply returns undefined.`)
+    warning(handler, `@@fetch-actions/handleResponderActions No handler matched action.type of ${type}. Using identityResponder which simply returns undefined.`)
     return identityResponder()
   }
   const response = handler(request, action)

@@ -43,11 +43,11 @@ const createFetchAction = ({
     .then(json => transformer(json, action))
     .catch(error => {
       warning(!!fatalHandler, `@@fetch-actions/createFetchAction uncaught fatal error. ${error.toString()}. Define a fatalHandler to capture these in your application.`)
-      if (fatalHandler) {
-        return fatalHandler(error, action)
-      } else {
-        throw error
+      const result = fatalHandler && fatalHandler(error, action)
+      if (result !== undefined) {
+        return result
       }
+      throw error
     })
 }
 
