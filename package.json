@@ -25,9 +25,11 @@
     "examples:test": "cross-env CI=true babel-node examples/testAll.js",
     "docs:clean": "rimraf _book",
     "docs:prepare": "gitbook install",
-    "docs:build": "yarn run docs:prepare && gitbook build -g heygrady/fetch-actions && cp logo/apple-touch-icon.png _book/gitbook/images/apple-touch-icon-precomposed-152.png && cp logo/favicon.ico _book/gitbook/images",
-    "docs:watch": "yarn run docs:prepare && gitbook serve",
-    "docs:publish": "yarn run docs:clean && yarn run docs:build && cp CNAME _book && cd _book && git init && git commit --allow-empty -m 'update book' && git checkout -b gh-pages && touch .nojekyll && git add . && git commit -am 'update book' && git push git@github.com:heygrady/fetch-actions gh-pages --force"
+    "docs:build": "gitbook build -g heygrady/fetch-actions",
+    "docs:watch": "yarn run docs:prepare && onchange 'docs/**/*.md' 'README.md' 'SUMMARY.md' -- yarn docs:build",
+    "docs:watch--old": "yarn run docs:prepare && gitbook serve",
+    "docs:preview": "cd _book && http-server -p4000 -c-1 .",
+    "docs:publish": "yarn run docs:clean && yarn run docs:prepare && yarn run docs:build && cp CNAME _book && cd _book && git init && git commit --allow-empty -m 'update book' && git checkout -b gh-pages && touch .nojekyll && git add . && git commit -am 'update book' && git push git@github.com:heygrady/fetch-actions gh-pages --force"
   },
   "jest": {
     "testPathIgnorePatterns": [
@@ -85,7 +87,7 @@
     "eslint-plugin-react": "^6.4.1",
     "eslint-plugin-standard": "^3.0.1",
     "fetch-everywhere": "^1.0.5",
-    "gitbook-cli": "^2.3.0",
+    "gitbook-cli": "^2.3.1",
     "glob": "^7.1.1",
     "http-server": "^0.10.0",
     "jest": "^18.0.0",

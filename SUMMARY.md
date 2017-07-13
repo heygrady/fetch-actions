@@ -1,6 +1,7 @@
 # Table of Contents
 
 * [Fetch Actions](/README.md)
+* [Reddit API example](/docs/reddit-api-example.md)
 
 ### API
 * [list of all functions](/docs/api/README.md)

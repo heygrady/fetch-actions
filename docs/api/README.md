@@ -1,4 +1,5 @@
 # fetch-actions API
+Below is the complete list of functions that fetch-actions provides.
 
 ## Core API
 - [`createFetchAction`](./createFetchAction.md)

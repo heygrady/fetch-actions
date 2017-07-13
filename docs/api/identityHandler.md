@@ -1,5 +1,5 @@
 # identityHandler
-The identity handler is designed for internal use only. It is the default handler for responseHandlers and transformers. Under the hood the handler doesn't do anything at all. It receives an object and an action and blindly returns the object.
+The identity handler is designed for internal use only. It is the default handler for responseHandlers and transformers. Under the hood the handler doesn't do anything at all. It receives an object and an action and returns the object.
 
 ## Usage
 ```js
@@ -15,4 +15,11 @@ const fetchAction = createFetchAction({
 })
 
 export fetchAction
+```
+
+## Psuedo-code
+The identity handler looks something like this:
+
+```js
+export const identityHandler = (payload, action) => payload
 ```

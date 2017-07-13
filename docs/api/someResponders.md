@@ -1,12 +1,17 @@
 # someResponders
+This function accepts a list of `responders` and executes the first one that matches, based on action type. Inspired by [reduce-reducers](https://github.com/acdlite/reduce-reducers).
+
 Allows you to glue responders together to run in sequence. It returns the first non-undefined response, skipping the rest of the sequence. It is called `someResponders` because only *some* of the responders may be executed.
+
+- `someResponders` executes the first matching `responder`.
+- If you are trying to join [`responseHandlers`](./handleResponseActions.md) or [`transformers`](./handleTransformerActions.md) together, try [`reduceHandlers`](./reduceHandlers.md).
+- If you are trying to join [`requestCreators`](./handleRequestCreatorActions.md) together, try [`someRequestHandlers`](./someRequestCreators.md).
 
 ## Usage
 ```js
 import createFetchAction, { someResponders } from 'fetch-actions'
-import MY_ACTION from '../your-app/constants'
-import fakeBlueberryResponder from '../your-app/responders/fakeBlueberryResponder'
-import fakeCarrotResponder from '../your-app/responders/fakeCarrotResponder'
+import fakeBlueberryResponder from './responders/fakeBlueberryResponder'
+import fakeCarrotResponder from './responders/fakeCarrotResponder'
 import 'fetch-everywhere'
 
 const fetchAction = createFetchAction({
