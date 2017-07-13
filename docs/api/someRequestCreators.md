@@ -8,6 +8,7 @@ Allows you to glue `requestCreators` together to run in sequence. It returns the
 - If you are trying to join [`responders`](./handleResponderActions.md) together, try [`someResponders`](./someResponders.md).
 
 ## Usage
+
 ```js
 import createFetchAction, { someRequestCreators } from 'fetch-actions'
 import carrots from './requestCreators/carrots'
@@ -24,4 +25,40 @@ const fetchAction = createFetchAction({
 })
 
 export fetchAction
+```
+
+## Example: overriding default requestCreator
+
+By default, a request creator created with [`handleRequestCreatorActions`](./handleRequestCreatorActions.md) will return an empty Request. If you are combining your request creators using `someRequestCreators` you might end up returning a blank request by accident. If you are intending to chain your requestCreators, you will need to override the default.
+
+```js
+import { someRequestCreators, handleRequestCreatorActions, DEFAULT_REQUEST_CREATOR } from 'fetch-actions'
+import { FETCH_POSTS } from '../modules/reddit/constants'
+import { FETCH_BLARGLE } from '../modules/flargle/constants'
+
+const fetchPostsRequestCreator = action => new Request(`https://www.reddit.com/r/${action.payload}.json`)
+
+// this request creator will return empty request for unknown actions
+const broken = handleRequestCreatorActions({
+  [FETCH_POSTS]: fetchPostsRequestCreator
+})
+
+// here we're overriding the default behavior
+const fixed = handleRequestCreatorActions({
+  [FETCH_POSTS]: fetchPostsRequestCreator,
+  [DEFAULT_REQUEST_CREATOR]: () => undefined
+})
+
+// this one runs last, so the default behavior is just fine
+const flargle = handleRequestCreatorActions({
+  [FETCH_BLARGLE]: action => new Request(`https://example.com`)
+})
+
+const brokenRequestCreator = someRequestCreators(broken, flargle)
+const requestCreator = someRequestCreators(fixed, flargle)
+
+const action = { type: FETCH_BLARGLE }
+
+brokenRequestCreator(action) // --> returns to an empty request
+requestCreator(action) // --> returns a request to example.com
 ```
