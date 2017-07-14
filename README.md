@@ -154,6 +154,7 @@ export default PostListContainer
 ```
 
 ## Next steps
+- [Reddit API example](./docs/reddit-api-example.md)
 - [API](./docs/api/README.md)
   - [`createFetchAction`](./docs/api/createFetchAction.md)
   - [`handleRequestCreatorActions`](./docs/api/handleRequestCreatorActions.md)
