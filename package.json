@@ -54,7 +54,7 @@
     "docs:watch:old": "yarn run docs:prepare && gitbook serve",
     "docs:watch": "yarn run docs:prepare && nohup onchange 'docs/**/*.md' 'README.md' 'SUMMARY.md' -- yarn run docs:build:only &>/dev/null & yarn docs:serve",
     "docs:serve": "cd _book && http-server -p4000 -c-1 .",
-    "docs:publish": "yarn run docs:clean && yarn run docs:build && cp CNAME _book && cd _book && git init && git commit --allow-empty -m 'update book' && git checkout -b gh-pages && touch .nojekyll && git add . && git commit -am 'update book' && git push git@github.com:$npm_package_config_account/$npm_package_config_name gh-pages --force"
+    "docs:publish": "yarn run docs:clean && yarn run docs:build && cd _book && git init && git commit --allow-empty -m 'update book' && git checkout -b gh-pages && touch .nojekyll && git add . && git commit -am 'update book' && git push git@github.com:$npm_package_config_account/$npm_package_config_name gh-pages --force"
   },
   "dependencies": {
     "invariant": "^2.2.2",
