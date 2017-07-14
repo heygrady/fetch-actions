@@ -22,5 +22,5 @@ script:
   - "yarn build"
 after_success:
   - "codecov --token=${CODECOV_UPLOAD_TOKEN}"
-  - "yarn docs:publish"
+  # - "yarn docs:publish"
   # - "firebase deploy --token=${FIREBASE_API_TOKEN}"

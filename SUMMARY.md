@@ -24,12 +24,6 @@
 * [`identityResponder`](/docs/api/identityResponder.md)
 * [`identityHandler`](/docs/api/identityHandler.md)
 
-#### Constants
-* `DEFAULT_REQUEST_CREATOR`
-* `DEFAULT_RESPONDER`
-* `DEFAULT_RESPONSE_HANDLER`
-* `DEFAULT_TRANSFORMER`
-
 ### Examples
-* [with thunks](/docs/api/examples/redux-thunk/README.md)
-* [with sagas](/docs/api/examples/redux-saga/README.md)
+* [with thunks](/docs/examples/redux-thunk/README.md)
+* [with sagas](/docs/examples/redux-saga/README.md)

@@ -3,7 +3,7 @@
 
 Fetch-actions allows you to dispatch actions from your redux (or similar) application to control [fetch](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch). **Fetch-actions uses actions to create fetch requests and handle fetch responses.**
 
-This library works well with [flux standard actions](https://github.com/acdlite/flux-standard-action) like you would encounter when using [redux-actions](https://github.com/acdlite/redux-actions) &mdash; however any [redux-compatible action](http://redux.js.org/docs/basics/Actions.html) will work just fine. Fetch-actions is heavily inspired by the [`handleActions`](https://github.com/acdlite/redux-actions#handleactionsreducermap-defaultstate) function that comes with `redux-actions`. You can learn about [the basics of actions](http://redux.js.org/docs/basics/Actions.html) and how they are used within [redux](https://github.com/reactjs/redux/).
+This library works well with [flux standard actions](https://github.com/acdlite/flux-standard-action) like you would encounter when using [redux-actions](https://github.com/acdlite/redux-actions). However, any [redux-compatible action](http://redux.js.org/docs/basics/Actions.html) will work just fine. Fetch-actions is heavily inspired by the [`handleActions`](https://github.com/acdlite/redux-actions#handleactionsreducermap-defaultstate) function that comes with `redux-actions`. You can learn about [the basics of actions](http://redux.js.org/docs/basics/Actions.html) and how they are used within [redux](https://github.com/reactjs/redux/).
 
 Fetch-actions provides functions &mdash; intended to be called from [redux middleware](http://redux.js.org/docs/advanced/Middleware.html) &mdash; that will perform an asynchronous `fetch` call. You can configure handlers &mdash; conceptually similar to [how reducers work](http://redux.js.org/docs/basics/Reducers.html) &mdash; for creating fetch requests and for transforming the JSON response. For advanced usage (and service mocking) you can also provide responders and responseHandlers for creating and manipulating responses.
 
@@ -30,13 +30,13 @@ You can read [more about fetch](https://developer.mozilla.org/en-US/docs/Web/API
 In the examples below we're using `fetch-everywhere` but you could just as easily use any of the many fetch libraries available, like [`whatwg-fetch`](https://github.com/github/fetch).
 
 ## fetchAction in action
-In our redux application we want to [`dispatch`](http://redux.js.org/docs/api/Store.html#dispatch) an [`action`](http://redux.js.org/docs/basics/Actions.html) that triggers a fetch call. Ultimately we want to inject the resulting data into our app (using a [`reducer`](http://redux.js.org/docs/basics/Reducers.html)). Of course, redux has a strictly synchronous, [unidirectional workflow](http://redux.js.org/docs/basics/DataFlow.html). There are ways &mdash; middleware &mdash; to integrate redux with [an asynchronous flow](http://redux.js.org/docs/advanced/AsyncActions.html). That's where fetch-actions comes in.
+In our redux application we want to [`dispatch`](http://redux.js.org/docs/api/Store.html#dispatch) an [`action`](http://redux.js.org/docs/basics/Actions.html) that triggers a fetch call. Ultimately we want to inject the resulting data into our app (using a [`reducer`](http://redux.js.org/docs/basics/Reducers.html)). Of course, redux has a strictly synchronous, [unidirectional workflow](http://redux.js.org/docs/basics/DataFlow.html). There are ways &mdash; i.e. middleware &mdash; to integrate redux with [an asynchronous flow](http://redux.js.org/docs/advanced/AsyncActions.html). That's where fetch-actions comes in.
 
-Most redux examples leave this asynchronous middle step &mdash; exposed in the redux ecosystem as [middleware](http://redux.js.org/docs/advanced/Middleware.html) &mdash; completely up to the implementor. We'll see later that fetch-actions is designed to work with redux-like middleware including [redux-thunk](https://github.com/gaearon/redux-thunk) and [redux-saga](https://github.com/redux-saga/redux-saga).
+Most redux examples leave this asynchronous middle step completely up to the implementor. We'll see later that fetch-actions is designed to work with redux-like middleware including [redux-thunk](https://github.com/gaearon/redux-thunk) and [redux-saga](https://github.com/redux-saga/redux-saga).
 
-In the [fetch example from the redux manual](http://redux.js.org/docs/advanced/ExampleRedditAPI.html), they show the `fetch` call embedded in a `thunk`. They completely ignore any complexity, like translating an action into a proper URI or transforming the API response. The redux manual is purposely naive in this regard because they are trying to highlight redux, not fetch.
+In the [fetch example from the redux manual](http://redux.js.org/docs/advanced/ExampleRedditAPI.html), they show the `fetch` call embedded in a `thunk`. The redux manual is purposely naive in this regard because they are trying to highlight redux, not fetch. They completely ignore any complexity, like translating an action into a proper URI or transforming the API response.
 
-In a more complex app it might be a seen bad practice to bury fetch calls deep within your middleware &mdash; the URI for a fetch request is conceptually similar to SQL query. Your app will likely require some type of request builder for generating proper API requests.
+In a more complex app it might be a seen as a bad practice to bury fetch calls deep within your middleware &mdash; the URI for a fetch request is conceptually similar to SQL query. Your app will likely require some type of request builder for generating proper API requests.
 
 Fetch-actions provides hooks into the fetch workflow so that your app can be shielded from the peculiarities of the various APIs you interface with. If the API changes, you can update your `requestCreators` and `transformers` and leave the rest of the your app alone. This can make your app more testable. At the very least it allows you to make your API integrations more predictable.
 
@@ -79,18 +79,18 @@ const action = fetchPosts() // <-- an action creator
 console.log(action) // --> { type: 'FETCH_POSTS' }
 
 // feed it an action, get a promise
-const promise = fetchAction(action)
+const promise = fetchAction(action) // <-- returns a promise, just like fetch
 
 // expect to receive ready-to-use data
 promise.then(data => {
-  console.log(data) // <-- normally you would dispatch data
+  console.log(data) // <-- you could dispatch this data in your middleware
 })
 ```
 
 ### How does createFetchAction work?
 Under the hood `createFetchAction` is setting up a promise chain and calling fetch lifecycle handlers in a specific order.
 
-Below you can see some psuedo-code for the `createFetchAction` provided by `fetch-actions`. You can see the real [source](./src/createFetchAction.js) is very similar.
+Below you can see some psuedo-code for the `createFetchAction` provided by `fetch-actions`. You can see the real [source](https://github.com/heygrady/fetch-actions/blob/master/src/createFetchAction.js) is very similar.
 
 Don't worry if you don't know what all of those handlers are doing. You can read about them in the API. This is just an example so that you can visualize how your fetch requests are being managed. We'll get into further details in later examples. For now we're still trying to stay focused on how we integrate with your middleware.
 
@@ -119,7 +119,7 @@ Caveats aside... to test out a simple fetch request, **you don't need much more 
 
 Below you can see that we're using a container to provide a `fetch` function to our `PostList` component. Whenever that function is called, the container will dispatch a thunk that calls `fetchAction` and dispatches `loadPosts` to load the results into our app.
 
-You will need to bring your own reducers for handling the `loadPosts` action. We'll see in some more advanced examples how you to construct an end-to-end example. Fetch-actions makes no assumptions about your app's reducers.
+You will need to bring your own reducers for handling the `loadPosts` action. We'll see later how you might construct an end-to-end example. Fetch-actions makes no assumptions about your app's reducers.
 
 This is what `fetchAction` might look like from within a container.
 
@@ -156,5 +156,4 @@ export default PostListContainer
   - [`handleResponderActions`](./docs/api/handleResponderActions.md)
   - [`handleResponseActions`](./docs/api/handleResponseActions.md)
   - [`handleTransformerActions`](./docs/api/handleTransformerActions.md)
-- [More examples](./docs/examples/README.md)
-- [Example applications](./examples/README.md)
+  - [`handleFatalActions`](./docs/api/handleFatalActions.md)
