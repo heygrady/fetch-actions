@@ -1,3 +1,5 @@
+[![codecov](https://codecov.io/gh/heygrady/fetch-actions/branch/master/graph/badge.svg)](https://codecov.io/gh/heygrady/fetch-actions)
+
 # fetch-actions
 *dispatch actions to handle fetch requests*
 
