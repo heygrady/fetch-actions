@@ -154,7 +154,7 @@ export default PostListContainer
 ```
 
 ## Next steps
-- [API](./docs/api.md)
+- [API](./docs/api/README.md)
   - [`createFetchAction`](./docs/api/createFetchAction.md)
   - [`handleRequestCreatorActions`](./docs/api/handleRequestCreatorActions.md)
   - [`handleResponderActions`](./docs/api/handleResponderActions.md)
