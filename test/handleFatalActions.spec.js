@@ -14,7 +14,6 @@ describe('handleTransformAction', () => {
   const error = new Error('test error')
   // eslint-disable-next-line handle-callback-err
   const testFatalHandler = (error, action) => {
-    local.log({ error, action })
     return action.payload
   }
   // eslint-disable-next-line handle-callback-err
