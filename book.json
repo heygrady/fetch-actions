@@ -1,7 +1,7 @@
 {
   "gitbook": "3.2.2",
   "title": "FetchActions",
-  "plugins": ["edit-link", "prism", "-highlight", "github", "anchorjs", "algolia"],
+  "plugins": ["edit-link", "prism", "-highlight", "github", "anchorjs"],
   "pluginsConfig": {
     "edit-link": {
       "base": "https://github.com/heygrady/fetch-actions/tree/master",
@@ -9,12 +9,6 @@
     },
     "github": {
       "url": "https://github.com/heygrady/fetch-actions/"
-    },
-    "algolia": {
-      "index": "fetch-actions-docs",
-      "applicationID": "__FIXME__",
-      "publicKey": "__FIXME__",
-      "freeAccount": "true"
     },
     "theme-default": {
       "styles": {

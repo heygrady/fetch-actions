@@ -8,11 +8,9 @@ var env = process.env.NODE_ENV
 var config = {
   format: 'umd',
   moduleName: 'FetchActions',
-  exports: 'named',
   plugins: [
     nodeResolve({
-      jsnext: true,
-      main: true
+      jsnext: true
     }),
     babel({
       exclude: 'node_modules/**'
@@ -20,9 +18,7 @@ var config = {
     replace({
       'process.env.NODE_ENV': JSON.stringify(env)
     }),
-    commonjs({
-      namedExports: { 'invariant': [ 'default' ] }
-    })
+    commonjs()
   ]
 }
 
@@ -33,14 +29,7 @@ if (env === 'production') {
         pure_getters: true,
         unsafe: true,
         unsafe_comps: true,
-        warnings: false,
-        screw_ie8: false
-      },
-      mangle: {
-        screw_ie8: false
-      },
-      output: {
-        screw_ie8: false
+        warnings: false
       }
     })
   )

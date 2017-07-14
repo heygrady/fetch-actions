@@ -1,4 +1,5 @@
-**/dist/**
-**/node_modules/**
-**/server.js
-**/webpack.config*.js
+dist/**
+node_modules/**
+src/index.html
+flow-typed/**
+_fun/**
