@@ -77,7 +77,7 @@ For now, let's feed `fetchAction` an action and get back a promise that returns 
 ```js
 // pull in our custom fetchAction function (see above)
 import fetchAction from './utils/api/fetchAction'
-import { fetchPosts } './modules/posts/actions'
+import { fetchPosts } from './modules/posts/actions'
 
 const action = fetchPosts() // <-- an action creator
 console.log(action) // --> { type: 'FETCH_POSTS' }
@@ -110,10 +110,10 @@ export const createFetchAction = ({
   fatalHandler
 }) => action => Promise.resolve()
   .then(() => requestCreator(action))
-  .then(request => responder && responder(request, action) || fetch(request))
+  .then(request => (responder && responder(request, action)) || fetch(request))
   .then(response => responseHandler(response, action).json())
   .then(json => transformer(json, action))
-  .catch(error => fatalHandler && fatalHandler(error, action) || console.error(error))
+  .catch(error => (fatalHandler && fatalHandler(error, action)) || console.error(error))
 ```
 
 ## Example: Using an inline thunk

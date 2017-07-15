@@ -4,7 +4,7 @@
     "standard",
     "standard-react"
   ],
-  "plugins": [],
+  "plugins": ["markdown"],
   "globals": {
     "__DEV__"      : false,
     "__TEST__"     : false,
