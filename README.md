@@ -7,6 +7,8 @@
 
 Fetch-actions allows you to dispatch actions from your redux (or similar) application to control [fetch](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch). **Fetch-actions uses actions to create fetch requests and handle fetch responses.**
 
+**[See the announcement blog post](https://heygrady.com/announcing-fetch-actions/).**
+
 This library works well with [flux standard actions](https://github.com/acdlite/flux-standard-action) like you would encounter when using [redux-actions](https://github.com/acdlite/redux-actions). However, any [redux-compatible action](http://redux.js.org/docs/basics/Actions.html) will work just fine. Fetch-actions is heavily inspired by the [`handleActions`](https://github.com/acdlite/redux-actions#handleactionsreducermap-defaultstate) function that comes with `redux-actions`. You can learn about [the basics of actions](http://redux.js.org/docs/basics/Actions.html) and how they are used within [redux](https://github.com/reactjs/redux/).
 
 Fetch-actions provides functions &mdash; intended to be called from [redux middleware](http://redux.js.org/docs/advanced/Middleware.html) &mdash; that will perform an asynchronous `fetch` call. You can configure handlers &mdash; conceptually similar to [how reducers work](http://redux.js.org/docs/basics/Reducers.html) &mdash; for creating fetch requests and for transforming the JSON response. For advanced usage (and service mocking) you can also provide responders and responseHandlers for creating and manipulating responses.
