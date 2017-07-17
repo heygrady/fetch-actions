@@ -1,0 +1,569 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>handleResponseActions · FetchActions</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.2">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-prism/prism.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+        <link rel="stylesheet" href="../../build/gitbook.css">
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="handleTransformerActions.html" />
+    
+    
+    <link rel="prev" href="handleResponderActions.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../../">
+            
+                <a href="../../">
+            
+                    
+                    Fetch Actions
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../reddit-api-example.html">
+            
+                <a href="../reddit-api-example.html">
+            
+                    
+                    Reddit API example
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">API</li>
+        
+        
+    
+        <li class="chapter " data-level="2.1" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    list of all functions
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Core API</li>
+        
+        
+    
+        <li class="chapter " data-level="3.1" data-path="createFetchAction.html">
+            
+                <a href="createFetchAction.html">
+            
+                    
+                    createFetchAction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.2" data-path="handleRequestCreatorActions.html">
+            
+                <a href="handleRequestCreatorActions.html">
+            
+                    
+                    handleRequestCreatorActions
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.3" data-path="handleResponderActions.html">
+            
+                <a href="handleResponderActions.html">
+            
+                    
+                    handleResponderActions
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="3.4" data-path="handleResponseActions.html">
+            
+                <a href="handleResponseActions.html">
+            
+                    
+                    handleResponseActions
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.5" data-path="handleTransformerActions.html">
+            
+                <a href="handleTransformerActions.html">
+            
+                    
+                    handleTransformerActions
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.6" data-path="handleFatalActions.html">
+            
+                <a href="handleFatalActions.html">
+            
+                    
+                    handleFatalActions
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Advanced API</li>
+        
+        
+    
+        <li class="chapter " data-level="4.1" data-path="reduceHandlers.html">
+            
+                <a href="reduceHandlers.html">
+            
+                    
+                    reduceHandlers
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="4.2" data-path="someRequestCreators.html">
+            
+                <a href="someRequestCreators.html">
+            
+                    
+                    someRequestCreators
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="4.3" data-path="someResponders.html">
+            
+                <a href="someResponders.html">
+            
+                    
+                    someResponders
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Identity functions</li>
+        
+        
+    
+        <li class="chapter " data-level="5.1" data-path="identityRequestCreator.html">
+            
+                <a href="identityRequestCreator.html">
+            
+                    
+                    identityRequestCreator
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.2" data-path="identityResponder.html">
+            
+                <a href="identityResponder.html">
+            
+                    
+                    identityResponder
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.3" data-path="identityHandler.html">
+            
+                <a href="identityHandler.html">
+            
+                    
+                    identityHandler
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Examples</li>
+        
+        
+    
+        <li class="chapter " data-level="6.1" data-path="../examples/redux-thunk/">
+            
+                <a href="../examples/redux-thunk/">
+            
+                    
+                    with thunks
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="6.2" data-path="../examples/redux-saga/">
+            
+                <a href="../examples/redux-saga/">
+            
+                    
+                    with sagas
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="../.." >handleResponseActions</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="handleresponseactions">handleResponseActions</h1>
+<p>This function create a <code>responseHandler</code> that maps actions to response handler functions based on action type.</p>
+<p>You don&apos;t normally need a <code>responseHandler</code> unless you need to handle API errors or otherwise deal directly with the Response object. If you are simply trying to transform the JSON response, use a <a href="handleTransformerActions.html">transformer</a> instead.</p>
+<p>You might use a response handler to:</p>
+<ul>
+<li>handle legitimate API errors</li>
+<li>log responses</li>
+<li>inspect responses</li>
+</ul>
+<p><strong>Note:</strong> response handlers happen <em>after</em> fetch (or after responders).</p>
+<h2 id="responsehandlers-versus-responders">responseHandlers versus responders</h2>
+<p>The names are somewhat confusing but a responseHandler <em>handles</em> responses while a responder <em>creates</em> them. You would normally use a responseHandler to read fetch <a href="https://developer.mozilla.org/en-US/docs/Web/API/Response" target="_blank">Response</a> objects. If you are trying to <em>create</em> response objects, try <a href="handleResponderActions.html">responders</a>.</p>
+<p>The full flow of a <code>fetchAction</code> call looks like this:</p>
+<ol>
+<li><code>requestCreator</code> &#x2014; creates a <a href="https://developer.mozilla.org/en-US/docs/Web/API/Request" target="_blank">Request</a></li>
+<li><code>responder</code> or <code>fetch</code> &#x2014; creates a <a href="https://developer.mozilla.org/en-US/docs/Web/API/Response" target="_blank">Response</a></li>
+<li><code>responseHandler</code> &#x2014; receives a Response; must return a Response</li>
+<li><code>transformer</code> &#x2014; receives the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Body/json" target="_blank"><code>Response.json()</code></a>; should return a JavaScript object</li>
+<li><code>fatalHandler</code> &#x2014; receives thrown errors.</li>
+</ol>
+<h2 id="usage">Usage</h2>
+<pre class="language-"><code class="lang-js"><span class="token keyword">import</span> createFetchAction<span class="token punctuation">,</span> <span class="token punctuation">{</span> handleResponseActions <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&apos;fetch-actions&apos;</span>
+<span class="token keyword">import</span> FETCH_POSTS <span class="token keyword">from</span> <span class="token string">&apos;../modules/reddit/constants&apos;</span>
+<span class="token keyword">import</span> <span class="token string">&apos;fetch-everywhere&apos;</span>
+
+<span class="token keyword">const</span> responseHandler <span class="token operator">=</span> <span class="token function">handleResponseActions</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+  <span class="token punctuation">[</span>FETCH_POSTS<span class="token punctuation">]</span><span class="token punctuation">:</span> <span class="token punctuation">(</span>response<span class="token punctuation">,</span> action<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token punctuation">{</span> <span class="token comment" spellcheck="true">// &lt;-- receive a response</span>
+    <span class="token comment" spellcheck="true">// you can log responses or inspect them</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token punctuation">{</span> response<span class="token punctuation">,</span> action <span class="token punctuation">}</span><span class="token punctuation">)</span>
+    <span class="token keyword">return</span> response <span class="token comment" spellcheck="true">// &lt;-- return the response (or a new one)</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+<span class="token keyword">const</span> fetchAction <span class="token operator">=</span> <span class="token function">createFetchAction</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+  fetch<span class="token punctuation">,</span>
+  responseHandler
+  <span class="token comment" spellcheck="true">// &lt;-- add other handlers here</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+<span class="token keyword">export</span> fetchAction
+</code></pre>
+<h2 id="example-errors">Example: errors</h2>
+<pre class="language-"><code class="lang-js"><span class="token keyword">import</span> createFetchAction<span class="token punctuation">,</span> <span class="token punctuation">{</span> handleRequestCreatorActions<span class="token punctuation">,</span> handleResponseActions <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&apos;fetch-actions&apos;</span>
+<span class="token keyword">import</span> FETCH_POSTS <span class="token keyword">from</span> <span class="token string">&apos;../modules/reddit/constants&apos;</span>
+<span class="token keyword">import</span> <span class="token string">&apos;fetch-everywhere&apos;</span>
+
+<span class="token keyword">const</span> requestCreator <span class="token operator">=</span> <span class="token function">handleRequestCreatorActions</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+  <span class="token punctuation">[</span>FETCH_POSTS<span class="token punctuation">]</span><span class="token punctuation">:</span> action <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token keyword">new</span> <span class="token class-name">Request</span><span class="token punctuation">(</span><span class="token template-string"><span class="token string">`https://www.reddit.com/r/</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>action<span class="token punctuation">.</span>payload<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">.json`</span></span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+<span class="token keyword">const</span> responseHandler <span class="token operator">=</span> <span class="token function">handleResponseActions</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+  <span class="token punctuation">[</span>FETCH_POSTS<span class="token punctuation">]</span><span class="token punctuation">:</span> <span class="token punctuation">(</span>response<span class="token punctuation">,</span> action<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">// intercept responses that are not 200</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>response<span class="token punctuation">.</span>ok<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">Response</span><span class="token punctuation">(</span>JSON<span class="token punctuation">.</span><span class="token function">stringify</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+        errors<span class="token punctuation">:</span> <span class="token punctuation">[</span>
+          <span class="token punctuation">{</span>
+            status<span class="token punctuation">:</span> response<span class="token punctuation">.</span>status<span class="token punctuation">,</span>
+            title<span class="token punctuation">:</span> response<span class="token punctuation">.</span>statusText<span class="token punctuation">,</span>
+            detail<span class="token punctuation">:</span> <span class="token string">&apos;Whoops! Something was *not* ok.&apos;</span>
+          <span class="token punctuation">}</span>
+        <span class="token punctuation">]</span>
+      <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment" spellcheck="true">// pass the response by default</span>
+    <span class="token keyword">return</span> response
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+<span class="token keyword">const</span> fetchAction <span class="token operator">=</span> <span class="token function">createFetchAction</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+  fetch<span class="token punctuation">,</span>
+  requestCreator<span class="token punctuation">,</span>
+  responseHandler
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+<span class="token function">fetchAction</span><span class="token punctuation">(</span><span class="token punctuation">{</span> type<span class="token punctuation">:</span> FETCH_POSTS<span class="token punctuation">,</span> payload<span class="token punctuation">:</span> <span class="token string">&apos;reactjs&apos;</span> <span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true">// --&gt; status 200, resolves to actual response</span>
+<span class="token function">fetchAction</span><span class="token punctuation">(</span><span class="token punctuation">{</span> type<span class="token punctuation">:</span> FETCH_POSTS<span class="token punctuation">,</span> payload<span class="token punctuation">:</span> <span class="token string">&apos;bogus&apos;</span> <span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true">// --&gt; status 403, resolves to error response</span>
+</code></pre>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="handleResponderActions.html" class="navigation navigation-prev " aria-label="Previous page: handleResponderActions">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="handleTransformerActions.html" class="navigation navigation-next " aria-label="Next page: handleTransformerActions">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"handleResponseActions","level":"3.4","depth":1,"next":{"title":"handleTransformerActions","level":"3.5","depth":1,"path":"docs/api/handleTransformerActions.md","ref":"docs/api/handleTransformerActions.md","articles":[]},"previous":{"title":"handleResponderActions","level":"3.3","depth":1,"path":"docs/api/handleResponderActions.md","ref":"docs/api/handleResponderActions.md","articles":[]},"dir":"ltr"},"config":{"plugins":["edit-link","prism","-highlight","github","anchorjs"],"styles":{"website":"build/gitbook.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"prism":{},"github":{"url":"https://github.com/heygrady/fetch-actions/"},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"Edit This Page","base":"https://github.com/heygrady/fetch-actions/tree/master"},"theme-default":{"styles":{"website":"build/gitbook.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchorjs":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"FetchActions","gitbook":"3.2.2"},"file":{"path":"docs/api/handleResponseActions.md","mtime":"2017-07-13T00:03:17.000Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-07-17T23:08:26.478Z"},"basePath":"../..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../../gitbook/gitbook.js"></script>
+    <script src="../../gitbook/theme.js"></script>
+    
+        
+        <script src="../../gitbook/gitbook-plugin-edit-link/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-github/plugin.js"></script>
+        
+    
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/3.1.1/anchor.min.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-anchorjs/anchor-style.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

@@ -1,0 +1,718 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>Reddit API example · FetchActions</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.2">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-prism/prism.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+        <link rel="stylesheet" href="../build/gitbook.css">
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="api/" />
+    
+    
+    <link rel="prev" href="../" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    Fetch Actions
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.2" data-path="reddit-api-example.html">
+            
+                <a href="reddit-api-example.html">
+            
+                    
+                    Reddit API example
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">API</li>
+        
+        
+    
+        <li class="chapter " data-level="2.1" data-path="api/">
+            
+                <a href="api/">
+            
+                    
+                    list of all functions
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Core API</li>
+        
+        
+    
+        <li class="chapter " data-level="3.1" data-path="api/createFetchAction.html">
+            
+                <a href="api/createFetchAction.html">
+            
+                    
+                    createFetchAction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.2" data-path="api/handleRequestCreatorActions.html">
+            
+                <a href="api/handleRequestCreatorActions.html">
+            
+                    
+                    handleRequestCreatorActions
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.3" data-path="api/handleResponderActions.html">
+            
+                <a href="api/handleResponderActions.html">
+            
+                    
+                    handleResponderActions
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.4" data-path="api/handleResponseActions.html">
+            
+                <a href="api/handleResponseActions.html">
+            
+                    
+                    handleResponseActions
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.5" data-path="api/handleTransformerActions.html">
+            
+                <a href="api/handleTransformerActions.html">
+            
+                    
+                    handleTransformerActions
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.6" data-path="api/handleFatalActions.html">
+            
+                <a href="api/handleFatalActions.html">
+            
+                    
+                    handleFatalActions
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Advanced API</li>
+        
+        
+    
+        <li class="chapter " data-level="4.1" data-path="api/reduceHandlers.html">
+            
+                <a href="api/reduceHandlers.html">
+            
+                    
+                    reduceHandlers
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="4.2" data-path="api/someRequestCreators.html">
+            
+                <a href="api/someRequestCreators.html">
+            
+                    
+                    someRequestCreators
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="4.3" data-path="api/someResponders.html">
+            
+                <a href="api/someResponders.html">
+            
+                    
+                    someResponders
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Identity functions</li>
+        
+        
+    
+        <li class="chapter " data-level="5.1" data-path="api/identityRequestCreator.html">
+            
+                <a href="api/identityRequestCreator.html">
+            
+                    
+                    identityRequestCreator
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.2" data-path="api/identityResponder.html">
+            
+                <a href="api/identityResponder.html">
+            
+                    
+                    identityResponder
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.3" data-path="api/identityHandler.html">
+            
+                <a href="api/identityHandler.html">
+            
+                    
+                    identityHandler
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Examples</li>
+        
+        
+    
+        <li class="chapter " data-level="6.1" data-path="examples/redux-thunk/">
+            
+                <a href="examples/redux-thunk/">
+            
+                    
+                    with thunks
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="6.2" data-path="examples/redux-saga/">
+            
+                <a href="examples/redux-saga/">
+            
+                    
+                    with sagas
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >Reddit API example</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="reddit-api-example">Reddit API example</h1>
+<p>Fetch actions is fairly simple but there are a lot of moving parts. It&apos;s a functional abstraction over the already-low-level fetch api. Below we will show a partial example based on the <a href="http://redux.js.org/docs/advanced/AsyncActions.html" target="_blank">reddit example in the redux manual</a> (see also the <a href="http://redux.js.org/docs/advanced/ExampleRedditAPI.html" target="_blank">full example</a>).</p>
+<p>In a basic application you would only need the <code>requestCreator</code> and <code>transformer</code> functions &#x2014; so we&apos;ll show those first.</p>
+<p>The directory structure of our app will look something like this:</p>
+<pre class="language-"><code>src/
+  components/
+  containers/
+  modules/reddit/
+    constants/
+    actions/
+    reducers/
+    index.js
+  utils/api/ &lt;-- fetchAction
+    requestCreators/
+    responders/
+    responseHandlers/
+    transformers/
+    fatalHandlers/
+    index.js
+</code></pre><h2 id="fetch-actions">Fetch actions</h2>
+<p>Our application needs to have a API utility for interacting with remote data sources. Fetch-actions is designed to provide such a utility in the form of a <code>fetchAction</code> function that accepts standard redux actions and returns a promise that resolves to a json object.</p>
+<h3 id="file-srcutilsapiindexjs">File: <code>src/utils/api/index.js</code></h3>
+<p>As you can see below, we&apos;re importing our own <code>fetch</code> and passing that into the <code>createFetchAction</code> function along with the other handlers. You can also see that we&apos;re keeping each of the handlers in separate folders. You can organize your directory structure however you&apos;d like but it&apos;s a good practice to create many small files to keep them well-organized.</p>
+<pre class="language-"><code class="lang-js"><span class="token keyword">import</span> createFetchAction <span class="token keyword">from</span> <span class="token string">&apos;fetch-actions&apos;</span>
+<span class="token keyword">import</span> <span class="token string">&apos;fetch-everywhere&apos;</span>
+<span class="token keyword">import</span> requestCreator <span class="token keyword">from</span> <span class="token string">&apos;./requestCreators&apos;</span>
+<span class="token keyword">import</span> transformer <span class="token keyword">from</span> <span class="token string">&apos;./transformers&apos;</span>
+
+<span class="token keyword">export</span> <span class="token keyword">const</span> fetchAction <span class="token operator">=</span> <span class="token function">createFetchAction</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+  fetch<span class="token punctuation">,</span>
+  requestCreator<span class="token punctuation">,</span>
+  transformer
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+</code></pre>
+<h2 id="request-creators">Request creators</h2>
+<p>First we&apos;re going to be creating our primary <code>requestCreator</code>. This function will work very similarly to <a href="https://redux-actions.js.org/docs/api/handleAction.html#handleactions" target="_blank"><code>handleActions</code></a>. Although a request creator is just a function, it&apos;s convenient to only call that function for specific actions. Fetch-actions provides helpers for creating handlers that map actions to functions.</p>
+<p>Our <code>requestCreator</code> will map actions to their appropriate request creator functions by matching the action type. In redux an action type should always be a constant. The <code>fetchAction</code> function from above will actually manage the <code>requestCreator</code>, calling it whenever <code>fetchAction(action)</code> is called.</p>
+<h3 id="file-srcutilsapirequestcreatorsindexjs">File: <code>src/utils/api/requestCreators/index.js</code></h3>
+<p>You can see below that we&apos;re importing the <code>FETCH_POSTS</code> constant from our reddit module (we&apos;ll see that module later on). We&apos;re also importing a <code>fetchPosts</code> request creator function. This function should accept an <code>action</code> and return a Fetch Request. An action with a type of <code>FETCH_POSTS</code> will trigger a call to the <code>fetchPosts</code> request creator function.</p>
+<pre class="language-"><code class="lang-js"><span class="token keyword">import</span> <span class="token punctuation">{</span> handleRequestCreatorActions <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&apos;fetch-actions&apos;</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> FETCH_POSTS <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&apos;../../modules/reddit/constants&apos;</span>
+<span class="token keyword">import</span> fetchPosts <span class="token keyword">from</span> <span class="token string">&apos;./fetchPosts&apos;</span>
+
+<span class="token keyword">const</span> requestCreator <span class="token operator">=</span> <span class="token function">handleRequestCreatorActions</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+  <span class="token punctuation">[</span>FETCH_POSTS<span class="token punctuation">]</span><span class="token punctuation">:</span> fetchPosts
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+<span class="token keyword">export</span> <span class="token keyword">default</span> requestCreator
+</code></pre>
+<h3 id="file-srcutilsapirequestcreatorsfetchpostsjs">File: <code>src/utils/api/requestCreators/fetchPosts.js</code></h3>
+<p>Here we can see a request creator function. It should look somewhat similar to a reducer. However, instead of accepting actions and returning a new state object like a reducer, a request creator accepts an action and returns a new Fetch <a href="https://developer.mozilla.org/en-US/docs/Web/API/Request" target="_blank">Request</a>.</p>
+<p>Below you can see that we grab the <code>subreddit</code> value from the action payload and use that to construct a URL. Then we return that request.  Similar to a reducer, request creators will often rely on well-formed payloads to correctly create proper requests.</p>
+<p>Internally, <code>fetchAction</code> will pass that request object to <code>fetch</code>, which will then return a promise that resolves to some kind of response. We&apos;ll see later how the action itself is created.</p>
+<p>The benefit here is that, in the event that reddit changes their URL structure, we can change this function and leave the rest of our app in tact.</p>
+<pre class="language-"><code class="lang-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">(</span>action<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token punctuation">{</span>
+  <span class="token keyword">const</span> <span class="token punctuation">{</span> payload<span class="token punctuation">:</span> subreddit <span class="token punctuation">}</span> <span class="token operator">=</span> action
+  <span class="token keyword">const</span> request <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Request</span><span class="token punctuation">(</span><span class="token template-string"><span class="token string">`https://www.reddit.com/r/</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>subreddit<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">.json`</span></span><span class="token punctuation">)</span>
+  <span class="token keyword">return</span> request
+<span class="token punctuation">}</span>
+</code></pre>
+<h2 id="transformers">Transformers</h2>
+<p>A transformer is expected to receive a JSON response and transform it into an object that the application is expecting. Internally, <code>fetchAction</code> will call the transformer as the last step in the promise chain, allowing for responses to be transformed automatically.</p>
+<h3 id="file-srcutilsapitransformersindexjs">File: <code>src/utils/api/transformers/index.js</code></h3>
+<p>Just like we did with the <code>requestCreator</code> above: we need to import our constants and our transformer functions, the transformer handler will map actions to transform functions, and our <code>transformer</code> will be managed by <code>fetchActions</code>.</p>
+<pre class="language-"><code class="lang-js"><span class="token keyword">import</span> <span class="token punctuation">{</span> handleTransformerActions <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&apos;fetch-actions&apos;</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> FETCH_POSTS <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&apos;../../modules/reddit/constants&apos;</span>
+<span class="token keyword">import</span> fetchPosts <span class="token keyword">from</span> <span class="token string">&apos;./fetchPosts&apos;</span>
+
+<span class="token keyword">const</span> transformer <span class="token operator">=</span> <span class="token function">handleTransformerActions</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+  <span class="token punctuation">[</span>FETCH_POSTS<span class="token punctuation">]</span><span class="token punctuation">:</span> fetchPosts
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+<span class="token keyword">export</span> <span class="token keyword">default</span> transformer
+</code></pre>
+<h3 id="file-srcutilsapitransformersfetchpostsjs">File: <code>src/utils/api/transformers/fetchPosts.js</code></h3>
+<p>Transformer functions, like the request creator function above, are quite simple. In this case they are almost exactly like reducers except that instead of returning a new state, transformers return a new object.</p>
+<p>A transformer receives the result from a <a href="https://developer.mozilla.org/en-US/docs/Web/API/Body/json" target="_blank"><code>response.json()</code></a> promise.</p>
+<p>Below we can see that we&apos;re creating a new JSON response that will contain only the posts along with a date stamp. This allows our app to work with a predictable response from the API. If the data that reddit returns should ever change, we could update this transformer and leave the rest of the application in tact.</p>
+<pre class="language-"><code class="lang-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">(</span>json<span class="token punctuation">,</span> action<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> <span class="token punctuation">{</span>
+    posts<span class="token punctuation">:</span> json<span class="token punctuation">.</span>data<span class="token punctuation">.</span>children<span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span>child <span class="token operator">=</span><span class="token operator">&gt;</span> child<span class="token punctuation">.</span>data<span class="token punctuation">)</span><span class="token punctuation">,</span>
+    receivedAt<span class="token punctuation">:</span> Date<span class="token punctuation">.</span><span class="token function">now</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<h2 id="module">Module</h2>
+<p>We&apos;re going to quickly recreate the application structure from the <a href="http://redux.js.org/docs/advanced/AsyncActions.html" target="_blank">redux reddit example</a> (also <a href="http://redux.js.org/docs/advanced/ExampleRedditAPI.html" target="_blank">full reddit api example</a>). We&apos;re going to be creating something functionally equivalent, but using redux-actions where possible.</p>
+<h3 id="file-srcmodulesredditindexjs">File: <code>src/modules/reddit/index.js</code></h3>
+<p>By default our module will export a reducer. This will be used in our redux app. You can read the full redux example linked above for information on using reducers with redux.</p>
+<pre class="language-"><code class="lang-js"><span class="token keyword">import</span> reducer <span class="token keyword">from</span> <span class="token string">&apos;./reducers&apos;</span>
+<span class="token keyword">export</span> <span class="token keyword">default</span> reducer
+</code></pre>
+<h2 id="actions-constants">Actions, constants</h2>
+<h3 id="file-srcmodulesredditconstantsindexjs">File: <code>src/modules/reddit/constants/index.js</code></h3>
+<p>We&apos;re putting all of our constants in a separate file to more closely match a recommended module structure. The redux example shows all of the constants mixed in with their associated actions but that gets messy as your app grows. It&apos;s better to put them in a separate file and even break that file into smaller pieces as required.</p>
+<pre class="language-"><code class="lang-js"><span class="token keyword">export</span> <span class="token keyword">const</span> SELECT_SUBREDDIT <span class="token operator">=</span> <span class="token string">&apos;SELECT_SUBREDDIT&apos;</span>
+<span class="token keyword">export</span> <span class="token keyword">const</span> INVALIDATE_SUBREDDIT <span class="token operator">=</span> <span class="token string">&apos;INVALIDATE_SUBREDDIT&apos;</span>
+<span class="token keyword">export</span> <span class="token keyword">const</span> REQUEST_POSTS <span class="token operator">=</span> <span class="token string">&apos;REQUEST_POSTS&apos;</span>
+<span class="token keyword">export</span> <span class="token keyword">const</span> RECEIVE_POSTS <span class="token operator">=</span> <span class="token string">&apos;RECEIVE_POSTS&apos;</span>
+<span class="token keyword">export</span> <span class="token keyword">const</span> FETCH_POSTS <span class="token operator">=</span> <span class="token string">&apos;FETCH_POSTS&apos;</span> <span class="token comment" spellcheck="true">// &lt;-- this is different than the redux example</span>
+</code></pre>
+<h3 id="file-srcmodulesredditactionsindexjs">File: <code>src/modules/reddit/actions/index.js</code></h3>
+<p>We&apos;re putting all of our actions in a single file as well. We&apos;re using <code>createAction</code> to create simple actions that will have a type and a payload. You can create your actions however you&apos;d like, as long as they have a type. However, using redux-actions like this can ease the pain of making many simple action creators.</p>
+<pre class="language-"><code class="lang-js"><span class="token keyword">import</span> <span class="token punctuation">{</span> createAction <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&apos;redux-actions&apos;</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span>
+  SELECT_SUBREDDIT<span class="token punctuation">,</span>
+  INVALIDATE_SUBREDDIT<span class="token punctuation">,</span>
+  REQUEST_POSTS<span class="token punctuation">,</span>
+  RECEIVE_POSTS<span class="token punctuation">,</span>
+  FETCH_POSTS
+<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&apos;../constants&apos;</span>
+<span class="token keyword">import</span> fetchAction <span class="token keyword">from</span> <span class="token string">&apos;../../utils/api&apos;</span>
+
+<span class="token keyword">export</span> <span class="token keyword">const</span> selectSubreddit <span class="token operator">=</span> <span class="token function">createAction</span><span class="token punctuation">(</span>SELECT_SUBREDDIT<span class="token punctuation">)</span>
+<span class="token keyword">export</span> <span class="token keyword">const</span> invalidateSubreddit <span class="token operator">=</span> <span class="token function">createAction</span><span class="token punctuation">(</span>INVALIDATE_SUBREDDIT<span class="token punctuation">)</span>
+<span class="token keyword">export</span> <span class="token keyword">const</span> requestPosts <span class="token operator">=</span> <span class="token function">createAction</span><span class="token punctuation">(</span>REQUEST_POSTS<span class="token punctuation">)</span>
+<span class="token keyword">export</span> <span class="token keyword">const</span> receivePosts <span class="token operator">=</span> <span class="token function">createAction</span><span class="token punctuation">(</span>RECEIVE_POSTS<span class="token punctuation">,</span> <span class="token punctuation">(</span>subreddit<span class="token punctuation">,</span> posts<span class="token punctuation">,</span> receivedAt<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token punctuation">{</span> subreddit<span class="token punctuation">,</span> posts<span class="token punctuation">,</span> receivedAt <span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+<span class="token comment" spellcheck="true">// notice this isn&apos;t exported</span>
+<span class="token comment" spellcheck="true">// we&apos;re sending this action to the fetchAction function</span>
+<span class="token comment" spellcheck="true">// we need this because the fetchPosts action is actually a thunk</span>
+<span class="token keyword">const</span> fetchPostsAction <span class="token operator">=</span> <span class="token function">createAction</span><span class="token punctuation">(</span>FETCH_POSTS<span class="token punctuation">)</span>
+
+<span class="token comment" spellcheck="true">// a thunk that dispatches two actions</span>
+<span class="token keyword">export</span> <span class="token keyword">const</span> fetchPosts <span class="token operator">=</span> <span class="token punctuation">(</span>subreddit<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token punctuation">(</span>dispatch<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token punctuation">{</span>
+  <span class="token comment" spellcheck="true">// we need to create our fetch action</span>
+  <span class="token keyword">const</span> action <span class="token operator">=</span> <span class="token function">fetchPostsAction</span><span class="token punctuation">(</span>subreddit<span class="token punctuation">)</span>
+
+  <span class="token function">dispatch</span><span class="token punctuation">(</span><span class="token function">requestPosts</span><span class="token punctuation">(</span>subreddit<span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+  <span class="token comment" spellcheck="true">// Finally, we&apos;re calling fectchAction!</span>
+  <span class="token comment" spellcheck="true">// it returns a promise that resolves to the transformed json response</span>
+  <span class="token comment" spellcheck="true">// we&apos;re taking the two value&apos;s we&apos;re expecting and dispatching them</span>
+  <span class="token function">fetchAction</span><span class="token punctuation">(</span>action<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">{</span> posts<span class="token punctuation">,</span> receivedAt <span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token punctuation">{</span>
+    <span class="token function">dispatch</span><span class="token punctuation">(</span><span class="token function">receivePosts</span><span class="token punctuation">(</span>subreddit<span class="token punctuation">,</span> posts<span class="token punctuation">,</span> receivedAt<span class="token punctuation">)</span><span class="token punctuation">)</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment" spellcheck="true">// this is a helper function</span>
+<span class="token keyword">const</span> shouldFetchPosts <span class="token operator">=</span> <span class="token punctuation">(</span>state<span class="token punctuation">,</span> subreddit<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token punctuation">{</span>
+  <span class="token keyword">const</span> posts <span class="token operator">=</span> state<span class="token punctuation">.</span>postsBySubreddit<span class="token punctuation">[</span>subreddit<span class="token punctuation">]</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>posts<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token boolean">true</span>
+  <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>posts<span class="token punctuation">.</span>isFetching<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token boolean">false</span>
+  <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token operator">!</span><span class="token operator">!</span>posts<span class="token punctuation">.</span>didInvalidate
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment" spellcheck="true">// another thunk</span>
+<span class="token keyword">export</span> <span class="token keyword">const</span> fetchPostsIfNeeded <span class="token operator">=</span> <span class="token punctuation">(</span>subreddit<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token punctuation">(</span>dispatch<span class="token punctuation">,</span> getState<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token punctuation">{</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">shouldFetchPosts</span><span class="token punctuation">(</span><span class="token function">getState</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> subreddit<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">dispatch</span><span class="token punctuation">(</span><span class="token function">fetchPosts</span><span class="token punctuation">(</span>subreddit<span class="token punctuation">)</span><span class="token punctuation">)</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<h2 id="reducers">Reducers</h2>
+<p>Here we&apos;re splitting the reducers into multiple files to make them easier to manage. These reducers are functionally equivalent to the ones in the redux reddit example linked above.</p>
+<h3 id="file-srcmodulesredditreducersindexjs">File: <code>src/modules/reddit/reducers/index.js</code></h3>
+<pre class="language-"><code class="lang-js"><span class="token keyword">import</span> <span class="token punctuation">{</span> combineReducers <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&apos;redux&apos;</span>
+<span class="token keyword">import</span> postsBySubreddit <span class="token keyword">from</span> <span class="token string">&apos;./postsBySubreddit&apos;</span>
+<span class="token keyword">import</span> selectedSubreddit <span class="token keyword">from</span> <span class="token string">&apos;./selectedSubreddit&apos;</span>
+
+<span class="token keyword">const</span> reducer <span class="token operator">=</span> <span class="token function">combineReducers</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+  postsBySubreddit<span class="token punctuation">,</span>
+  selectedSubreddit
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+<span class="token keyword">export</span> <span class="token keyword">default</span> reducer
+</code></pre>
+<h3 id="file-srcmodulesredditreducerspostsbysubredditjs">File: <code>src/modules/reddit/reducers/postsBySubreddit.js</code></h3>
+<p>We&apos;re using <code>handleActions</code> to make it easier to create reducers without needing all of the switch-case boilerplate.</p>
+<pre class="language-"><code class="lang-js"><span class="token keyword">import</span> <span class="token punctuation">{</span> handleActions<span class="token punctuation">,</span> combineActions <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&apos;redux-actions&apos;</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span>
+  INVALIDATE_SUBREDDIT<span class="token punctuation">,</span>
+  REQUEST_POSTS<span class="token punctuation">,</span>
+  RECEIVE_POSTS
+<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&apos;../constants&apos;</span>
+
+<span class="token keyword">const</span> posts <span class="token operator">=</span> <span class="token function">handleAction</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+  <span class="token punctuation">[</span>INVALIDATE_SUBREDDIT<span class="token punctuation">]</span><span class="token punctuation">:</span> <span class="token punctuation">(</span>state<span class="token punctuation">,</span> action<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token punctuation">(</span><span class="token punctuation">{</span>
+    <span class="token operator">...</span>state<span class="token punctuation">,</span>
+    didInvalidate<span class="token punctuation">:</span> <span class="token boolean">true</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+  <span class="token punctuation">[</span>REQUEST_POSTS<span class="token punctuation">]</span><span class="token punctuation">:</span> <span class="token punctuation">(</span>state<span class="token punctuation">,</span> action<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token punctuation">(</span><span class="token punctuation">{</span>
+    <span class="token operator">...</span>state<span class="token punctuation">,</span>
+    isFetching<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+    didInvalidate<span class="token punctuation">:</span> <span class="token boolean">false</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+  <span class="token punctuation">[</span>RECEIVE_POSTS<span class="token punctuation">]</span><span class="token punctuation">:</span> <span class="token punctuation">(</span>state<span class="token punctuation">,</span> action<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token punctuation">(</span><span class="token punctuation">{</span>
+    <span class="token operator">...</span>state<span class="token punctuation">,</span>
+    isFetching<span class="token punctuation">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+    didInvalidate<span class="token punctuation">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+    items<span class="token punctuation">:</span> action<span class="token punctuation">.</span>payload<span class="token punctuation">.</span>posts<span class="token punctuation">,</span>
+    lastUpdated<span class="token punctuation">:</span> action<span class="token punctuation">.</span>payload<span class="token punctuation">.</span>receivedAt
+  <span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>
+  isFetching<span class="token punctuation">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+  didInvalidate<span class="token punctuation">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+  items<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+<span class="token keyword">const</span> postsBySubreddit <span class="token operator">=</span> <span class="token function">handleActions</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+  <span class="token punctuation">[</span><span class="token function">combineActions</span><span class="token punctuation">(</span>INVALIDATE_SUBREDDIT<span class="token punctuation">,</span> REQUEST_POSTS<span class="token punctuation">,</span> RECEIVE_POSTS<span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">:</span> <span class="token punctuation">(</span>state<span class="token punctuation">,</span> action<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token punctuation">{</span>
+    <span class="token keyword">const</span> subreddit <span class="token operator">=</span> action<span class="token punctuation">.</span>payload<span class="token punctuation">.</span>subreddit <span class="token operator">||</span> action<span class="token punctuation">.</span>payload
+    <span class="token keyword">return</span> <span class="token punctuation">{</span>
+      <span class="token operator">...</span>state<span class="token punctuation">,</span>
+      <span class="token punctuation">[</span>subreddit<span class="token punctuation">]</span><span class="token punctuation">:</span> <span class="token function">posts</span><span class="token punctuation">(</span>state<span class="token punctuation">[</span>subreddit<span class="token punctuation">]</span><span class="token punctuation">,</span> action<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+<span class="token keyword">export</span> <span class="token keyword">default</span> postsBySubreddit
+</code></pre>
+<h3 id="file-srcmodulesredditreducersselectedsubredditjs">File: <code>src/modules/reddit/reducers/selectedSubreddit.js</code></h3>
+<p>This is the other reducer for managing which subreddit is selected. This is functionally identical to the reducer in the redux tutorial linked above.</p>
+<pre class="language-"><code class="lang-js"><span class="token keyword">import</span> <span class="token punctuation">{</span> handleActions <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&apos;redux-actions&apos;</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> SELECT_SUBREDDIT <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&apos;../constants&apos;</span>
+
+<span class="token keyword">const</span> selectedSubreddit <span class="token operator">=</span> <span class="token function">handleActions</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+  <span class="token punctuation">[</span>SELECT_SUBREDDIT<span class="token punctuation">]</span><span class="token punctuation">:</span> <span class="token punctuation">(</span>state<span class="token punctuation">,</span> action<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">&gt;</span> action<span class="token punctuation">.</span>payload
+<span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token string">&apos;reactjs&apos;</span><span class="token punctuation">)</span>
+
+<span class="token keyword">export</span> <span class="token keyword">default</span> selectedSubreddit
+</code></pre>
+<h2 id="next-steps">Next steps</h2>
+<p>If you&apos;re trying to get a complete example, you will need to complete the <a href="http://redux.js.org/docs/advanced/ExampleRedditAPI.html" target="_blank">example from the redux docs</a> and merge it with what is shown here.</p>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="../" class="navigation navigation-prev " aria-label="Previous page: Fetch Actions">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="api/" class="navigation navigation-next " aria-label="Next page: list of all functions">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"Reddit API example","level":"1.2","depth":1,"next":{"title":"list of all functions","level":"2.1","depth":1,"path":"docs/api/README.md","ref":"docs/api/README.md","articles":[]},"previous":{"title":"Fetch Actions","level":"1.1","depth":1,"path":"README.md","ref":"README.md","articles":[]},"dir":"ltr"},"config":{"plugins":["edit-link","prism","-highlight","github","anchorjs"],"styles":{"website":"build/gitbook.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"prism":{},"github":{"url":"https://github.com/heygrady/fetch-actions/"},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"Edit This Page","base":"https://github.com/heygrady/fetch-actions/tree/master"},"theme-default":{"styles":{"website":"build/gitbook.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchorjs":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"FetchActions","gitbook":"3.2.2"},"file":{"path":"docs/reddit-api-example.md","mtime":"2017-07-11T22:54:57.000Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-07-17T23:08:26.478Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-edit-link/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-github/plugin.js"></script>
+        
+    
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/3.1.1/anchor.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-anchorjs/anchor-style.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

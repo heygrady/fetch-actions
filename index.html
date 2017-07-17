@@ -1,0 +1,613 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>Fetch Actions · FetchActions</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.2">
+        
+        
+        
+    
+    <link rel="stylesheet" href="gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-prism/prism.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+        <link rel="stylesheet" href="build/gitbook.css">
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="docs/reddit-api-example.html" />
+    
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter active" data-level="1.1" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    Fetch Actions
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="docs/reddit-api-example.html">
+            
+                <a href="docs/reddit-api-example.html">
+            
+                    
+                    Reddit API example
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">API</li>
+        
+        
+    
+        <li class="chapter " data-level="2.1" data-path="docs/api/">
+            
+                <a href="docs/api/">
+            
+                    
+                    list of all functions
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Core API</li>
+        
+        
+    
+        <li class="chapter " data-level="3.1" data-path="docs/api/createFetchAction.html">
+            
+                <a href="docs/api/createFetchAction.html">
+            
+                    
+                    createFetchAction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.2" data-path="docs/api/handleRequestCreatorActions.html">
+            
+                <a href="docs/api/handleRequestCreatorActions.html">
+            
+                    
+                    handleRequestCreatorActions
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.3" data-path="docs/api/handleResponderActions.html">
+            
+                <a href="docs/api/handleResponderActions.html">
+            
+                    
+                    handleResponderActions
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.4" data-path="docs/api/handleResponseActions.html">
+            
+                <a href="docs/api/handleResponseActions.html">
+            
+                    
+                    handleResponseActions
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.5" data-path="docs/api/handleTransformerActions.html">
+            
+                <a href="docs/api/handleTransformerActions.html">
+            
+                    
+                    handleTransformerActions
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.6" data-path="docs/api/handleFatalActions.html">
+            
+                <a href="docs/api/handleFatalActions.html">
+            
+                    
+                    handleFatalActions
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Advanced API</li>
+        
+        
+    
+        <li class="chapter " data-level="4.1" data-path="docs/api/reduceHandlers.html">
+            
+                <a href="docs/api/reduceHandlers.html">
+            
+                    
+                    reduceHandlers
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="4.2" data-path="docs/api/someRequestCreators.html">
+            
+                <a href="docs/api/someRequestCreators.html">
+            
+                    
+                    someRequestCreators
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="4.3" data-path="docs/api/someResponders.html">
+            
+                <a href="docs/api/someResponders.html">
+            
+                    
+                    someResponders
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Identity functions</li>
+        
+        
+    
+        <li class="chapter " data-level="5.1" data-path="docs/api/identityRequestCreator.html">
+            
+                <a href="docs/api/identityRequestCreator.html">
+            
+                    
+                    identityRequestCreator
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.2" data-path="docs/api/identityResponder.html">
+            
+                <a href="docs/api/identityResponder.html">
+            
+                    
+                    identityResponder
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.3" data-path="docs/api/identityHandler.html">
+            
+                <a href="docs/api/identityHandler.html">
+            
+                    
+                    identityHandler
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Examples</li>
+        
+        
+    
+        <li class="chapter " data-level="6.1" data-path="docs/examples/redux-thunk/">
+            
+                <a href="docs/examples/redux-thunk/">
+            
+                    
+                    with thunks
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="6.2" data-path="docs/examples/redux-saga/">
+            
+                <a href="docs/examples/redux-saga/">
+            
+                    
+                    with sagas
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="." >Fetch Actions</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <p><a href="https://badge.fury.io/js/fetch-actions" target="_blank"><img src="https://badge.fury.io/js/fetch-actions.svg" alt="npm version"></a>
+<a href="https://travis-ci.org/heygrady/fetch-actions" target="_blank"><img src="https://travis-ci.org/heygrady/fetch-actions.svg?branch=master" alt="Build Status"></a>
+<a href="https://codecov.io/gh/heygrady/fetch-actions" target="_blank"><img src="https://codecov.io/gh/heygrady/fetch-actions/branch/master/graph/badge.svg" alt="codecov"></a></p>
+<h1 id="fetch-actions">fetch-actions</h1>
+<p><em>dispatch actions to handle fetch requests</em></p>
+<p>Fetch-actions allows you to dispatch actions from your redux (or similar) application to control <a href="https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch" target="_blank">fetch</a>. <strong>Fetch-actions uses actions to create fetch requests and handle fetch responses.</strong></p>
+<p><strong><a href="https://heygrady.com/announcing-fetch-actions/" target="_blank">See the announcement blog post</a>.</strong></p>
+<p>This library works well with <a href="https://github.com/acdlite/flux-standard-action" target="_blank">flux standard actions</a> like you would encounter when using <a href="https://github.com/acdlite/redux-actions" target="_blank">redux-actions</a>. However, any <a href="http://redux.js.org/docs/basics/Actions.html" target="_blank">redux-compatible action</a> will work just fine. Fetch-actions is heavily inspired by the <a href="https://github.com/acdlite/redux-actions#handleactionsreducermap-defaultstate" target="_blank"><code>handleActions</code></a> function that comes with <code>redux-actions</code>. You can learn about <a href="http://redux.js.org/docs/basics/Actions.html" target="_blank">the basics of actions</a> and how they are used within <a href="https://github.com/reactjs/redux/" target="_blank">redux</a>.</p>
+<p>Fetch-actions provides functions &#x2014; intended to be called from <a href="http://redux.js.org/docs/advanced/Middleware.html" target="_blank">redux middleware</a> &#x2014; that will perform an asynchronous <code>fetch</code> call. You can configure handlers &#x2014; conceptually similar to <a href="http://redux.js.org/docs/basics/Reducers.html" target="_blank">how reducers work</a> &#x2014; for creating fetch requests and for transforming the JSON response. For advanced usage (and service mocking) you can also provide responders and responseHandlers for creating and manipulating responses.</p>
+<p>This library tries to conform to redux best practices, like using pure functions and avoiding side effects. It borrows liberally from concepts like actions, middleware and reducers and should fit cleanly into a redux-like workflow. Hopefully fetch-actions can bring some sanity to the process of handling asynchronous external requests in a redux-like app.</p>
+<p>If you are already using redux with middleware to fetch data from the server, this should make your life a little easier. If you have been wondering how to cleanly integrate a react-redux application with an API, keep reading.</p>
+<h2 id="installation">Installation</h2>
+<pre class="language-"><code class="lang-bash">yarn add fetch-actions
+
+<span class="token comment" spellcheck="true"># you need to bring your own fetch</span>
+yarn add fetch-everywhere
+</code></pre>
+<h2 id="bring-your-own-fetch">Bring your own fetch</h2>
+<p>The fetch standard is <a href="https://developers.google.com/web/updates/2015/03/introduction-to-fetch" target="_blank">replacing XMLHttpRequest</a> but it hasn&apos;t been added to every environment (<a href="http://caniuse.com/#feat=fetch" target="_blank">can i use fetch?</a>). These days JavaScript applications can run in all sorts of places. Luckily there are API-complete <a href="https://github.com/lucasfeliciano/fetch-everywhere" target="_blank">fetch polyfills for everywhere</a> your code is likely to run.</p>
+<p><a href="https://medium.com/@shahata/why-i-wont-be-using-fetch-api-in-my-apps-6900e6c6fe78" target="_blank">Not everyone loves fetch</a>. If you&apos;re using something that wraps fetch, like <a href="https://github.com/mzabriskie/axios" target="_blank">axios</a> or <a href="https://github.com/visionmedia/superagent" target="_blank">superagent</a>, you could still benefit from fetch-actions by using a custom responder. We will show examples of using custom responders later on. For now we&apos;re going to assume you want to use fetch in your app.</p>
+<p>You can read <a href="https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API" target="_blank">more about fetch</a> on MDN.</p>
+<p>In the examples below we&apos;re using <code>fetch-everywhere</code> but you could just as easily use any of the many fetch libraries available, like <a href="https://github.com/github/fetch" target="_blank"><code>whatwg-fetch</code></a>.</p>
+<h2 id="fetchaction-in-action">fetchAction in action</h2>
+<p>In our redux application we want to <a href="http://redux.js.org/docs/api/Store.html#dispatch" target="_blank"><code>dispatch</code></a> an <a href="http://redux.js.org/docs/basics/Actions.html" target="_blank"><code>action</code></a> that triggers a fetch call. Ultimately we want to inject the resulting data into our app (using a <a href="http://redux.js.org/docs/basics/Reducers.html" target="_blank"><code>reducer</code></a>). Of course, redux has a strictly synchronous, <a href="http://redux.js.org/docs/basics/DataFlow.html" target="_blank">unidirectional workflow</a>. There are ways &#x2014; i.e. middleware &#x2014; to integrate redux with <a href="http://redux.js.org/docs/advanced/AsyncActions.html" target="_blank">an asynchronous flow</a>. That&apos;s where fetch-actions comes in.</p>
+<p>Most redux examples leave this asynchronous middle step completely up to the implementor. We&apos;ll see later that fetch-actions is designed to work with redux-like middleware including <a href="https://github.com/gaearon/redux-thunk" target="_blank">redux-thunk</a> and <a href="https://github.com/redux-saga/redux-saga" target="_blank">redux-saga</a>.</p>
+<p>In the <a href="http://redux.js.org/docs/advanced/ExampleRedditAPI.html" target="_blank">fetch example from the redux manual</a>, they show the <code>fetch</code> call embedded in a <code>thunk</code>. The redux manual is purposely naive in this regard because they are trying to highlight redux, not fetch. They completely ignore any complexity, like translating an action into a proper URI or transforming the API response.</p>
+<p>In a more complex app it might be a seen as a bad practice to bury fetch calls deep within your middleware &#x2014; the URI for a fetch request is conceptually similar to SQL query. Your app will likely require some type of request builder for generating proper API requests.</p>
+<p>Fetch-actions provides hooks into the fetch workflow so that your app can be shielded from the peculiarities of the various APIs you interface with. If the API changes, you can update your <code>requestCreators</code> and <code>transformers</code> and leave the rest of the your app alone. This can make your app more testable. At the very least it allows you to make your API integrations more predictable.</p>
+<p>To this end, fetch-actions makes it easy to create a <code>fetchAction</code> function that accepts an action and returns data. This allows your fetch implementation to remain naive where it interfaces with your middleware, moving the complex functionality into handlers that are managed elsewhere.</p>
+<h3 id="it-looks-like-this">It looks like this</h3>
+<pre class="language-"><code class="lang-js"><span class="token keyword">import</span> createFetchAction <span class="token keyword">from</span> <span class="token string">&apos;fetch-actions&apos;</span>
+
+<span class="token comment" spellcheck="true">// bring your own fetch</span>
+<span class="token keyword">import</span> <span class="token string">&apos;fetch-everywhere&apos;</span>
+
+<span class="token comment" spellcheck="true">// make your own handlers</span>
+<span class="token comment" spellcheck="true">// we&apos;ll see what these look like later</span>
+<span class="token keyword">import</span> requestCreator <span class="token keyword">from</span> <span class="token string">&apos;./requestCreators&apos;</span>
+<span class="token keyword">import</span> transformer <span class="token keyword">from</span> <span class="token string">&apos;./transformers&apos;</span>
+
+<span class="token comment" spellcheck="true">// provide an interface between your API and your app</span>
+<span class="token keyword">export</span> <span class="token keyword">const</span> fetchAction <span class="token operator">=</span> <span class="token function">createFetchAction</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+  fetch<span class="token punctuation">,</span> <span class="token comment" spellcheck="true">// &lt;-- inject your own fetch</span>
+  requestCreator<span class="token punctuation">,</span> <span class="token comment" spellcheck="true">// &lt;-- create requests from actions</span>
+  transformer <span class="token comment" spellcheck="true">// &lt;-- transform responses before returning them</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+</code></pre>
+<h3 id="use-it-like-this">Use it like this</h3>
+<p>Here we&apos;re showing how you&apos;d use <code>fetchAction</code> all by itself. In a real application you&apos;d call <code>fetchAction</code> from middleware, like a thunk or a saga. We&apos;ll see those examples further below.</p>
+<p>You can see below that <code>fetchAction</code> accepts an action and returns a promise which resolves to <code>data</code>. If you need to more control over the fetch lifecycle you should do this with the various fetch handlers we&apos;ll explore below. From within your middleware you should expect that <code>fetchAction</code> will know how to handle your actions and return the correct data. We&apos;ll see how that works later.</p>
+<p>For now, let&apos;s feed <code>fetchAction</code> an action and get back a promise that returns <code>data</code>.</p>
+<pre class="language-"><code class="lang-js"><span class="token comment" spellcheck="true">// pull in our custom fetchAction function (see above)</span>
+<span class="token keyword">import</span> fetchAction <span class="token keyword">from</span> <span class="token string">&apos;./utils/api/fetchAction&apos;</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> fetchPosts <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&apos;./modules/posts/actions&apos;</span>
+
+<span class="token keyword">const</span> action <span class="token operator">=</span> <span class="token function">fetchPosts</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true">// &lt;-- an action creator</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>action<span class="token punctuation">)</span> <span class="token comment" spellcheck="true">// --&gt; { type: &apos;FETCH_POSTS&apos; }</span>
+
+<span class="token comment" spellcheck="true">// feed it an action, get a promise</span>
+<span class="token keyword">const</span> promise <span class="token operator">=</span> <span class="token function">fetchAction</span><span class="token punctuation">(</span>action<span class="token punctuation">)</span> <span class="token comment" spellcheck="true">// &lt;-- returns a promise, just like fetch</span>
+
+<span class="token comment" spellcheck="true">// expect to receive ready-to-use data</span>
+promise<span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span>data <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token punctuation">{</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span> <span class="token comment" spellcheck="true">// &lt;-- you could dispatch this data in your middleware</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+</code></pre>
+<h3 id="how-does-createfetchaction-work">How does createFetchAction work?</h3>
+<p>Under the hood <code>createFetchAction</code> is setting up a promise chain and calling fetch lifecycle handlers in a specific order.</p>
+<p>Below you can see some psuedo-code for the <code>createFetchAction</code> provided by <code>fetch-actions</code>. You can see the real <a href="https://github.com/heygrady/fetch-actions/blob/master/src/createFetchAction.js" target="_blank">source</a> is very similar.</p>
+<p>Don&apos;t worry if you don&apos;t know what all of those handlers are doing. You can read about them in the API. This is just an example so that you can visualize how your fetch requests are being managed. We&apos;ll get into further details in later examples. For now we&apos;re still trying to stay focused on how we integrate with your middleware.</p>
+<pre class="language-"><code class="lang-js"><span class="token keyword">import</span> <span class="token punctuation">{</span> identityRequestCreator<span class="token punctuation">,</span> identityHandler <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&apos;./identityHandlers&apos;</span>
+
+<span class="token keyword">export</span> <span class="token keyword">const</span> createFetchAction <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">{</span>
+  fetch<span class="token punctuation">,</span>
+  requestCreator <span class="token operator">=</span> identityRequestCreator<span class="token punctuation">,</span>
+  responder<span class="token punctuation">,</span>
+  responseHandler <span class="token operator">=</span> identityHandler<span class="token punctuation">,</span>
+  transformer <span class="token operator">=</span> identityHandler<span class="token punctuation">,</span>
+  fatalHandler
+<span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">&gt;</span> action <span class="token operator">=</span><span class="token operator">&gt;</span> Promise<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+  <span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token function">requestCreator</span><span class="token punctuation">(</span>action<span class="token punctuation">)</span><span class="token punctuation">)</span>
+  <span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span>request <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token punctuation">(</span>responder <span class="token operator">&amp;&amp;</span> <span class="token function">responder</span><span class="token punctuation">(</span>request<span class="token punctuation">,</span> action<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">||</span> <span class="token function">fetch</span><span class="token punctuation">(</span>request<span class="token punctuation">)</span><span class="token punctuation">)</span>
+  <span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span>response <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token function">responseHandler</span><span class="token punctuation">(</span>response<span class="token punctuation">,</span> action<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">json</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+  <span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span>json <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token function">transformer</span><span class="token punctuation">(</span>json<span class="token punctuation">,</span> action<span class="token punctuation">)</span><span class="token punctuation">)</span>
+  <span class="token punctuation">.</span><span class="token keyword">catch</span><span class="token punctuation">(</span>error <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token punctuation">(</span>fatalHandler <span class="token operator">&amp;&amp;</span> <span class="token function">fatalHandler</span><span class="token punctuation">(</span>error<span class="token punctuation">,</span> action<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">||</span> console<span class="token punctuation">.</span><span class="token function">error</span><span class="token punctuation">(</span>error<span class="token punctuation">)</span><span class="token punctuation">)</span>
+</code></pre>
+<h2 id="example-using-an-inline-thunk">Example: Using an inline thunk</h2>
+<p>In the thunk example below we&apos;re dispatching a thunk within the <code>mapDispatchToProps</code> of a container. You should read up on <a href="http://redux.js.org/docs/basics/UsageWithReact.html" target="_blank">how containers work in react-redux</a>. You should follow any best practices recommended by <a href="https://github.com/gaearon/redux-thunk" target="_blank">redux-thunk</a>. We&apos;ll see later that a saga can be an elegant way to manage more complex requests. The example below assumes your app is correctly configured with react-redux and redux-thunk.</p>
+<p>Caveats aside... to test out a simple fetch request, <strong>you don&apos;t need much more than a thunk</strong>.</p>
+<p>Below you can see that we&apos;re using a container to provide a <code>fetch</code> function to our <code>PostList</code> component. Whenever that function is called, the container will dispatch a thunk that calls <code>fetchAction</code> and dispatches <code>loadPosts</code> to load the results into our app.</p>
+<p>You will need to bring your own reducers for handling the <code>loadPosts</code> action. We&apos;ll see later how you might construct an end-to-end example. Fetch-actions makes no assumptions about your app&apos;s reducers.</p>
+<p>This is what <code>fetchAction</code> might look like from within a container.</p>
+<pre class="language-"><code class="lang-js"><span class="token keyword">import</span> <span class="token punctuation">{</span> connect <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&apos;react-redux&apos;</span>
+<span class="token keyword">import</span> fetchAction <span class="token keyword">from</span> <span class="token string">&apos;../utils/api/fetchAction&apos;</span>
+<span class="token keyword">import</span> PostList <span class="token keyword">from</span> <span class="token string">&apos;../components/PostList&apos;</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> fetchPosts<span class="token punctuation">,</span> loadPosts <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&apos;../modules/posts/actions&apos;</span>
+
+<span class="token keyword">const</span> myThunk <span class="token operator">=</span> dispatch <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token punctuation">{</span>
+  <span class="token keyword">const</span> action <span class="token operator">=</span> <span class="token function">fetchPosts</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true">// &lt;-- create an action</span>
+
+  <span class="token keyword">const</span> promise <span class="token operator">=</span> <span class="token function">fetchAction</span><span class="token punctuation">(</span>action<span class="token punctuation">)</span> <span class="token comment" spellcheck="true">// &lt;-- fetch the data</span>
+
+  promise<span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span>posts <span class="token operator">=</span><span class="token operator">&gt;</span>
+    <span class="token function">dispatch</span><span class="token punctuation">(</span><span class="token function">loadPosts</span><span class="token punctuation">(</span>posts<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true">// &lt;-- dispatch the data</span>
+  <span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">const</span> mapDispatchToProps <span class="token operator">=</span> <span class="token punctuation">(</span>dispatch<span class="token punctuation">,</span> ownProps<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> <span class="token punctuation">{</span>
+    fetch<span class="token punctuation">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token function">dispatch</span><span class="token punctuation">(</span>myThunk<span class="token punctuation">)</span> <span class="token comment" spellcheck="true">// &lt;-- initiate the process from a component</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">const</span> PostListContainer <span class="token operator">=</span> <span class="token function">connect</span><span class="token punctuation">(</span>undefined<span class="token punctuation">,</span> mapDispatchToProps<span class="token punctuation">)</span><span class="token punctuation">(</span>PostList<span class="token punctuation">)</span>
+<span class="token keyword">export</span> <span class="token keyword">default</span> PostListContainer
+</code></pre>
+<h2 id="next-steps">Next steps</h2>
+<ul>
+<li><a href="docs/reddit-api-example.html">Reddit API example</a></li>
+<li><a href="docs/api/">API</a><ul>
+<li><a href="docs/api/createFetchAction.html"><code>createFetchAction</code></a></li>
+<li><a href="docs/api/handleRequestCreatorActions.html"><code>handleRequestCreatorActions</code></a></li>
+<li><a href="docs/api/handleResponderActions.html"><code>handleResponderActions</code></a></li>
+<li><a href="docs/api/handleResponseActions.html"><code>handleResponseActions</code></a></li>
+<li><a href="docs/api/handleTransformerActions.html"><code>handleTransformerActions</code></a></li>
+<li><a href="docs/api/handleFatalActions.html"><code>handleFatalActions</code></a></li>
+</ul>
+</li>
+</ul>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                
+                <a href="docs/reddit-api-example.html" class="navigation navigation-next navigation-unique" aria-label="Next page: Reddit API example">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"Fetch Actions","level":"1.1","depth":1,"next":{"title":"Reddit API example","level":"1.2","depth":1,"path":"docs/reddit-api-example.md","ref":"docs/reddit-api-example.md","articles":[]},"dir":"ltr"},"config":{"plugins":["edit-link","prism","-highlight","github","anchorjs"],"styles":{"website":"build/gitbook.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"prism":{},"github":{"url":"https://github.com/heygrady/fetch-actions/"},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"Edit This Page","base":"https://github.com/heygrady/fetch-actions/tree/master"},"theme-default":{"styles":{"website":"build/gitbook.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchorjs":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"FetchActions","gitbook":"3.2.2"},"file":{"path":"README.md","mtime":"2017-07-17T23:00:28.000Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-07-17T23:08:26.478Z"},"basePath":".","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="gitbook/gitbook.js"></script>
+    <script src="gitbook/theme.js"></script>
+    
+        
+        <script src="gitbook/gitbook-plugin-edit-link/plugin.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-github/plugin.js"></script>
+        
+    
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/3.1.1/anchor.min.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-anchorjs/anchor-style.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+
