@@ -4,6 +4,8 @@ import handleRequestCreatorActions, {
 } from '../src/handleRequestCreatorActions'
 import 'cross-fetch/polyfill'
 
+const realConsole = console
+
 describe('handleRequestCreatorActions', () => {
   const type = 'TEST_ACTION'
   const payload = { hello: true }
@@ -15,10 +17,16 @@ describe('handleRequestCreatorActions', () => {
 
   let handler
   beforeEach(() => {
+    global.console = { warn: jest.fn() }
     handler = handleRequestCreatorActions({
       [type]: testHandler,
       [DEFAULT_HANDLER]: () => new Request('http://default'),
     })
+  })
+  afterEach(() => {
+    if (global.console !== realConsole) {
+      global.console = realConsole
+    }
   })
 
   it('throws on missing map', () => {
@@ -31,7 +39,6 @@ describe('handleRequestCreatorActions', () => {
   })
 
   it('warns on missing handler', () => {
-    global.console = { warn: jest.fn() }
     const action = { type: 'missing' }
     const handler = handleRequestCreatorActions({
       noMatch: (action) => new Request('http://no-match'),

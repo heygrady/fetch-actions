@@ -3,9 +3,7 @@ import handleFatalActions, { DEFAULT_HANDLER } from '../src/handleFatalActions'
 import createFakeFetch from './helpers/createFakeFetch'
 import 'cross-fetch/polyfill'
 
-const local = {
-  log: console.log,
-}
+const realConsole = console
 
 describe('handleTransformAction', () => {
   const type = 'TEST_ACTION'
@@ -21,10 +19,16 @@ describe('handleTransformAction', () => {
 
   let fatalHandler
   beforeEach(() => {
+    global.console = { warn: jest.fn() }
     fatalHandler = handleFatalActions({
       [type]: testFatalHandler,
       [DEFAULT_HANDLER]: () => 'default',
     })
+  })
+  afterEach(() => {
+    if (global.console !== realConsole) {
+      global.console = realConsole
+    }
   })
 
   it('throws on missing map', () => {
@@ -37,7 +41,6 @@ describe('handleTransformAction', () => {
   })
 
   it('warns on missing fatalHandler', () => {
-    global.console = { warn: jest.fn() }
     const action = { type: 'missing' }
     const fatalHandler = handleFatalActions({ noMatch: (error) => error })
     expect(fatalHandler(error, action)).toBeUndefined()
@@ -82,7 +85,7 @@ describe('handleTransformAction', () => {
           expect(response).toEqual(payload)
         })
         .catch((e) => {
-          local.log(e)
+          realConsole.log(e)
         })
     })
 
@@ -99,7 +102,7 @@ describe('handleTransformAction', () => {
       expect.assertions(1)
       return fetchAction(action)
         .then((response) => {
-          local.log(response)
+          realConsole.log(response)
         })
         .catch((e) => {
           expect(true).toEqual(true)

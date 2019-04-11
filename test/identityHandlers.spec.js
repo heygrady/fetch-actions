@@ -5,10 +5,19 @@ import {
 } from '../src/identityHandlers'
 import 'cross-fetch/polyfill'
 
+const realConsole = console
+
 describe('identityHandlers', () => {
   describe('identityRequestCreator', () => {
-    it('warns when request is empty', () => {
+    beforeEach(() => {
       global.console = { warn: jest.fn() }
+    })
+    afterEach(() => {
+      if (global.console !== realConsole) {
+        global.console = realConsole
+      }
+    })
+    it('warns when request is empty', () => {
       const emptyRequest = new Request('')
       expect(identityRequestCreator()).toEqual(emptyRequest)
       expect(console.warn).toBeCalled()

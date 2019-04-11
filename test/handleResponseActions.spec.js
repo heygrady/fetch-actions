@@ -4,6 +4,8 @@ import handleResponseActions, {
 } from '../src/handleResponseActions'
 import 'cross-fetch/polyfill'
 
+const realConsole = console
+
 describe('handleResponseActions', () => {
   const type = 'TEST_ACTION'
   const payload = { hello: true }
@@ -16,10 +18,16 @@ describe('handleResponseActions', () => {
 
   let handler
   beforeEach(() => {
+    global.console = { warn: jest.fn() }
     handler = handleResponseActions({
       [type]: testHandler,
       [DEFAULT_HANDLER]: () => new Response(JSON.stringify({ default: true })),
     })
+  })
+  afterEach(() => {
+    if (global.console !== realConsole) {
+      global.console = realConsole
+    }
   })
 
   it('throws on missing map', () => {
@@ -32,7 +40,6 @@ describe('handleResponseActions', () => {
   })
 
   it('warns on missing handler', () => {
-    global.console = { warn: jest.fn() }
     const action = { type: 'missing' }
     const handler = handleResponseActions({ noMatch: (response) => response })
     expect(handler(response, action)).toEqual(response)
@@ -76,7 +83,6 @@ describe('handleResponseActions', () => {
     })
 
     it('returns undefined after resolving promises when not response-like', () => {
-      global.console = { warn: jest.fn() }
       expect.assertions(2)
       const promise = Promise.resolve({})
       return makeResponse(promise).then((response) => {

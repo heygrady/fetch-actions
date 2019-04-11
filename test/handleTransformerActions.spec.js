@@ -3,6 +3,8 @@ import handleTransformerActions, {
   DEFAULT_TRANSFORMER,
 } from '../src/handleTransformerActions'
 
+const realConsole = console
+
 describe('handleTransformAction', () => {
   const type = 'TEST_ACTION'
   const payload = { hello: true }
@@ -14,10 +16,16 @@ describe('handleTransformAction', () => {
 
   let transformer
   beforeEach(() => {
+    global.console = { warn: jest.fn() }
     transformer = handleTransformerActions({
       [type]: testTransformer,
       [DEFAULT_TRANSFORMER]: () => 'default',
     })
+  })
+  afterEach(() => {
+    if (global.console !== realConsole) {
+      global.console = realConsole
+    }
   })
 
   it('throws on missing map', () => {
@@ -30,7 +38,6 @@ describe('handleTransformAction', () => {
   })
 
   it('warns on missing transformer', () => {
-    global.console = { warn: jest.fn() }
     const action = { type: 'missing' }
     const transformer = handleTransformerActions({ noMatch: (json) => json })
     expect(transformer(json, action)).toEqual(json)
