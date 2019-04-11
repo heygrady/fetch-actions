@@ -1,5 +1,5 @@
 import createFetchAction from '../../../../../src/createFetchAction'
-import fetch from 'fetch-everywhere'
+import fetch from 'cross-fetch/polyfill'
 import requestCreator from './requestCreators'
 import fakeFetch from './mock/fakeFetch'
 import transformer from './transformers'

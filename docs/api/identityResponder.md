@@ -5,7 +5,7 @@ The identity request creator is designed for internal use only. It is the defaul
 
 ```js
 import createFetchAction, { identityResponder } from 'fetch-actions'
-import 'fetch-everywhere'
+import 'cross-fetch/polyfill'
 
 const fetchAction = createFetchAction({
   fetch,

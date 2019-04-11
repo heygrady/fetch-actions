@@ -10,7 +10,7 @@ At a minimum your fetchAction function needs to have a `requestCreator`. The `ha
 ```js
 import createFetchAction, { handleRequestCreatorActions } from 'fetch-actions'
 import FETCH_POSTS from '../modules/reddit/constants'
-import 'fetch-everywhere'
+import 'cross-fetch/polyfill'
 
 // use the action to create a proper fetch Request
 // @see https://developer.mozilla.org/en-US/docs/Web/API/Request/Request
@@ -75,7 +75,7 @@ import createFetchAction, {
   DEFAULT_REQUEST_CREATOR // <-- import the constant
 } from 'fetch-actions'
 import FETCH_POSTS from '../modules/reddit/constants'
-import 'fetch-everywhere'
+import 'cross-fetch/polyfill'
 
 const fetchPostsRequestCreator = action => new Request(`https://www.reddit.com/r/${action.payload}.json`)
 

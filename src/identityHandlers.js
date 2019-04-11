@@ -1,7 +1,10 @@
-import warning from 'warning'
+import warning from 'tiny-warning'
 
-export const identityRequestCreator = action => {
-  warning(false, '@@fetch-actions/identityRequestCreator you should define a requestCreator for all actions. The identity fetch handler generates blank requests.')
+export const identityRequestCreator = (action) => {
+  warning(
+    false,
+    '@@fetch-actions/identityRequestCreator you should define a requestCreator for all actions. The identity fetch handler generates blank requests.'
+  )
   return new Request('')
 }
 export const identityResponder = (payload, action) => undefined

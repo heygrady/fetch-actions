@@ -2400,9 +2400,9 @@ fd-slicer@~1.0.1:
   dependencies:
     pend "~1.2.0"
 
-fetch-everywhere@^1.0.5:
+cross-fetch/polyfill@^1.0.5:
   version "1.0.5"
-  resolved "https://registry.yarnpkg.com/fetch-everywhere/-/fetch-everywhere-1.0.5.tgz#b2497f47a57d9026b3907c09756acf5f4bd34e8b"
+  resolved "https://registry.yarnpkg.com/cross-fetch/polyfill/-/cross-fetch/polyfill-1.0.5.tgz#b2497f47a57d9026b3907c09756acf5f4bd34e8b"
   dependencies:
     node-fetch "^1.0.1"
     whatwg-fetch ">=0.10.0"

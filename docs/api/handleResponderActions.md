@@ -20,7 +20,7 @@ The full flow of a `fetchAction` call looks like this:
 ```js
 import createFetchAction, { handleResponderActions } from 'fetch-actions'
 import FETCH_POSTS from '../modules/reddit/constants'
-import 'fetch-everywhere'
+import 'cross-fetch/polyfill'
 
 const responder = handleResponderActions({
   [FETCH_POSTS]: (request, action) => {
@@ -47,7 +47,7 @@ export fetchAction
 ```js
 import createFetchAction, { handleRequestCreatorActions, handleResponderActions } from 'fetch-actions'
 import FETCH_POSTS from '../modules/reddit/constants'
-import 'fetch-everywhere'
+import 'cross-fetch/polyfill'
 
 const FETCH_FAKE_POSTS = 'FETCH_FAKE_POSTS'
 

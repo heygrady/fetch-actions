@@ -5,7 +5,7 @@ The core functionality of fetch-actions is contained within `createFetchAction`.
 
 ```js
 import createFetchAction from 'fetch-actions'
-import 'fetch-everywhere'
+import 'cross-fetch/polyfill'
 
 const fetchAction = createFetchAction({
   fetch
@@ -22,7 +22,7 @@ Below you can see all of the configuration options.
 
 ```js
 import createFetchAction from 'fetch-actions'
-import 'fetch-everywhere'
+import 'cross-fetch/polyfill'
 
 import requestCreator from './requestCreators'
 import responder from './responders'
@@ -56,7 +56,7 @@ Here's an inline example to show roughly how `fetchAction` works.
 ```js
 import createFetchAction, { handleRequestCreatorActions, handleTransformerActions } from 'fetch-actions'
 import { createAction } from 'redux-actions'
-import 'fetch-everywhere'
+import 'cross-fetch/polyfill'
 
 // we need an action and action creator
 const FETCH_POSTS = 'FETCH_POSTS'

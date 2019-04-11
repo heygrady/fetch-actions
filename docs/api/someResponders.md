@@ -13,7 +13,7 @@ Allows you to glue responders together to run in sequence. It returns the first 
 import createFetchAction, { someResponders } from 'fetch-actions'
 import fakeBlueberryResponder from './responders/fakeBlueberryResponder'
 import fakeCarrotResponder from './responders/fakeCarrotResponder'
-import 'fetch-everywhere'
+import 'cross-fetch/polyfill'
 
 const fetchAction = createFetchAction({
   fetch,

@@ -1,10 +1,10 @@
 import createFetchAction from '../src/createFetchAction'
 import handleFatalActions, { DEFAULT_HANDLER } from '../src/handleFatalActions'
 import createFakeFetch from './helpers/createFakeFetch'
-import 'fetch-everywhere'
+import 'cross-fetch/polyfill'
 
 const local = {
-  log: console.log
+  log: console.log,
 }
 
 describe('handleTransformAction', () => {
@@ -23,58 +23,38 @@ describe('handleTransformAction', () => {
   beforeEach(() => {
     fatalHandler = handleFatalActions({
       [type]: testFatalHandler,
-      [DEFAULT_HANDLER]: () => 'default'
+      [DEFAULT_HANDLER]: () => 'default',
     })
   })
 
   it('throws on missing map', () => {
-    expect(
-      () => handleFatalActions()(error, action)
-    ).toThrow(
-      undefined
-    )
+    expect(() => handleFatalActions()(error, action)).toThrow(undefined)
   })
 
   it('throws on missing action type', () => {
     const action = {}
-    expect(
-      () => fatalHandler(error, action)
-    ).toThrow()
+    expect(() => fatalHandler(error, action)).toThrow()
   })
 
   it('warns on missing fatalHandler', () => {
-    global.console = { error: jest.fn() }
+    global.console = { warn: jest.fn() }
     const action = { type: 'missing' }
-    const fatalHandler = handleFatalActions({ noMatch: error => error })
-    expect(
-      fatalHandler(error, action)
-    ).toEqual(undefined)
-    expect(console.error).toBeCalled()
+    const fatalHandler = handleFatalActions({ noMatch: (error) => error })
+    expect(fatalHandler(error, action)).toBeUndefined()
+    expect(console.warn).toBeCalled()
   })
 
   it('returns a function from a map', () => {
-    expect(
-      typeof fatalHandler
-    ).toEqual(
-      'function'
-    )
+    expect(typeof fatalHandler).toEqual('function')
   })
 
   it('returns the action.payload', () => {
-    expect(
-      fatalHandler(error, action)
-    ).toEqual(
-      payload
-    )
+    expect(fatalHandler(error, action)).toEqual(payload)
   })
 
   it('uses default fatalHandler on unknown action', () => {
     const action = { type: 'other' }
-    expect(
-      fatalHandler(error, action)
-    ).toEqual(
-      'default'
-    )
+    expect(fatalHandler(error, action)).toEqual('default')
   })
   describe('catches errors from fetchAction', () => {
     const data = true
@@ -94,12 +74,16 @@ describe('handleTransformAction', () => {
         fetch,
         requestCreator,
         responder: 'bad',
-        fatalHandler
+        fatalHandler,
       })
       expect.assertions(1)
       return fetchAction(action)
-        .then(response => { expect(response).toEqual(payload) })
-        .catch((e) => { local.log(e) })
+        .then((response) => {
+          expect(response).toEqual(payload)
+        })
+        .catch((e) => {
+          local.log(e)
+        })
     })
 
     it('throws on bad responder function', () => {
@@ -109,13 +93,17 @@ describe('handleTransformAction', () => {
         responder: 'bad',
         fatalHandler: handleFatalActions({
           [type]: testUndefinedFatalHandler,
-          [DEFAULT_HANDLER]: () => 'default'
-        })
+          [DEFAULT_HANDLER]: () => 'default',
+        }),
       })
       expect.assertions(1)
       return fetchAction(action)
-        .then(response => { local.log(response) })
-        .catch((e) => { expect(true).toEqual(true) })
+        .then((response) => {
+          local.log(response)
+        })
+        .catch((e) => {
+          expect(true).toEqual(true)
+        })
     })
   })
 })

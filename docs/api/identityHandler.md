@@ -5,7 +5,7 @@ The identity handler is designed for internal use only. It is the default handle
 
 ```js
 import createFetchAction, { identityHandler } from 'fetch-actions'
-import 'fetch-everywhere'
+import 'cross-fetch/polyfill'
 
 const fetchAction = createFetchAction({
   fetch,

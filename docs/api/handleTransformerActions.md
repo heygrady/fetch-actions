@@ -7,7 +7,7 @@ This is the most common type of handler besides a [requestCreator](./handleReque
 ```js
 import createFetchAction, { handleTransformerActions } from 'fetch-actions'
 import FETCH_POSTS from '../modules/reddit/constants'
-import 'fetch-everywhere'
+import 'cross-fetch/polyfill'
 
 const transformer = handleTransformerActions({
   [FETCH_POSTS]: (json, action) => {
@@ -36,7 +36,7 @@ export fetchAction
 ```js
 import createFetchAction, { handleRequestCreatorActions, handleTransformerActions } from 'fetch-actions'
 import FETCH_POSTS from '../modules/reddit/constants'
-import 'fetch-everywhere'
+import 'cross-fetch/polyfill'
 
 const requestCreator = handleRequestCreatorActions({
   [FETCH_POSTS]: action => new Request(`https://www.reddit.com/r/${action.payload}.json`)

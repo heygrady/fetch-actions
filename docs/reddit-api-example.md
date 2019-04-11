@@ -33,7 +33,7 @@ As you can see below, we're importing our own `fetch` and passing that into the 
 
 ```js
 import createFetchAction from 'fetch-actions'
-import 'fetch-everywhere'
+import 'cross-fetch/polyfill'
 import requestCreator from './requestCreators'
 import transformer from './transformers'
 

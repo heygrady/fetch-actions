@@ -10,7 +10,7 @@ By default fetchAction will catch and re-throw the error, leaving error handling
 ```js
 import createFetchAction, { handleFatalActions } from 'fetch-actions'
 import FETCH_POSTS from '../modules/reddit/constants'
-import 'fetch-everywhere'
+import 'cross-fetch/polyfill'
 
 const fatalHandler = handleFatalActions({
   [FETCH_POSTS]: (error, action) => {
@@ -32,7 +32,7 @@ export fetchAction
 ```js
 import createFetchAction, { handleRequestCreatorActions, handleTransformerActions, handleFatalActions } from 'fetch-actions'
 import FETCH_POSTS from '../modules/reddit/constants'
-import 'fetch-everywhere'
+import 'cross-fetch/polyfill'
 
 const requestCreator = handleRequestCreatorActions({
   [FETCH_POSTS]: action => new Request(`https://www.reddit.com/r/${action.payload}.json`)

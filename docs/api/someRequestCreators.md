@@ -13,7 +13,7 @@ Allows you to glue `requestCreators` together to run in sequence. It returns the
 import createFetchAction, { someRequestCreators } from 'fetch-actions'
 import carrots from './requestCreators/carrots'
 import blueberries from './requestCreators/blueberries'
-import 'fetch-everywhere'
+import 'cross-fetch/polyfill'
 
 const fetchAction = createFetchAction({
   fetch,

@@ -26,7 +26,7 @@ The full flow of a `fetchAction` call looks like this:
 ```js
 import createFetchAction, { handleResponseActions } from 'fetch-actions'
 import FETCH_POSTS from '../modules/reddit/constants'
-import 'fetch-everywhere'
+import 'cross-fetch/polyfill'
 
 const responseHandler = handleResponseActions({
   [FETCH_POSTS]: (response, action) => { // <-- receive a response
@@ -50,7 +50,7 @@ export fetchAction
 ```js
 import createFetchAction, { handleRequestCreatorActions, handleResponseActions } from 'fetch-actions'
 import FETCH_POSTS from '../modules/reddit/constants'
-import 'fetch-everywhere'
+import 'cross-fetch/polyfill'
 
 const requestCreator = handleRequestCreatorActions({
   [FETCH_POSTS]: action => new Request(`https://www.reddit.com/r/${action.payload}.json`)

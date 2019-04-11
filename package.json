@@ -32,19 +32,11 @@
   },
   "scripts": {
     "clean": "rimraf lib dist es coverage",
-    "dev": "yarn build:commonjs -- --watch",
-    "lint": "eslint src test build",
-    "lint:fix": "yarn run lint -- --fix",
-    "test": "cross-env BABEL_ENV=commonjs jest",
-    "test:watch": "yarn test -- --watch",
-    "test:cov": "yarn test -- --coverage",
-    "test:cov:report": "yarn test:cov && cd coverage/lcov-report && http-server -p4000 -c-1",
-    "build:commonjs": "cross-env BABEL_ENV=commonjs babel src --out-dir lib",
-    "build:es": "cross-env BABEL_ENV=es babel src --out-dir es",
-    "build:umd": "cross-env BABEL_ENV=es NODE_ENV=development rollup -c -i src/index.js -o dist/$npm_package_config_name.js",
-    "build:umd:min": "cross-env BABEL_ENV=es NODE_ENV=production rollup -c -i src/index.js -o dist/$npm_package_config_name.min.js",
-    "build": "yarn run build:commonjs && yarn run build:es && yarn run build:umd && yarn run build:umd:min",
-    "prepare": "yarn run clean && yarn run lint && yarn test && yarn run build",
+    "dev": "yarn build:commonjs --watch",
+    "build:commonjs": "cross-env MODULES_ENV=commonjs babel src --out-dir lib",
+    "build:esmodules": "cross-env MODULES_ENV=esmodules babel src --out-dir es",
+    "build:umd": "rollup -c",
+    "build": "yarn clean && yarn run build:commonjs && yarn run build:esmodules && yarn run build:umd",
     "examples:lint": "eslint examples",
     "examples:test": "cross-env CI=true babel-node examples/testAll.js",
     "docs:clean": "rimraf _book",
@@ -54,64 +46,57 @@
     "docs:watch:old": "yarn run docs:prepare && gitbook serve",
     "docs:watch": "yarn run docs:prepare && nohup onchange 'docs/**/*.md' 'README.md' 'SUMMARY.md' -- yarn run docs:build:only &>/dev/null & yarn docs:serve",
     "docs:serve": "cd _book && http-server -p4000 -c-1 .",
-    "docs:publish": "yarn run docs:clean && yarn run docs:build && cd _book && git init && git commit --allow-empty -m 'update book' && git checkout -b gh-pages && touch .nojekyll && git add . && git commit -am 'update book' && git push git@github.com:$npm_package_config_account/$npm_package_config_name gh-pages --force"
+    "docs:publish": "yarn run docs:clean && yarn run docs:build && cd _book && git init && git commit --allow-empty -m 'update book' && git checkout -b gh-pages && touch .nojekyll && git add . && git commit -am 'update book' && git push git@github.com:$npm_package_config_account/$npm_package_config_name gh-pages --force",
+    "lint": "eslint src test",
+    "format": "prettier --write \"{src,test}/**/*.{js,jsx,ts,tsx}\" babel.config.js rollup.config.js .eslintrc.json README.md && yarn lint --fix || true",
+    "prepare": "yarn run lint && yarn test && yarn run build",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:cov": "jest --coverage",
+    "test:cov:report": "yarn test:cov && cd coverage/lcov-report && http-server -p4001 -c-1"
   },
   "dependencies": {
-    "invariant": "^2.2.2",
-    "warning": "^3.0.0"
+    "prettier": "^1.16.4",
+    "tiny-invariant": "^1.0.4",
+    "tiny-warning": "^1.0.2"
   },
   "devDependencies": {
-    "babel-cli": "^6.24.1",
-    "babel-core": "^6.25.0",
-    "babel-eslint": "^7.2.3",
-    "babel-jest": "^20.0.3",
-    "babel-plugin-check-es2015-constants": "^6.22.0",
-    "babel-plugin-transform-es2015-arrow-functions": "^6.22.0",
-    "babel-plugin-transform-es2015-block-scoped-functions": "^6.22.0",
-    "babel-plugin-transform-es2015-block-scoping": "^6.24.1",
-    "babel-plugin-transform-es2015-classes": "^6.24.1",
-    "babel-plugin-transform-es2015-computed-properties": "^6.24.1",
-    "babel-plugin-transform-es2015-destructuring": "^6.23.0",
-    "babel-plugin-transform-es2015-for-of": "^6.23.0",
-    "babel-plugin-transform-es2015-function-name": "^6.24.1",
-    "babel-plugin-transform-es2015-literals": "^6.22.0",
-    "babel-plugin-transform-es2015-modules-commonjs": "^6.24.1",
-    "babel-plugin-transform-es2015-object-super": "^6.24.1",
-    "babel-plugin-transform-es2015-parameters": "^6.24.1",
-    "babel-plugin-transform-es2015-shorthand-properties": "^6.24.1",
-    "babel-plugin-transform-es2015-spread": "^6.22.0",
-    "babel-plugin-transform-es2015-sticky-regex": "^6.24.1",
-    "babel-plugin-transform-es2015-template-literals": "^6.22.0",
-    "babel-plugin-transform-es2015-unicode-regex": "^6.24.1",
-    "babel-plugin-transform-es3-member-expression-literals": "^6.22.0",
-    "babel-plugin-transform-es3-property-literals": "^6.22.0",
-    "babel-plugin-transform-object-rest-spread": "^6.23.0",
-    "babel-register": "^6.24.1",
-    "cross-env": "^5.0.1",
-    "eslint": "~4.1.1",
-    "eslint-config-react-app": "^1.0.5",
-    "eslint-config-standard": "^10.2.1",
-    "eslint-config-standard-react": "^5.0.0",
-    "eslint-plugin-babel": "^4.1.1",
-    "eslint-plugin-flowtype": "^2.35.0",
-    "eslint-plugin-import": "^2.7.0",
-    "eslint-plugin-jsx-a11y": "^5.0.3",
-    "eslint-plugin-markdown": "^1.0.0-beta.6",
-    "eslint-plugin-node": "^5.1.0",
-    "eslint-plugin-promise": "^3.5.0",
-    "eslint-plugin-react": "^7.1.0",
-    "eslint-plugin-standard": "^3.0.1",
-    "fetch-everywhere": "^1.0.5",
+    "@babel/cli": "^7.4.3",
+    "@babel/core": "^7.4.3",
+    "@zumper/babel-preset-react-app": "^7.0.2-zumper.7",
+    "babel-core": "^7.0.0-bridge.0",
+    "babel-eslint": "^10.0.1",
+    "babel-jest": "^24.7.1",
+    "babel-plugin-module-resolver": "^3.2.0",
+    "cross-env": "^5.2.0",
+    "cross-fetch": "^3.0.2",
+    "eslint": "^5.16.0",
+    "eslint-config-prettier": "^4.1.0",
+    "eslint-config-react-app": "^3.0.8",
+    "eslint-config-standard": "^12.0.0",
+    "eslint-import-resolver-babel-module": "^5.0.1",
+    "eslint-plugin-flowtype": "^3.6.1",
+    "eslint-plugin-import": "^2.16.0",
+    "eslint-plugin-jest": "^22.4.1",
+    "eslint-plugin-jsx-a11y": "^6.2.1",
+    "eslint-plugin-node": "^8.0.1",
+    "eslint-plugin-prettier": "^3.0.1",
+    "eslint-plugin-promise": "^4.1.1",
+    "eslint-plugin-react": "^7.12.4",
+    "eslint-plugin-standard": "^4.0.0",
     "gitbook-cli": "^2.3.1",
-    "http-server": "^0.10.0",
-    "jest": "^20.0.4",
-    "rimraf": "^2.6.1",
-    "rollup": "^0.45.2",
-    "rollup-plugin-babel": "^2.7.1",
-    "rollup-plugin-commonjs": "^8.0.2",
-    "rollup-plugin-node-resolve": "^3.0.0",
-    "rollup-plugin-replace": "^1.1.1",
-    "rollup-plugin-uglify": "^2.0.1"
+    "http-server": "^0.11.1",
+    "jest": "^24.7.1",
+    "lodash.camelcase": "^4.3.0",
+    "lodash.kebabcase": "^4.1.1",
+    "lodash.upperfirst": "^4.3.1",
+    "rimraf": "^2.6.3",
+    "rollup": "^1.10.0",
+    "rollup-plugin-babel": "^4.3.2",
+    "rollup-plugin-commonjs": "^9.3.4",
+    "rollup-plugin-node-resolve": "^4.2.3",
+    "rollup-plugin-replace": "^2.2.0",
+    "rollup-plugin-terser": "^4.0.4"
   },
   "npmName": "fetch-actions",
   "npmFileMap": [
@@ -122,18 +107,39 @@
       ]
     }
   ],
-  "browserify": {
-    "transform": [
-      "loose-envify"
-    ]
-  },
   "jest": {
-    "testPathIgnorePatterns": [
-      "node_modules",
-      "_fun",
-      "_book",
-      "examples"
+    "collectCoverageFrom": [
+      "src/**/*.{js,jsx,ts,tsx}",
+      "!src/**/*.d.ts"
     ],
-    "testRegex": "(/test/.*\\.spec.js)$"
+    "coverageDirectory": "<rootDir>/coverage/",
+    "coveragePathIgnorePatterns": [
+      "<rootDir>/dist",
+      "<rootDir>/es",
+      "<rootDir>/lib",
+      "<rootDir>/node_modules"
+    ],
+    "resolver": "jest-pnp-resolver",
+    "testMatch": [
+      "<rootDir>/test/**/*.spec.js"
+    ],
+    "testPathIgnorePatterns": [
+      "<rootDir>/dist",
+      "<rootDir>/es",
+      "<rootDir>/lib",
+      "<rootDir>/node_modules"
+    ],
+    "testURL": "https://localhost"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js,jsx,json,css,md}": [
+      "prettier --write",
+      "git add"
+    ]
   }
 }

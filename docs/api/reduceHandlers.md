@@ -11,7 +11,7 @@ Similar to `reduceReducers`, `reducerHandlers` simply passes the previous return
 
 ```js
 import createFetchAction, { reduceHandlers } from 'fetch-actions'
-import 'fetch-everywhere'
+import 'cross-fetch/polyfill'
 
 import logHandler from './responseHandlers/logHandler'
 import errorHandler from './responseHandlers/errorHandler'

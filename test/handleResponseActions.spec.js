@@ -1,5 +1,8 @@
-import handleResponseActions, { DEFAULT_HANDLER, makeResponse } from '../src/handleResponseActions'
-import 'fetch-everywhere'
+import handleResponseActions, {
+  DEFAULT_HANDLER,
+  makeResponse,
+} from '../src/handleResponseActions'
+import 'cross-fetch/polyfill'
 
 describe('handleResponseActions', () => {
   const type = 'TEST_ACTION'
@@ -15,99 +18,75 @@ describe('handleResponseActions', () => {
   beforeEach(() => {
     handler = handleResponseActions({
       [type]: testHandler,
-      [DEFAULT_HANDLER]: () => new Response(JSON.stringify({ default: true }))
+      [DEFAULT_HANDLER]: () => new Response(JSON.stringify({ default: true })),
     })
   })
 
   it('throws on missing map', () => {
-    expect(
-      () => handleResponseActions()(response, action)
-    ).toThrow(
-      undefined
-    )
+    expect(() => handleResponseActions()(response, action)).toThrow(undefined)
   })
 
   it('throws on missing action type', () => {
     const action = {}
-    expect(
-      () => handler(response, action)
-    ).toThrow()
+    expect(() => handler(response, action)).toThrow()
   })
 
   it('warns on missing handler', () => {
-    global.console = { error: jest.fn() }
+    global.console = { warn: jest.fn() }
     const action = { type: 'missing' }
-    const handler = handleResponseActions({ noMatch: response => response })
-    expect(
-      handler(response, action)
-    ).toEqual(response)
-    expect(console.error).toBeCalled()
+    const handler = handleResponseActions({ noMatch: (response) => response })
+    expect(handler(response, action)).toEqual(response)
+    expect(console.warn).toBeCalled()
   })
 
   it('returns a function from a map', () => {
-    expect(
-      typeof handler
-    ).toEqual(
-      'function'
-    )
+    expect(typeof handler).toEqual('function')
   })
 
   it('returns a new response', () => {
     expect.assertions(1)
-    return handler(response, action).json().then(json => {
-      expect(
-        json.data
-      ).toEqual(
-        true
-      )
-    })
+    return handler(response, action)
+      .json()
+      .then((json) => {
+        expect(json.data).toEqual(true)
+      })
   })
 
   it('uses default handler on unknown action', () => {
     const action = { type: 'other' }
     expect.assertions(1)
-    return handler(response, action).json().then(json => {
-      expect(
-        json.default
-      ).toEqual(
-        true
-      )
-    })
+    return handler(response, action)
+      .json()
+      .then((json) => {
+        expect(json.default).toEqual(true)
+      })
   })
 
   describe('makeResponse', () => {
     it('resolves promises', () => {
       expect.assertions(1)
-      const promise = Promise.resolve(new Response(JSON.stringify({ data: true })))
-      return makeResponse(promise).then(response => response.json()).then(json => {
-        expect(
-          json.data
-        ).toEqual(
-          true
-        )
-      })
+      const promise = Promise.resolve(
+        new Response(JSON.stringify({ data: true }))
+      )
+      return makeResponse(promise)
+        .then((response) => response.json())
+        .then((json) => {
+          expect(json.data).toEqual(true)
+        })
     })
 
     it('returns undefined after resolving promises when not response-like', () => {
-      global.console = { error: jest.fn() }
+      global.console = { warn: jest.fn() }
       expect.assertions(2)
       const promise = Promise.resolve({})
-      return makeResponse(promise).then(response => {
-        expect(console.error).toBeCalled()
-        expect(
-          response
-        ).toEqual(
-          undefined
-        )
+      return makeResponse(promise).then((response) => {
+        expect(console.warn).toBeCalled()
+        expect(response).toBeUndefined()
       })
     })
 
     it('returns undefined when not response-like', () => {
-      expect(
-        makeResponse({})
-      ).toEqual(
-        undefined
-      )
+      expect(makeResponse({})).toBeUndefined()
     })
   })
 })

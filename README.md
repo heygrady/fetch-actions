@@ -3,7 +3,8 @@
 [![codecov](https://codecov.io/gh/heygrady/fetch-actions/branch/master/graph/badge.svg)](https://codecov.io/gh/heygrady/fetch-actions)
 
 # fetch-actions
-*dispatch actions to handle fetch requests*
+
+_dispatch actions to handle fetch requests_
 
 Fetch-actions allows you to dispatch actions from your redux (or similar) application to control [fetch](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch). **Fetch-actions uses actions to create fetch requests and handle fetch responses.**
 
@@ -23,19 +24,21 @@ If you are already using redux with middleware to fetch data from the server, th
 yarn add fetch-actions
 
 # you need to bring your own fetch
-yarn add fetch-everywhere
+yarn add cross-fetch/polyfill
 ```
 
 ## Bring your own fetch
-The fetch standard is [replacing XMLHttpRequest](https://developers.google.com/web/updates/2015/03/introduction-to-fetch) but it hasn't been added to every environment ([can i use fetch?](http://caniuse.com/#feat=fetch)). These days JavaScript applications can run in all sorts of places. Luckily there are API-complete [fetch polyfills for everywhere](https://github.com/lucasfeliciano/fetch-everywhere) your code is likely to run.
+
+The fetch standard is [replacing XMLHttpRequest](https://developers.google.com/web/updates/2015/03/introduction-to-fetch) but it hasn't been added to every environment ([can i use fetch?](http://caniuse.com/#feat=fetch)). These days JavaScript applications can run in all sorts of places. Luckily there are API-complete [fetch polyfills for everywhere](https://github.com/lucasfeliciano/cross-fetch) your code is likely to run.
 
 [Not everyone loves fetch](https://medium.com/@shahata/why-i-wont-be-using-fetch-api-in-my-apps-6900e6c6fe78). If you're using something that wraps fetch, like [axios](https://github.com/mzabriskie/axios) or [superagent](https://github.com/visionmedia/superagent), you could still benefit from fetch-actions by using a custom responder. We will show examples of using custom responders later on. For now we're going to assume you want to use fetch in your app.
 
 You can read [more about fetch](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) on MDN.
 
-In the examples below we're using `fetch-everywhere` but you could just as easily use any of the many fetch libraries available, like [`whatwg-fetch`](https://github.com/github/fetch).
+In the examples below we're using `cross-fetch/polyfill` but you could just as easily use any of the many fetch libraries available, like [`whatwg-fetch`](https://github.com/github/fetch).
 
 ## fetchAction in action
+
 In our redux application we want to [`dispatch`](http://redux.js.org/docs/api/Store.html#dispatch) an [`action`](http://redux.js.org/docs/basics/Actions.html) that triggers a fetch call. Ultimately we want to inject the resulting data into our app (using a [`reducer`](http://redux.js.org/docs/basics/Reducers.html)). Of course, redux has a strictly synchronous, [unidirectional workflow](http://redux.js.org/docs/basics/DataFlow.html). There are ways &mdash; i.e. middleware &mdash; to integrate redux with [an asynchronous flow](http://redux.js.org/docs/advanced/AsyncActions.html). That's where fetch-actions comes in.
 
 Most redux examples leave this asynchronous middle step completely up to the implementor. We'll see later that fetch-actions is designed to work with redux-like middleware including [redux-thunk](https://github.com/gaearon/redux-thunk) and [redux-saga](https://github.com/redux-saga/redux-saga).
@@ -54,7 +57,7 @@ To this end, fetch-actions makes it easy to create a `fetchAction` function that
 import createFetchAction from 'fetch-actions'
 
 // bring your own fetch
-import 'fetch-everywhere'
+import 'cross-fetch/polyfill'
 
 // make your own handlers
 // we'll see what these look like later
@@ -65,11 +68,12 @@ import transformer from './transformers'
 export const fetchAction = createFetchAction({
   fetch, // <-- inject your own fetch
   requestCreator, // <-- create requests from actions
-  transformer // <-- transform responses before returning them
+  transformer, // <-- transform responses before returning them
 })
 ```
 
 ### Use it like this
+
 Here we're showing how you'd use `fetchAction` all by itself. In a real application you'd call `fetchAction` from middleware, like a thunk or a saga. We'll see those examples further below.
 
 You can see below that `fetchAction` accepts an action and returns a promise which resolves to `data`. If you need to more control over the fetch lifecycle you should do this with the various fetch handlers we'll explore below. From within your middleware you should expect that `fetchAction` will know how to handle your actions and return the correct data. We'll see how that works later.
@@ -88,12 +92,13 @@ console.log(action) // --> { type: 'FETCH_POSTS' }
 const promise = fetchAction(action) // <-- returns a promise, just like fetch
 
 // expect to receive ready-to-use data
-promise.then(data => {
+promise.then((data) => {
   console.log(data) // <-- you could dispatch this data in your middleware
 })
 ```
 
 ### How does createFetchAction work?
+
 Under the hood `createFetchAction` is setting up a promise chain and calling fetch lifecycle handlers in a specific order.
 
 Below you can see some psuedo-code for the `createFetchAction` provided by `fetch-actions`. You can see the real [source](https://github.com/heygrady/fetch-actions/blob/master/src/createFetchAction.js) is very similar.
@@ -109,16 +114,23 @@ export const createFetchAction = ({
   responder,
   responseHandler = identityHandler,
   transformer = identityHandler,
-  fatalHandler
-}) => action => Promise.resolve()
-  .then(() => requestCreator(action))
-  .then(request => (responder && responder(request, action)) || fetch(request))
-  .then(response => responseHandler(response, action).json())
-  .then(json => transformer(json, action))
-  .catch(error => (fatalHandler && fatalHandler(error, action)) || console.error(error))
+  fatalHandler,
+}) => (action) =>
+  Promise.resolve()
+    .then(() => requestCreator(action))
+    .then(
+      (request) => (responder && responder(request, action)) || fetch(request)
+    )
+    .then((response) => responseHandler(response, action).json())
+    .then((json) => transformer(json, action))
+    .catch(
+      (error) =>
+        (fatalHandler && fatalHandler(error, action)) || console.error(error)
+    )
 ```
 
 ## Example: Using an inline thunk
+
 In the thunk example below we're dispatching a thunk within the `mapDispatchToProps` of a container. You should read up on [how containers work in react-redux](http://redux.js.org/docs/basics/UsageWithReact.html). You should follow any best practices recommended by [redux-thunk](https://github.com/gaearon/redux-thunk). We'll see later that a saga can be an elegant way to manage more complex requests. The example below assumes your app is correctly configured with react-redux and redux-thunk.
 
 Caveats aside... to test out a simple fetch request, **you don't need much more than a thunk**.
@@ -135,27 +147,31 @@ import fetchAction from '../utils/api/fetchAction'
 import PostList from '../components/PostList'
 import { fetchPosts, loadPosts } from '../modules/posts/actions'
 
-const myThunk = dispatch => {
+const myThunk = (dispatch) => {
   const action = fetchPosts() // <-- create an action
 
   const promise = fetchAction(action) // <-- fetch the data
 
-  promise.then(posts =>
-    dispatch(loadPosts(posts)) // <-- dispatch the data
+  promise.then(
+    (posts) => dispatch(loadPosts(posts)) // <-- dispatch the data
   )
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    fetch: () => dispatch(myThunk) // <-- initiate the process from a component
+    fetch: () => dispatch(myThunk), // <-- initiate the process from a component
   }
 }
 
-const PostListContainer = connect(undefined, mapDispatchToProps)(PostList)
+const PostListContainer = connect(
+  undefined,
+  mapDispatchToProps
+)(PostList)
 export default PostListContainer
 ```
 
 ## Next steps
+
 - [Reddit API example](./docs/reddit-api-example.md)
 - [API](./docs/api/README.md)
   - [`createFetchAction`](./docs/api/createFetchAction.md)

@@ -1,4 +1,7 @@
-import handleTransformerActions, { makeJson, DEFAULT_TRANSFORMER } from '../src/handleTransformerActions'
+import handleTransformerActions, {
+  makeJson,
+  DEFAULT_TRANSFORMER,
+} from '../src/handleTransformerActions'
 
 describe('handleTransformAction', () => {
   const type = 'TEST_ACTION'
@@ -13,93 +16,61 @@ describe('handleTransformAction', () => {
   beforeEach(() => {
     transformer = handleTransformerActions({
       [type]: testTransformer,
-      [DEFAULT_TRANSFORMER]: () => 'default'
+      [DEFAULT_TRANSFORMER]: () => 'default',
     })
   })
 
   it('throws on missing map', () => {
-    expect(
-      () => handleTransformerActions()(json, action)
-    ).toThrow(
-      undefined
-    )
+    expect(() => handleTransformerActions()(json, action)).toThrow(undefined)
   })
 
   it('throws on missing action type', () => {
     const action = {}
-    expect(
-      () => transformer(json, action)
-    ).toThrow()
+    expect(() => transformer(json, action)).toThrow()
   })
 
   it('warns on missing transformer', () => {
-    global.console = { error: jest.fn() }
+    global.console = { warn: jest.fn() }
     const action = { type: 'missing' }
-    const transformer = handleTransformerActions({ noMatch: json => json })
-    expect(
-      transformer(json, action)
-    ).toEqual(json)
-    expect(console.error).toBeCalled()
+    const transformer = handleTransformerActions({ noMatch: (json) => json })
+    expect(transformer(json, action)).toEqual(json)
+    expect(console.warn).toBeCalled()
   })
 
   it('returns a function from a map', () => {
-    expect(
-      typeof transformer
-    ).toEqual(
-      'function'
-    )
+    expect(typeof transformer).toEqual('function')
   })
 
   it('transforms the json', () => {
-    expect(
-      transformer(json, action)
-    ).toEqual(
-      payload
-    )
+    expect(transformer(json, action)).toEqual(payload)
   })
 
   it('uses default transformer on unknown action', () => {
     const action = { type: 'other' }
-    expect(
-      transformer(json, action)
-    ).toEqual(
-      'default'
-    )
+    expect(transformer(json, action)).toEqual('default')
   })
 
   describe('makeJson', () => {
     it('resolves promises', () => {
       expect.assertions(1)
       const promise = Promise.resolve('hello')
-      return makeJson(promise).then(json => {
-        expect(
-          json
-        ).toEqual(
-          'hello'
-        )
+      return makeJson(promise).then((json) => {
+        expect(json).toEqual('hello')
       })
     })
 
     it('resolves json promises from response-like objects', () => {
       expect.assertions(1)
       const response = {
-        json: () => Promise.resolve('hello')
+        json: () => Promise.resolve('hello'),
       }
-      return makeJson(response).then(json => {
-        expect(
-          json
-        ).toEqual(
-          'hello'
-        )
+      return makeJson(response).then((json) => {
+        expect(json).toEqual('hello')
       })
     })
 
     it('returns normal result', () => {
-      expect(
-        makeJson(json)
-      ).toEqual(
-        json
-      )
+      expect(makeJson(json)).toEqual(json)
     })
   })
 })

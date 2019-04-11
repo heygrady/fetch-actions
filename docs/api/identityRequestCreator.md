@@ -5,7 +5,7 @@ The identity request creator is designed for internal use only. It is the defaul
 
 ```js
 import createFetchAction, { identityRequestCreator } from 'fetch-actions'
-import 'fetch-everywhere'
+import 'cross-fetch/polyfill'
 
 const fetchAction = createFetchAction({
   fetch,
@@ -20,7 +20,7 @@ export fetchAction
 The identity request creator looks something like this:
 
 ```js
-import warning from 'warning'
+import warning from 'tiny-warning'
 
 export const identityRequestCreator = action => {
   warning(false, '@@fetch-actions/identityRequestCreator you should define a requestCreator for all actions. The identity fetch handler generates blank requests.')

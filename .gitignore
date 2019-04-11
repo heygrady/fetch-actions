@@ -3,6 +3,7 @@ _old
 .DS_Store
 *.log
 node_modules
+build
 dist
 lib
 es
