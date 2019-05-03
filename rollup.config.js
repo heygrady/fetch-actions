@@ -12,9 +12,9 @@ import pkg from './package.json'
 
 const { MODULES_ENV } = process.env
 
-const useCommonJS = MODULES_ENV === 'commonjs'
-const useESModules = MODULES_ENV === 'esmodules'
-const useUMD = !useCommonJS && !useESModules
+const targetCommonJS = MODULES_ENV === 'commonjs'
+const targetESModules = MODULES_ENV === 'esmodules'
+const targetBrowser = !targetCommonJS && !targetESModules
 
 const input = 'src/index.js'
 const globalName = upperFirst(camelCase(pkg.name))
@@ -25,7 +25,7 @@ let deps = [
   ...Object.keys(pkg.dependencies || {}),
   ...Object.keys(pkg.peerDependencies || {}),
 ]
-if (useUMD) {
+if (targetBrowser) {
   const embeddedModules = new Set([
     '@babel/runtime',
     'tiny-invariant',
@@ -64,9 +64,12 @@ const createConfig = (format, env = 'production') => {
     plugins: [
       nodeResolve({
         extensions: ['.mjs', '.js', '.jsx', '.ts', '.tsx', '.json'],
+        customResolveOptions: {
+          moduleDirectory: ['node_modules', 'src'],
+        },
       }),
-      babel(),
       commonjs(),
+      babel(),
       replace({ 'process.env.NODE_ENV': JSON.stringify(env) }),
       isEnvProduction &&
         (format === 'iife' || format === 'umd') &&
@@ -83,8 +86,8 @@ const createConfig = (format, env = 'production') => {
 }
 
 export default [
-  useUMD && createConfig('umd', 'development'),
-  useUMD && createConfig('umd'),
-  useCommonJS && createConfig('cjs'),
-  useESModules && createConfig('esm'),
+  targetBrowser && createConfig('umd', 'development'),
+  targetBrowser && createConfig('umd'),
+  targetCommonJS && createConfig('cjs'),
+  targetESModules && createConfig('esm'),
 ].filter(Boolean)

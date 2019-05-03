@@ -39,31 +39,21 @@
     "build": "yarn clean && yarn run build:commonjs && yarn run build:esmodules && yarn run build:umd",
     "examples:lint": "eslint examples",
     "examples:test": "cross-env CI=true babel-node examples/testAll.js",
-    "docs:clean": "rimraf _book",
-    "docs:prepare": "gitbook install",
-    "docs:build:only": "gitbook build -g $npm_package_config_account/$npm_package_config_name",
-    "docs:build": "yarn run docs:prepare && yarn run docs:build:only",
-    "docs:watch:old": "yarn run docs:prepare && gitbook serve",
-    "docs:watch": "yarn run docs:prepare && nohup onchange 'docs/**/*.md' 'README.md' 'SUMMARY.md' -- yarn run docs:build:only &>/dev/null & yarn docs:serve",
-    "docs:serve": "cd _book && http-server -p4000 -c-1 .",
-    "docs:publish": "yarn run docs:clean && yarn run docs:build && cd _book && git init && git commit --allow-empty -m 'update book' && git checkout -b gh-pages && touch .nojekyll && git add . && git commit -am 'update book' && git push git@github.com:$npm_package_config_account/$npm_package_config_name gh-pages --force",
     "lint": "eslint src test",
     "format": "prettier --write \"{src,test}/**/*.{js,jsx,ts,tsx}\" babel.config.js rollup.config.js .eslintrc.json README.md && yarn lint --fix || true",
     "prepare": "yarn run lint && yarn test && yarn run build",
     "test": "jest",
-    "test:watch": "jest --watch",
-    "test:cov": "jest --coverage",
-    "test:cov:report": "yarn test:cov && cd coverage/lcov-report && http-server -p4001 -c-1"
+    "coverage": "yarn test --coverage && npx http-server ./coverage/lcov-report -p4001 -c-1"
   },
   "dependencies": {
-    "prettier": "^1.16.4",
+    "prettier": "^1.17.0",
     "tiny-invariant": "^1.0.4",
     "tiny-warning": "^1.0.2"
   },
   "devDependencies": {
-    "@babel/cli": "^7.4.3",
-    "@babel/core": "^7.4.3",
-    "@zumper/babel-preset-react-app": "^7.0.2-zumper.7",
+    "@babel/cli": "^7.4.4",
+    "@babel/core": "^7.4.4",
+    "@zumper/babel-preset-react-app": "^8.0.0-zumper.9",
     "babel-core": "^7.0.0-bridge.0",
     "babel-eslint": "^10.0.1",
     "babel-jest": "^24.7.1",
@@ -71,27 +61,26 @@
     "cross-env": "^5.2.0",
     "cross-fetch": "^3.0.2",
     "eslint": "^5.16.0",
-    "eslint-config-prettier": "^4.1.0",
-    "eslint-config-react-app": "^3.0.8",
+    "eslint-config-prettier": "^4.2.0",
+    "eslint-config-react-app": "^4.0.0",
     "eslint-config-standard": "^12.0.0",
-    "eslint-import-resolver-babel-module": "^5.0.1",
+    "eslint-import-resolver-babel-module": "^5.1.0",
     "eslint-plugin-flowtype": "^3.6.1",
-    "eslint-plugin-import": "^2.16.0",
-    "eslint-plugin-jest": "^22.4.1",
+    "eslint-plugin-import": "^2.17.2",
+    "eslint-plugin-jest": "^22.5.1",
     "eslint-plugin-jsx-a11y": "^6.2.1",
     "eslint-plugin-node": "^8.0.1",
     "eslint-plugin-prettier": "^3.0.1",
     "eslint-plugin-promise": "^4.1.1",
     "eslint-plugin-react": "^7.12.4",
+    "eslint-plugin-react-hooks": "^1.6.0",
     "eslint-plugin-standard": "^4.0.0",
-    "gitbook-cli": "^2.3.1",
-    "http-server": "^0.11.1",
     "jest": "^24.7.1",
     "lodash.camelcase": "^4.3.0",
     "lodash.kebabcase": "^4.1.1",
     "lodash.upperfirst": "^4.3.1",
     "rimraf": "^2.6.3",
-    "rollup": "^1.10.0",
+    "rollup": "^1.10.1",
     "rollup-plugin-babel": "^4.3.2",
     "rollup-plugin-commonjs": "^9.3.4",
     "rollup-plugin-node-resolve": "^4.2.3",
@@ -137,9 +126,16 @@
     }
   },
   "lint-staged": {
-    "*.{js,jsx,json,css,md}": [
+    "*.{js,jsx,ts,tsx,json,css,md}": [
       "prettier --write",
       "git add"
     ]
-  }
+  },
+  "browserslist": [
+    ">0.2%",
+    "Chrome 41",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
 }
