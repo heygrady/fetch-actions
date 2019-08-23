@@ -1,4 +1,4 @@
-const { TARGET_NODE_VERSION, MODULES_ENV, NODE_ENV } = process.env
+const { NODE_ENV, MODULES_ENV } = process.env
 
 const isEnvTest = NODE_ENV === 'test'
 if (!isEnvTest) {
@@ -6,27 +6,43 @@ if (!isEnvTest) {
   process.env.NODE_ENV = 'production'
 }
 
-const targetTest = isEnvTest
-const targetCommonJS = MODULES_ENV === 'commonjs'
-const targetESModules = MODULES_ENV === 'esmodules'
-const targetBrowser = !targetCommonJS && !targetESModules
-const nodeVersion = TARGET_NODE_VERSION || 8
+const targetJest = isEnvTest
+const targetCommonJS = MODULES_ENV === 'commonjs' && !targetJest
+const targetESModules = MODULES_ENV === 'esmodules' && !targetJest
+const targetWeb = !targetCommonJS && !targetESModules && !targetJest
 
 module.exports = {
+  plugins: [
+    [
+      'babel-plugin-module-resolver',
+      {
+        root: ['./src/'],
+        extensions: ['.js', '.jsx', '.ts', '.tsx'],
+      },
+    ],
+  ],
   presets: [
     // for testing with jest/jsdom
-    targetTest && '@zumper/babel-preset-react-app/test',
-    targetBrowser && ['@zumper/babel-preset-react-app', { helpers: false }],
-    targetCommonJS && [
-      '@zumper/babel-preset-react-app/commonjs',
-      { helpers: false, nodeVersion },
-    ],
+    targetJest && '@zumper/babel-preset-react-app/test',
+    // building for lib folder
+    targetCommonJS &&
+      !isEnvTest && [
+        '@zumper/babel-preset-react-app/commonjs',
+        {
+          helpers: true,
+          moduleTransform: true,
+          absoluteRuntime: false,
+        },
+      ],
+    // building for es folder
     targetESModules && [
       '@zumper/babel-preset-react-app/esmodules',
-      { helpers: false },
+      { helpers: true, absoluteRuntime: false },
+    ],
+    // building for dist folder
+    targetWeb && [
+      '@zumper/babel-preset-react-app',
+      { helpers: false, absoluteRuntime: false },
     ],
   ].filter(Boolean),
-  plugins: [
-    [require.resolve('babel-plugin-module-resolver'), { root: ['./src/'] }],
-  ],
 }

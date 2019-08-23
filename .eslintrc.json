@@ -1,6 +1,5 @@
 {
   "extends": [
-    "plugin:jsx-a11y/recommended",
     "plugin:import/recommended",
     "react-app",
     "standard",
@@ -10,16 +9,16 @@
   "plugins": ["jest", "prettier"],
   "settings": {
     "import/resolver": {
-      "node": {
-        "extensions": [".js", ".jsx"]
-      },
       "babel-module": {
-        "root": ["./src"],
-        "extensions": [".js", ".jsx"]
+        "root": ["./src/"],
+        "extensions": [".js", ".jsx", ".ts", ".tsx"]
+      },
+      "node": {
+        "extensions": ["js", "jsx", "ts", "tsx"]
       }
     },
     "react": {
-      "version": "latest"
+      "version": "Infinity"
     }
   },
   "rules": {
@@ -27,7 +26,7 @@
   },
   "overrides": [
     {
-      "files": ["test/**/*.spec.js"],
+      "files": ["test/**/*.spec.js", "test/**/*.spec.ts", "test/**/*.spec.tsx"],
       "env": {
         "jest": true,
         "jest/globals": true

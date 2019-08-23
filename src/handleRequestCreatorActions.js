@@ -12,7 +12,7 @@ export const makeRequest = (request) => {
   } else if (typeof request.url === 'string') {
     return request
   } else if (Array.isArray(request) && request.length === 2) {
-    let [input, init] = request
+    const [input, init] = request
     return new Request(input, init)
   } else {
     return new Request(request)

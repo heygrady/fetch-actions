@@ -78,7 +78,7 @@ describe('handleRequestCreatorActions', () => {
       const body = JSON.stringify({ data: true })
       const request = makeRequest(['http://array', { body, method: 'post' }])
       expect(request.url).toEqual('http://array/')
-      expect(request.body).toEqual(body)
+      expect(request.body.toString()).toEqual(body)
     })
 
     it('returns string as request', () => {
