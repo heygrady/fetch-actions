@@ -1,9 +1,10 @@
 # handleRequestCreatorActions
+
 This function create a `requestCreator` that maps actions to request creator functions based on action type. A request creator function creates [Requests](https://developer.mozilla.org/en-US/docs/Web/API/Request).
 
 At a minimum your fetchAction function needs to have a `requestCreator`. The `handleRequestCreatorActions` function creates a handler that maps action types to request creator functions.
 
-**Note:** request creators happen *before* fetch.
+**Note:** request creators happen _before_ fetch.
 
 ## Usage
 
@@ -43,14 +44,16 @@ const requestCreator = (action) => new Request()
 ### Example: GET
 
 ```js
-const getPosts = action => new Request(`https://www.reddit.com/r/${action.payload}.json`)
+const getPosts = (action) =>
+  new Request(`https://www.reddit.com/r/${action.payload}.json`)
 ```
 
 ### Example: POST
+
 The following example won't work unless you are following the [reddit API rules](https://github.com/reddit/reddit/wiki/API).
 
 ```js
-const createComment = action => {
+const createComment = (action) => {
   const body = JSON.stringify(action.payload)
 
   const headers = new Headers()
@@ -59,7 +62,7 @@ const createComment = action => {
   const init = {
     method: 'POST', // <-- we're setting the method to POST
     headers,
-    body
+    body,
   }
 
   return new Request('https://www.reddit.com/api/comment', init)
@@ -67,28 +70,30 @@ const createComment = action => {
 ```
 
 ## DEFAULT_REQUEST_CREATOR
+
 There is a hidden feature, allowing you to specify the default request creator to be called if no matching creators are found. If you do not define a default request creator and no matching creators are found, the [identity creator](./identityRequestCreator) will be used.
 
 ```js
 import createFetchAction, {
   handleRequestCreatorActions,
-  DEFAULT_REQUEST_CREATOR // <-- import the constant
+  DEFAULT_REQUEST_CREATOR, // <-- import the constant
 } from 'fetch-actions'
 import FETCH_POSTS from '../modules/reddit/constants'
 import 'cross-fetch/polyfill'
 
-const fetchPostsRequestCreator = action => new Request(`https://www.reddit.com/r/${action.payload}.json`)
+const fetchPostsRequestCreator = (action) =>
+  new Request(`https://www.reddit.com/r/${action.payload}.json`)
 
 const requestCreator = handleRequestCreatorActions({
   [FETCH_POSTS]: fetchPostsRequestCreator,
 
   // by default, make a request to example.com
-  [DEFAULT_REQUEST_CREATOR]: action => new Request('https://example.com')
+  [DEFAULT_REQUEST_CREATOR]: (action) => new Request('https://example.com'),
 })
 
 const fetchAction = createFetchAction({
   fetch,
-  requestCreator
+  requestCreator,
 })
 
 fetchAction({ type: 'BOGUS_ACTION' }) // --> makes a request to example.com

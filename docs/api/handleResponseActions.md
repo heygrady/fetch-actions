@@ -1,17 +1,20 @@
 # handleResponseActions
+
 This function create a `responseHandler` that maps actions to response handler functions based on action type.
 
 You don't normally need a `responseHandler` unless you need to handle API errors or otherwise deal directly with the Response object. If you are simply trying to transform the JSON response, use a [transformer](./handleTransformerActions.md) instead.
 
 You might use a response handler to:
+
 - handle legitimate API errors
 - log responses
 - inspect responses
 
-**Note:** response handlers happen *after* fetch (or after responders).
+**Note:** response handlers happen _after_ fetch (or after responders).
 
 ## responseHandlers versus responders
-The names are somewhat confusing but a responseHandler *handles* responses while a responder *creates* them. You would normally use a responseHandler to read fetch [Response](https://developer.mozilla.org/en-US/docs/Web/API/Response) objects. If you are trying to *create* response objects, try [responders](./handleResponderActions.md).
+
+The names are somewhat confusing but a responseHandler _handles_ responses while a responder _creates_ them. You would normally use a responseHandler to read fetch [Response](https://developer.mozilla.org/en-US/docs/Web/API/Response) objects. If you are trying to _create_ response objects, try [responders](./handleResponderActions.md).
 
 The full flow of a `fetchAction` call looks like this:
 
@@ -48,38 +51,44 @@ export fetchAction
 ## Example: errors
 
 ```js
-import createFetchAction, { handleRequestCreatorActions, handleResponseActions } from 'fetch-actions'
+import createFetchAction, {
+  handleRequestCreatorActions,
+  handleResponseActions,
+} from 'fetch-actions'
 import FETCH_POSTS from '../modules/reddit/constants'
 import 'cross-fetch/polyfill'
 
 const requestCreator = handleRequestCreatorActions({
-  [FETCH_POSTS]: action => new Request(`https://www.reddit.com/r/${action.payload}.json`)
+  [FETCH_POSTS]: (action) =>
+    new Request(`https://www.reddit.com/r/${action.payload}.json`),
 })
 
 const responseHandler = handleResponseActions({
   [FETCH_POSTS]: (response, action) => {
     // intercept responses that are not 200
     if (!response.ok) {
-      return new Response(JSON.stringify({
-        errors: [
-          {
-            status: response.status,
-            title: response.statusText,
-            detail: 'Whoops! Something was *not* ok.'
-          }
-        ]
-      }))
+      return new Response(
+        JSON.stringify({
+          errors: [
+            {
+              status: response.status,
+              title: response.statusText,
+              detail: 'Whoops! Something was *not* ok.',
+            },
+          ],
+        })
+      )
     }
 
     // pass the response by default
     return response
-  }
+  },
 })
 
 const fetchAction = createFetchAction({
   fetch,
   requestCreator,
-  responseHandler
+  responseHandler,
 })
 
 fetchAction({ type: FETCH_POSTS, payload: 'reactjs' }) // --> status 200, resolves to actual response

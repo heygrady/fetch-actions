@@ -1,12 +1,14 @@
 # handleResponderActions
+
 This function create a `responder` that maps actions to responder functions based on action type. A responder function creates [Responses](https://developer.mozilla.org/en-US/docs/Web/API/Response).
 
 You don't normally need responders unless you are trying to mock an API endpoint. Internally, `fetchAction` will let responders field requests instead of sending them to fetch. If no responder matches the action type, the request will be passed to fetch.
 
-**Note:** responders happen *instead of* fetch.
+**Note:** responders happen _instead of_ fetch.
 
 ## responders versus responseHandlers
-The names are somewhat confusing but a responder *creates* responses while a *responseHandler* handles them. You would normally use a responder to create [Response](https://developer.mozilla.org/en-US/docs/Web/API/Response) objects, bypassing fetch. If you are trying to handle responses, try a [responseHandler](./handleResponseActions).
+
+The names are somewhat confusing but a responder _creates_ responses while a _responseHandler_ handles them. You would normally use a responder to create [Response](https://developer.mozilla.org/en-US/docs/Web/API/Response) objects, bypassing fetch. If you are trying to handle responses, try a [responseHandler](./handleResponseActions).
 
 The full flow of a `fetchAction` call looks like this:
 
@@ -17,6 +19,7 @@ The full flow of a `fetchAction` call looks like this:
 5. `fatalHandler` &mdash; receives thrown errors.
 
 ## Usage
+
 ```js
 import createFetchAction, { handleResponderActions } from 'fetch-actions'
 import FETCH_POSTS from '../modules/reddit/constants'
