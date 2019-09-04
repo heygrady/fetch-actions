@@ -43,7 +43,7 @@
     "lint": "eslint --ext .js,.mjs,.jsx,.ts,.tsx src test",
     "dedupe": "npx yarn-deduplicate yarn.lock && yarn install",
     "pretest": "yarn lint",
-    "prepare": "yarn test && yarn clean && yarn build",
+    "prepare": "yarn test && yarn build",
     "preversion": "yarn format",
     "postversion": "npm publish --access public",
     "postpublish": "git push origin --all && git push origin --tags",
