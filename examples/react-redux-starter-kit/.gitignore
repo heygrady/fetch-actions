@@ -18,6 +18,7 @@ LICENSE
 project.config.js
 .idea/
 .yarn-cache
+yarn.lock
 !src/store/createStore.js
 !src/store/sagas.js
 !src/utils/api

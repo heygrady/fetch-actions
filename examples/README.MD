@@ -1,4 +1,7 @@
 # Example of using `fetch-actions` with `react-redux-starter-kit`
+
+TODO: rework this example to use create-react-app
+
 This is the example documentation for integrating `fetch-actions` with `react-redux-starter-kit`. It should be easy to integrate fetch-actions with any starter kit and pull requests are welcome for examples.
 
 This tutorial was written using this version of the starter kit, it may have changed since it was last written. This folder should be kept up to date with the latest version should people care to keep the content updated. Even if the information is slightly out of the date, this is primarily to elaborate on core technique. Using a common starter-kit is intended to answer mundane questions like how to get the basics of react and redux working and instead focus on how to set up redux-saga and fetch-action to make the counter example that ships with the starter kit sync with the server.
@@ -42,5 +45,3 @@ yarn add fetch-actions
 # to make this repo we import locally for testing
 # import createFetchAction from '../../src'
 ```
-
-## Set up a saga for the counter

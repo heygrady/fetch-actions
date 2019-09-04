@@ -18,7 +18,7 @@ before_script:
 script:
   - "yarn lint"
   - "yarn test"
-  - "yarn test:cov"
+  - "yarn test --coverage"
   - "yarn build"
 after_success:
   - "codecov --token=${CODECOV_UPLOAD_TOKEN}"
