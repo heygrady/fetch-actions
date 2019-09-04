@@ -70,6 +70,19 @@ describe('reduceHandlers', () => {
     handler(state, action)
   })
 
+  it('waits for async handlers', async () => {
+    const handler = reduceHandlers(
+      async () => ({ first: true }),
+      (state) => {
+        expect(state.first).toEqual(true)
+        return { second: true }
+      }
+    )
+    const state = { data: true }
+    const final = await handler(state)
+    expect(final.second).toEqual(true)
+  })
+
   describe('someRequestCreators', () => {
     let firstrequestCreator
     let secondrequestCreator
