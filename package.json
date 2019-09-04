@@ -3,10 +3,12 @@
   "version": "0.1.0",
   "description": "Manage fetch with flux-standard-actions dispatched from a saga or thunk.",
   "main": "lib/index.js",
+  "types": "index.d.ts",
   "module": "es/index.js",
   "jsnext:main": "es/index.js",
   "files": [
     "dist",
+    "index.d.ts",
     "lib",
     "es",
     "src"
