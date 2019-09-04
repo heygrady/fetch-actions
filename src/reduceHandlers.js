@@ -20,8 +20,19 @@ export const someResponders = (...handlers) => {
   }
 }
 
+const isPromise = (anything) => {
+  return typeof anything === 'object' &&
+    !!anything &&
+    typeof anything.then === 'function'
+}
+
 const reduceHandlers = (...handlers) => {
   return (state, action) =>
-    handlers.reduce((state, handler) => handler(state, action), state)
+    handlers.reduce((state, handler) => {
+      if (isPromise(state)) {
+        return state.then((resolvedState) => handler(resolvedState, action))
+      }
+      return handler(state, action)
+    }, state)
 }
 export default reduceHandlers
