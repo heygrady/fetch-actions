@@ -21,9 +21,11 @@ export const someResponders = (...handlers) => {
 }
 
 const isPromise = (anything) => {
-  return typeof anything === 'object' &&
+  return (
+    typeof anything === 'object' &&
     !!anything &&
     typeof anything.then === 'function'
+  )
 }
 
 const reduceHandlers = (...handlers) => {
