@@ -256,4 +256,3 @@ export const reduceHandlers: ReduceHandlers
 export const someFatalHandlers: SomeFatalHandlers
 export const someRequestCreators: SomeRequestCreators
 export const someResponders: SomeResponders
-export default createFetchAction
