@@ -157,10 +157,23 @@ export interface HandleTransformerActions {
   ): ResponseTransformer<ActionTypes>
 }
 
+export interface ReduceConfigs {
+  <ActionTypes extends AnyAction>(
+    fetch: CreateFetchActionConfig<ActionTypes>['fetch'],
+    ...configs: ReadonlyArray<Omit<CreateFetchActionConfig<ActionTypes>, 'fetch'>>
+  ): CreateFetchActionConfig<ActionTypes>
+}
+
 export interface ReduceHandlers {
   <State, ActionTypes extends AnyAction, Result>(
     ...handlers: ReadonlyArray<Handler<State, ActionTypes, Result>>
   ): Handler<State, ActionTypes, Result>
+}
+
+export interface SomeFatalHandlers {
+  <ActionTypes extends AnyAction>(
+    ...handlers: ReadonlyArray<FatalHandler<ActionTypes>>
+  ): FatalHandler<ActionTypes>
 }
 
 export interface SomeRequestCreators {
@@ -202,7 +215,9 @@ export const makeJson: MakeJson
 export const makeRequest: MakeRequest
 export const makeRequestResponse: MakeRequestResponse
 export const makeResponse: MakeResponse
+export const reduceConfigs: ReduceConfigs
 export const reduceHandlers: ReduceHandlers
+export const someFatalHandlers: SomeFatalHandlers
 export const someRequestCreators: SomeRequestCreators
 export const someResponders: SomeResponders
 export default createFetchAction

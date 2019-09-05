@@ -1,3 +1,14 @@
+export const someFatalHandlers = (...handlers) => {
+  return (error, action) => {
+    let data
+    handlers.some((handler) => {
+      data = handler(error, action)
+      return typeof data !== 'undefined'
+    })
+    return data
+  }
+}
+
 export const someRequestCreators = (...handlers) => {
   return (action) => {
     let request
@@ -17,6 +28,31 @@ export const someResponders = (...handlers) => {
       return !!response
     })
     return response
+  }
+}
+
+const isTruthy = (something) => {
+  return !!something
+}
+
+export const reduceConfigs = (fetch, ...configs) => {
+  return {
+    fatalHandler: someFatalHandlers(
+      ...configs.map((c) => c.fatalHandler).filter(isTruthy)
+    ),
+    fetch,
+    requestCreator: someRequestCreators(
+      ...configs.map((c) => c.requestCreator).filter(isTruthy)
+    ),
+    responder: someResponders(
+      ...configs.map((c) => c.responder).filter(isTruthy)
+    ),
+    responseHandler: reduceHandlers(
+      ...configs.map((c) => c.responseHandler).filter(isTruthy)
+    ),
+    transformer: reduceHandlers(
+      ...configs.map((c) => c.transformer).filter(isTruthy)
+    ),
   }
 }
 

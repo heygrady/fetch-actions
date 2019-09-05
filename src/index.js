@@ -21,6 +21,8 @@ import handleFatalActions, {
   DEFAULT_HANDLER as DEFAULT_FATAL_HANDLER,
 } from './handleFatalActions'
 import reduceHandlers, {
+  reduceConfigs,
+  someFatalHandlers,
   someRequestCreators,
   someResponders,
 } from './reduceHandlers'
@@ -46,7 +48,9 @@ export {
   makeJson,
   handleFatalActions,
   DEFAULT_FATAL_HANDLER,
+  reduceConfigs,
   reduceHandlers,
+  someFatalHandlers,
   someRequestCreators,
   someResponders,
   identityRequestCreator,
