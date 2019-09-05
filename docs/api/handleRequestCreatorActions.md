@@ -15,21 +15,20 @@ import 'cross-fetch/polyfill'
 
 // use the action to create a proper fetch Request
 // @see https://developer.mozilla.org/en-US/docs/Web/API/Request/Request
-const fetchPostsRequestCreator = action => new Request(`https://www.reddit.com/r/${action.payload}.json`)
+const fetchPostsRequestCreator = (action) =>
+  new Request(`https://www.reddit.com/r/${action.payload}.json`)
 
 // map our action constants to our request creators
 const requestCreator = handleRequestCreatorActions({
-  [FETCH_POSTS]: fetchPostsRequestCreator
+  [FETCH_POSTS]: fetchPostsRequestCreator,
 })
 
 // add our creator to fetchAction
-const fetchAction = createFetchAction({
+export const fetchAction = createFetchAction({
   fetch,
-  requestCreator
+  requestCreator,
   // <-- add other handlers here
 })
-
-export fetchAction
 ```
 
 ## Request creator functions

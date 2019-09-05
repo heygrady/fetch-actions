@@ -19,7 +19,7 @@ import errorHandler from './responseHandlers/errorHandler'
 import blueberryTransformer from './transformers/blueberryTransformer'
 import carrotTransformer from './transformers/carrotTransformer'
 
-const fetchAction = createFetchAction({
+export const fetchAction = createFetchAction({
   fetch,
   responseHandler: reduceHandlers(
     logHandler, // <-- logs all responses
@@ -28,8 +28,6 @@ const fetchAction = createFetchAction({
   transformer: reduceHandlers(
     blueberryTransformer, // <-- handles blueberry actions
     carrotTransformer // <-- handles carrot actions
-  )
+  ),
 })
-
-export fetchAction
 ```

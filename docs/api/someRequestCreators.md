@@ -16,16 +16,11 @@ import carrots from './requestCreators/carrots'
 import blueberries from './requestCreators/blueberries'
 import 'cross-fetch/polyfill'
 
-const fetchAction = createFetchAction({
+export const fetchAction = createFetchAction({
   fetch,
-  requestCreator: someRequestCreators(
-    carrots,
-    blueberries
-  )
+  requestCreator: someRequestCreators(carrots, blueberries),
   // <-- add other handlers here
 })
-
-export fetchAction
 ```
 
 ## Example: overriding default requestCreator

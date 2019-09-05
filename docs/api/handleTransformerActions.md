@@ -18,19 +18,17 @@ const transformer = handleTransformerActions({
       id: json.somePath.id, // <-- pull values from weird places
       attributes: {
         fullName: `${json.firstName}, ${json.lastName}`, // <-- glue values together
-      }
+      },
     }
     return data // <-- return the data
-  }
+  },
 })
 
-const fetchAction = createFetchAction({
+export const fetchAction = createFetchAction({
   fetch,
-  transformer
+  transformer,
   // <-- add other handlers here
 })
-
-export fetchAction
 ```
 
 ## Example: reddit

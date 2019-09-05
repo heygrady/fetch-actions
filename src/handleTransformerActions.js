@@ -1,7 +1,8 @@
-import selectActionType from './selectActionType'
-import { identityHandler } from './identityHandlers'
 import invariant from 'tiny-invariant'
 import warning from 'tiny-warning'
+
+import { identityHandler } from './identityHandlers'
+import { selectActionType } from './selectActionType'
 export const DEFAULT_TRANSFORMER =
   '@@fetch-actions/handleTransformerActions/DEFAULT_TRANSFORMER'
 
@@ -16,7 +17,7 @@ export const makeJson = (json) => {
   }
 }
 
-const handleTransformerActions = (map) => (json, action) => {
+export const handleTransformerActions = (map) => (json, action) => {
   const type = selectActionType(action)
   invariant(
     type !== undefined,
@@ -33,4 +34,3 @@ const handleTransformerActions = (map) => (json, action) => {
   }
   return makeJson(transformer(json, action))
 }
-export default handleTransformerActions

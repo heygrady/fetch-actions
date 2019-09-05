@@ -32,20 +32,19 @@ import FETCH_POSTS from '../modules/reddit/constants'
 import 'cross-fetch/polyfill'
 
 const responseHandler = handleResponseActions({
-  [FETCH_POSTS]: (response, action) => { // <-- receive a response
+  [FETCH_POSTS]: (response, action) => {
+    // <-- receive a response
     // you can log responses or inspect them
     console.log({ response, action })
     return response // <-- return the response (or a new one)
-  }
+  },
 })
 
-const fetchAction = createFetchAction({
+export const fetchAction = createFetchAction({
   fetch,
-  responseHandler
+  responseHandler,
   // <-- add other handlers here
 })
-
-export fetchAction
 ```
 
 ## Example: errors

@@ -16,16 +16,14 @@ import 'cross-fetch/polyfill'
 const fatalHandler = handleFatalActions({
   [FETCH_POSTS]: (error, action) => {
     console.error({ error, action })
-  }
+  },
 })
 
-const fetchAction = createFetchAction({
+export const fetchAction = createFetchAction({
   fetch,
-  fatalHandler
+  fatalHandler,
   // <-- add other handlers here
 })
-
-export fetchAction
 ```
 
 ## Example

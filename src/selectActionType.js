@@ -5,5 +5,4 @@ const get = (obj, key, defaultValue) => {
   return obj[key]
 }
 
-const selectActionType = (action) => get(action, 'type')
-export default selectActionType
+export const selectActionType = (action) => get(action, 'type')

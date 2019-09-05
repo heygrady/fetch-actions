@@ -8,14 +8,12 @@ The identity handler is designed for internal use only. It is the default handle
 import createFetchAction, { identityHandler } from 'fetch-actions'
 import 'cross-fetch/polyfill'
 
-const fetchAction = createFetchAction({
+export const fetchAction = createFetchAction({
   fetch,
   responseHandler: identityHandler,
-  transformer: identityHandler
+  transformer: identityHandler,
   // <-- add other handlers here
 })
-
-export fetchAction
 ```
 
 ## Psuedo-code

@@ -1,11 +1,12 @@
-import selectActionType from './selectActionType'
 import invariant from 'tiny-invariant'
 import warning from 'tiny-warning'
+
+import { selectActionType } from './selectActionType'
 
 export const DEFAULT_HANDLER =
   '@@fetch-actions/handleFatalActions/DEFAULT_HANDLER'
 
-const handleFatalActions = (map) => (error, action) => {
+export const handleFatalActions = (map) => (error, action) => {
   const type = selectActionType(action)
   const handler = map[type] || map[DEFAULT_HANDLER]
   invariant(
@@ -22,4 +23,3 @@ const handleFatalActions = (map) => (error, action) => {
   }
   return handler(error, action)
 }
-export default handleFatalActions

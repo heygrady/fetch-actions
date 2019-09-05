@@ -1,7 +1,8 @@
-import selectActionType from './selectActionType'
-import { identityResponder } from './identityHandlers'
 import invariant from 'tiny-invariant'
 import warning from 'tiny-warning'
+
+import { identityResponder } from './identityHandlers'
+import { selectActionType } from './selectActionType'
 
 export const DEFAULT_HANDLER =
   '@@fetch-actions/handleResponderActions/DEFAULT_HANDLER'
@@ -38,7 +39,7 @@ export const makeResponse = (response) => {
   }
 }
 
-const handleResponderActions = (map) => (request, action) => {
+export const handleResponderActions = (map) => (request, action) => {
   const type = selectActionType(action)
   invariant(
     type !== undefined,
@@ -56,4 +57,3 @@ const handleResponderActions = (map) => (request, action) => {
   const response = handler(request, action)
   return makeResponse(response)
 }
-export default handleResponderActions

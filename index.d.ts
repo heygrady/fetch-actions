@@ -8,21 +8,31 @@ export type MaybePromise<T> = Promise<T> | T
 
 export type NotAPromise = Exclude<any, Promise<any>>
 
-export interface BaseAction<T extends string> { type: T }
+export interface BaseAction<T extends string> {
+  type: T
+}
 
 export interface Action<T extends string, Payload> extends BaseAction<T> {
   payload: Payload
   error?: boolean
 }
 
-export interface ActionMeta<T extends string, Payload, Meta> extends Action<T, Payload> {
+export interface ActionMeta<T extends string, Payload, Meta>
+  extends Action<T, Payload> {
   meta: Meta
 }
 
 export type AnyAction = Action<string, any>
 
-export type NarrowedAction<Actions extends AnyAction, ActionType extends string> = {
-  [K in Actions['type']]: Actions extends ActionMeta<K, infer Payload, infer Meta>
+export type NarrowedAction<
+  Actions extends AnyAction,
+  ActionType extends string
+> = {
+  [K in Actions['type']]: Actions extends ActionMeta<
+    K,
+    infer Payload,
+    infer Meta
+  >
     ? ActionMeta<K, Payload, Meta>
     : Actions extends Action<K, infer Payload>
     ? Action<K, Payload>
@@ -66,24 +76,29 @@ export type ResponseHandler<ActionTypes extends AnyAction> = Handler<
   MaybePromise<ResponseWithJson | undefined>
 >
 
-export type ResponseTransformer<ActionTypes extends AnyAction> = Handler<any, ActionTypes>
+export type ResponseTransformer<ActionTypes extends AnyAction> = Handler<
+  any,
+  ActionTypes
+>
 
 export type FatalHandlerMap<ActionTypes extends AnyAction> = Partial<
   {
-    readonly [K in ActionTypes['type']]: FatalHandler<NarrowedAction<ActionTypes, K>>
+    readonly [K in ActionTypes['type']]: FatalHandler<
+      NarrowedAction<ActionTypes, K>
+    >
   } & { readonly [DEFAULT_FATAL_HANDLER]: FatalHandler<ActionTypes> }
 >
 
 export interface HandleFatalActions {
-  <ActionTypes extends AnyAction>(fatalHandlerMap: FatalHandlerMap<ActionTypes>): FatalHandler<
-    ActionTypes
-  >
+  <ActionTypes extends AnyAction>(
+    fatalHandlerMap: FatalHandlerMap<ActionTypes>
+  ): FatalHandler<ActionTypes>
 }
 
 export interface CreateFetchAction {
-  <ActionTypes extends AnyAction>(config: CreateFetchActionConfig<ActionTypes>): FetchAction<
-    ActionTypes
-  >
+  <ActionTypes extends AnyAction>(
+    config: CreateFetchActionConfig<ActionTypes>
+  ): FetchAction<ActionTypes>
 }
 
 export type LooseRequest =
@@ -98,7 +113,9 @@ export interface LooseRequestCreator<ActionTypes extends AnyAction> {
 }
 
 export interface Responder<ActionTypes extends AnyAction> {
-  (request: Request, action: ActionTypes): MaybePromise<ResponseWithJson | undefined>
+  (request: Request, action: ActionTypes): MaybePromise<
+    ResponseWithJson | undefined
+  >
 }
 export interface IdentityResponder<ActionTypes extends AnyAction> {
   (request: Request, action: ActionTypes): undefined
@@ -113,17 +130,23 @@ export interface IdentityHandler<ActionTypes extends AnyAction> {
 
 export type ResponderMap<ActionTypes extends AnyAction> = Partial<
   {
-    readonly [K in ActionTypes['type']]: LooseResponder<NarrowedAction<ActionTypes, K>>
+    readonly [K in ActionTypes['type']]: LooseResponder<
+      NarrowedAction<ActionTypes, K>
+    >
   } & { readonly [DEFAULT_REQUEST_HANDLER]: LooseResponder<ActionTypes> }
 >
 
 export interface HandleResponderActions {
-  <ActionTypes extends AnyAction>(responderMap: ResponderMap<ActionTypes>): Responder<ActionTypes>
+  <ActionTypes extends AnyAction>(
+    responderMap: ResponderMap<ActionTypes>
+  ): Responder<ActionTypes>
 }
 
 export type ResponseHandlerMap<ActionTypes extends AnyAction> = Partial<
   {
-    readonly [K in ActionTypes['type']]: ResponseHandler<NarrowedAction<ActionTypes, K>>
+    readonly [K in ActionTypes['type']]: ResponseHandler<
+      NarrowedAction<ActionTypes, K>
+    >
   } & { readonly [DEFAULT_RESPONSE_HANDLER]: ResponseHandler<ActionTypes> }
 >
 
@@ -135,7 +158,9 @@ export interface HandleResponseActions {
 
 export type RequestCreatorMap<ActionTypes extends AnyAction> = Partial<
   {
-    readonly [K in ActionTypes['type']]: LooseRequestCreator<NarrowedAction<ActionTypes, K>>
+    readonly [K in ActionTypes['type']]: LooseRequestCreator<
+      NarrowedAction<ActionTypes, K>
+    >
   } & { readonly [DEFAULT_REQUEST_CREATOR]: LooseRequestCreator<ActionTypes> }
 >
 
@@ -147,7 +172,9 @@ export interface HandleRequestCreatorActions {
 
 export type TransformerMap<ActionTypes extends AnyAction> = Partial<
   {
-    readonly [K in ActionTypes['type']]: ResponseTransformer<NarrowedAction<ActionTypes, K>>
+    readonly [K in ActionTypes['type']]: ResponseTransformer<
+      NarrowedAction<ActionTypes, K>
+    >
   } & { readonly [DEFAULT_TRANSFORMER]: ResponseTransformer<ActionTypes> }
 >
 
@@ -160,7 +187,9 @@ export interface HandleTransformerActions {
 export interface ReduceConfigs {
   <ActionTypes extends AnyAction>(
     fetch: CreateFetchActionConfig<ActionTypes>['fetch'],
-    ...configs: ReadonlyArray<Omit<CreateFetchActionConfig<ActionTypes>, 'fetch'>>
+    ...configs: ReadonlyArray<
+      Omit<CreateFetchActionConfig<ActionTypes>, 'fetch'>
+    >
   ): CreateFetchActionConfig<ActionTypes>
 }
 
@@ -183,21 +212,28 @@ export interface SomeRequestCreators {
 }
 
 export interface SomeResponders {
-  <ActionTypes extends AnyAction>(...handlers: ReadonlyArray<Responder<ActionTypes>>): Responder<
-    ActionTypes
-  >
+  <ActionTypes extends AnyAction>(
+    ...handlers: ReadonlyArray<Responder<ActionTypes>>
+  ): Responder<ActionTypes>
 }
 
-export interface MakeJson { <T>(json: Promise<T>): T; (json: any): any }
+export interface MakeJson {
+  <T>(json: Promise<T>): T
+  (json: any): any
+}
 
-export interface MakeRequest { (request: MaybePromise<LooseRequest>): MaybePromise<Request> }
+export interface MakeRequest {
+  (request: MaybePromise<LooseRequest>): MaybePromise<Request>
+}
 
 export interface MakeRequestResponse {
   (response: MaybePromise<LooseResponse>): MaybePromise<ResponseWithJson>
 }
 
 export interface MakeResponse {
-  <T extends MaybePromise<any>>(response: T): T extends MaybePromise<ResponseWithJson>
+  <T extends MaybePromise<any>>(response: T): T extends MaybePromise<
+    ResponseWithJson
+  >
     ? T
     : undefined
 }

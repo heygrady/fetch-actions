@@ -1,10 +1,12 @@
-import reduceHandlers, {
+import 'cross-fetch/polyfill'
+
+import {
   reduceConfigs,
+  reduceHandlers,
   someFatalHandlers,
   someRequestCreators,
   someResponders,
 } from '../src/reduceHandlers'
-import 'cross-fetch/polyfill'
 
 describe('reduceHandlers', () => {
   let firstHandler

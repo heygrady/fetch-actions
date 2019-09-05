@@ -1,7 +1,8 @@
-import createFetchAction from '../src/createFetchAction'
-import handleFatalActions, { DEFAULT_HANDLER } from '../src/handleFatalActions'
-import createFakeFetch from './helpers/createFakeFetch'
 import 'cross-fetch/polyfill'
+
+import { createFetchAction } from '../src/createFetchAction'
+import { DEFAULT_HANDLER, handleFatalActions } from '../src/handleFatalActions'
+import { createFakeFetch } from './helpers/createFakeFetch'
 
 const realConsole = console
 

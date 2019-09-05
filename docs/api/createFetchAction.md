@@ -8,12 +8,10 @@ The core functionality of fetch-actions is contained within `createFetchAction`.
 import createFetchAction from 'fetch-actions'
 import 'cross-fetch/polyfill'
 
-const fetchAction = createFetchAction({
-  fetch
+export const fetchAction = createFetchAction({
+  fetch,
   // <-- add handlers here
 })
-
-export fetchAction
 ```
 
 **Note:** if you do not specify a `requestCreator` function the [`identityRequestCreator`](./identityRequestCreator.md) will be used, which will generate console warnings.
@@ -32,17 +30,14 @@ import responseHandler from './responseHandlers'
 import transformer from './transformers'
 import fatalHandler from './fatalHandler'
 
-
 const fetchAction = createFetchAction({
   fetch,
   requestCreator,
   responder,
   responseHandler,
   transformer,
-  fatalHandler
+  fatalHandler,
 })
-
-export fetchAction
 ```
 
 ### Available handlers

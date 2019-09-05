@@ -1,9 +1,10 @@
+import 'cross-fetch/polyfill'
+
 import {
+  identityHandler,
   identityRequestCreator,
   identityResponder,
-  identityHandler,
 } from '../src/identityHandlers'
-import 'cross-fetch/polyfill'
 
 const realConsole = console
 

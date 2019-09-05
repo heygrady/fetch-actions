@@ -1,6 +1,7 @@
-import handleTransformerActions, {
-  makeJson,
+import {
   DEFAULT_TRANSFORMER,
+  handleTransformerActions,
+  makeJson,
 } from '../src/handleTransformerActions'
 
 const realConsole = console

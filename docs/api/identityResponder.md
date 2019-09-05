@@ -8,13 +8,11 @@ The identity request creator is designed for internal use only. It is the defaul
 import createFetchAction, { identityResponder } from 'fetch-actions'
 import 'cross-fetch/polyfill'
 
-const fetchAction = createFetchAction({
+export const fetchAction = createFetchAction({
   fetch,
-  responder: identityResponder // <-- always returns undefined
+  responder: identityResponder, // <-- always returns undefined
   // <-- add other handlers here
 })
-
-export fetchAction
 ```
 
 ## Psuedo-code

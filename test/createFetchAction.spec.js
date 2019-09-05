@@ -1,6 +1,7 @@
-import createFetchAction from '../src/createFetchAction'
-import createFakeFetch from './helpers/createFakeFetch'
 import 'cross-fetch/polyfill'
+
+import { createFetchAction } from '../src/createFetchAction'
+import { createFakeFetch } from './helpers/createFakeFetch'
 
 const realConsole = console
 

@@ -30,33 +30,33 @@ const responder = handleResponderActions({
     // use the request and action to create a fetch response
     // @see https://developer.mozilla.org/en-US/docs/Web/API/Response/Response
     const data = { whatever: true }
-    return new Response(
-      JSON.stringify(data)
-    )
-  }
+    return new Response(JSON.stringify(data))
+  },
 })
 
-const fetchAction = createFetchAction({
+export const fetchAction = createFetchAction({
   fetch,
-  responder
+  responder,
   // <-- add other handlers here
 })
-
-export fetchAction
 ```
 
 ## Example
 
 ```js
-import createFetchAction, { handleRequestCreatorActions, handleResponderActions } from 'fetch-actions'
+import createFetchAction, {
+  handleRequestCreatorActions,
+  handleResponderActions,
+} from 'fetch-actions'
 import FETCH_POSTS from '../modules/reddit/constants'
 import 'cross-fetch/polyfill'
 
 const FETCH_FAKE_POSTS = 'FETCH_FAKE_POSTS'
 
 const requestCreator = handleRequestCreatorActions({
-  [FETCH_POSTS]: action => new Request(`https://www.reddit.com/r/${action.payload}.json`)
-  [FETCH_FAKE_POSTS]: action => new Request(`https://example.com`)
+  [FETCH_POSTS]: (action) =>
+    new Request(`https://www.reddit.com/r/${action.payload}.json`),
+  [FETCH_FAKE_POSTS]: (action) => new Request(`https://example.com`),
 })
 
 // let's create a responder to mock our new example endpoint
@@ -66,22 +66,22 @@ const responder = handleResponderActions({
     const data = {
       kind: 'Fake',
       data: {
-        children: []
-      }
+        children: [],
+      },
     }
 
     // respond with fake data
     return new Response(JSON.stringify(data))
-  }
+  },
 })
 
 // add our creator to fetchAction
 const fetchAction = createFetchAction({
   fetch,
   requestCreator,
-  responder // <-- responder will override fetch
+  responder, // <-- responder will override fetch
 })
 
 fetchAction({ type: FETCH_POSTS, payload: 'reactjs' }) // --> resolves to the real reddit data
-fetchAction({ type: FETCH_FAKE_POSTS}) // --> resolves to the fake data, bypasses fetch
+fetchAction({ type: FETCH_FAKE_POSTS }) // --> resolves to the fake data, bypasses fetch
 ```

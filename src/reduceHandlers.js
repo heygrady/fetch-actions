@@ -31,27 +31,23 @@ export const someResponders = (...handlers) => {
   }
 }
 
-const isTruthy = (something) => {
-  return !!something
-}
-
 export const reduceConfigs = (fetch, ...configs) => {
   return {
     fatalHandler: someFatalHandlers(
-      ...configs.map((c) => c.fatalHandler).filter(isTruthy)
+      ...configs.map((c) => c.fatalHandler).filter(Boolean)
     ),
     fetch,
     requestCreator: someRequestCreators(
-      ...configs.map((c) => c.requestCreator).filter(isTruthy)
+      ...configs.map((c) => c.requestCreator).filter(Boolean)
     ),
     responder: someResponders(
-      ...configs.map((c) => c.responder).filter(isTruthy)
+      ...configs.map((c) => c.responder).filter(Boolean)
     ),
     responseHandler: reduceHandlers(
-      ...configs.map((c) => c.responseHandler).filter(isTruthy)
+      ...configs.map((c) => c.responseHandler).filter(Boolean)
     ),
     transformer: reduceHandlers(
-      ...configs.map((c) => c.transformer).filter(isTruthy)
+      ...configs.map((c) => c.transformer).filter(Boolean)
     ),
   }
 }
@@ -64,7 +60,7 @@ const isPromise = (anything) => {
   )
 }
 
-const reduceHandlers = (...handlers) => {
+export const reduceHandlers = (...handlers) => {
   return (state, action) =>
     handlers.reduce((state, handler) => {
       if (isPromise(state)) {
@@ -73,4 +69,3 @@ const reduceHandlers = (...handlers) => {
       return handler(state, action)
     }, state)
 }
-export default reduceHandlers

@@ -1,4 +1,4 @@
-import selectActionType from '../src/selectActionType'
+import { selectActionType } from '../src/selectActionType'
 
 describe('selectActionType', () => {
   it('returns undefined with no action', () => {

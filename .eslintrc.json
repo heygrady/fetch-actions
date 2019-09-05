@@ -6,7 +6,7 @@
     "prettier",
     "prettier/standard"
   ],
-  "plugins": ["jest", "prettier"],
+  "plugins": ["simple-import-sort", "markdown", "jest", "prettier"],
   "settings": {
     "import/resolver": {
       "babel-module": {
@@ -22,11 +22,24 @@
     }
   },
   "rules": {
-    "prettier/prettier": "error"
+    "import/no-default-export": "warn",
+    "prettier/prettier": "error",
+    "simple-import-sort/sort": "error"
   },
   "overrides": [
     {
-      "files": ["test/**/*.spec.js", "test/**/*.spec.ts", "test/**/*.spec.tsx"],
+      "files": ["**/*.ts", "**/*.tsx"],
+      "rules": {
+        "@typescript-eslint/no-angle-bracket-type-assertion": "off"
+      }
+    },
+    {
+      "files": [
+        "test/**/*.spec.js",
+        "test/**/*.spec.jsx",
+        "test/**/*.spec.ts",
+        "test/**/*.spec.tsx"
+      ],
       "env": {
         "jest": true,
         "jest/globals": true
@@ -40,6 +53,26 @@
         "jest/prefer-to-be-undefined": "warn",
         "jest/prefer-to-have-length": "warn",
         "jest/valid-expect": "error"
+      }
+    },
+    {
+      "files": ["**/*.md"],
+      "parserOptions": {
+        "ecmaFeatures": {
+          "impliedStrict": true
+        }
+      },
+      "rules": {
+        "import/no-default-export": "off",
+        "import/no-unresolved": "off",
+        "no-undef": "off",
+        "no-unused-vars": "off",
+        "no-console": "off",
+        "padded-blocks": "off",
+        "react/prop-types": "off",
+        "react/react-in-jsx-scope": "off",
+        "simple-import-sort/sort": "off",
+        "strict": "off"
       }
     }
   ]

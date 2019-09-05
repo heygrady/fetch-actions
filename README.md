@@ -1,6 +1,5 @@
 [![npm version](https://badge.fury.io/js/fetch-actions.svg)](https://badge.fury.io/js/fetch-actions)
 [![Build Status](https://travis-ci.org/heygrady/fetch-actions.svg?branch=master)](https://travis-ci.org/heygrady/fetch-actions)
-[![codecov](https://codecov.io/gh/heygrady/fetch-actions/branch/master/graph/badge.svg)](https://codecov.io/gh/heygrady/fetch-actions)
 
 # fetch-actions
 

@@ -1,60 +1,44 @@
-import createFetchAction from './createFetchAction'
+export { createFetchAction } from './createFetchAction'
 
-import handleRequestCreatorActions, {
+export {
+  handleRequestCreatorActions,
   DEFAULT_HANDLER as DEFAULT_REQUEST_CREATOR,
   makeRequest,
 } from './handleRequestCreatorActions'
-import handleResponderActions, {
+
+export {
+  handleResponderActions,
   DEFAULT_HANDLER as DEFAULT_REQUEST_HANDLER,
   makeResponse as makeRequestResponse,
 } from './handleResponderActions'
-import handleResponseActions, {
+
+export {
+  handleResponseActions,
   DEFAULT_HANDLER as DEFAULT_RESPONSE_HANDLER,
   makeResponse,
 } from './handleResponseActions'
-import handleTransformerActions, {
+
+export {
+  handleTransformerActions,
   DEFAULT_TRANSFORMER,
   makeJson,
 } from './handleTransformerActions'
 
-import handleFatalActions, {
+export {
+  handleFatalActions,
   DEFAULT_HANDLER as DEFAULT_FATAL_HANDLER,
 } from './handleFatalActions'
-import reduceHandlers, {
+
+export {
+  reduceHandlers,
   reduceConfigs,
   someFatalHandlers,
   someRequestCreators,
   someResponders,
 } from './reduceHandlers'
-import {
+
+export {
   identityRequestCreator,
   identityResponder,
   identityHandler,
 } from './identityHandlers'
-
-export {
-  createFetchAction,
-  handleRequestCreatorActions,
-  DEFAULT_REQUEST_CREATOR,
-  makeRequest,
-  handleResponderActions,
-  DEFAULT_REQUEST_HANDLER,
-  makeRequestResponse,
-  handleResponseActions,
-  DEFAULT_RESPONSE_HANDLER,
-  makeResponse,
-  handleTransformerActions,
-  DEFAULT_TRANSFORMER,
-  makeJson,
-  handleFatalActions,
-  DEFAULT_FATAL_HANDLER,
-  reduceConfigs,
-  reduceHandlers,
-  someFatalHandlers,
-  someRequestCreators,
-  someResponders,
-  identityRequestCreator,
-  identityResponder,
-  identityHandler,
-}
-export default createFetchAction

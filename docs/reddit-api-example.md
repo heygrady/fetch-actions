@@ -60,11 +60,9 @@ import { handleRequestCreatorActions } from 'fetch-actions'
 import { FETCH_POSTS } from '../../modules/reddit/constants'
 import fetchPosts from './fetchPosts'
 
-const requestCreator = handleRequestCreatorActions({
+export const requestCreator = handleRequestCreatorActions({
   [FETCH_POSTS]: fetchPosts,
 })
-
-export default requestCreator
 ```
 
 ### File: `src/utils/api/requestCreators/fetchPosts.js`
@@ -78,7 +76,7 @@ Internally, `fetchAction` will pass that request object to `fetch`, which will t
 The benefit here is that, in the event that reddit changes their URL structure, we can change this function and leave the rest of our app in tact.
 
 ```js
-export default (action) => {
+export const fetchPosts = (action) => {
   const { payload: subreddit } = action
   const request = new Request(`https://www.reddit.com/r/${subreddit}.json`)
   return request
@@ -98,11 +96,9 @@ import { handleTransformerActions } from 'fetch-actions'
 import { FETCH_POSTS } from '../../modules/reddit/constants'
 import fetchPosts from './fetchPosts'
 
-const transformer = handleTransformerActions({
+export const transformer = handleTransformerActions({
   [FETCH_POSTS]: fetchPosts,
 })
-
-export default transformer
 ```
 
 ### File: `src/utils/api/transformers/fetchPosts.js`
@@ -114,7 +110,7 @@ A transformer receives the result from a [`response.json()`](https://developer.m
 Below we can see that we're creating a new JSON response that will contain only the posts along with a date stamp. This allows our app to work with a predictable response from the API. If the data that reddit returns should ever change, we could update this transformer and leave the rest of the application in tact.
 
 ```js
-export default (json, action) => {
+export const fetchPosts = (json, action) => {
   return {
     posts: json.data.children.map((child) => child.data),
     receivedAt: Date.now(),
@@ -131,8 +127,7 @@ We're going to quickly recreate the application structure from the [redux reddit
 By default our module will export a reducer. This will be used in our redux app. You can read the full redux example linked above for information on using reducers with redux.
 
 ```js
-import reducer from './reducers'
-export default reducer
+export { default as reducer } from './reducers'
 ```
 
 ## Actions, constants
@@ -169,9 +164,11 @@ export const invalidateSubreddit = createAction(INVALIDATE_SUBREDDIT)
 export const requestPosts = createAction(REQUEST_POSTS)
 export const receivePosts = createAction(
   RECEIVE_POSTS,
-  (subreddit, posts, receivedAt) => {
-    subreddit, posts, receivedAt
-  }
+  (subreddit, posts, receivedAt) => ({
+    subreddit,
+    posts,
+    receivedAt,
+  })
 )
 
 // notice this isn't exported

@@ -16,14 +16,9 @@ import fakeBlueberryResponder from './responders/fakeBlueberryResponder'
 import fakeCarrotResponder from './responders/fakeCarrotResponder'
 import 'cross-fetch/polyfill'
 
-const fetchAction = createFetchAction({
+export const fetchAction = createFetchAction({
   fetch,
-  responder: someResponders(
-    fakeBlueberryResponder,
-    fakeCarrotResponder
-  )
+  responder: someResponders(fakeBlueberryResponder, fakeCarrotResponder),
   // <-- add other handlers here
 })
-
-export fetchAction
 ```

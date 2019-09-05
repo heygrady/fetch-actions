@@ -1,9 +1,10 @@
-import { identityRequestCreator, identityHandler } from './identityHandlers'
-import selectActionType from './selectActionType'
 import invariant from 'tiny-invariant'
 import warning from 'tiny-warning'
 
-const createFetchAction = ({
+import { identityHandler, identityRequestCreator } from './identityHandlers'
+import { selectActionType } from './selectActionType'
+
+export const createFetchAction = ({
   fetch,
   requestCreator = identityRequestCreator,
   responder,
@@ -73,5 +74,3 @@ const createFetchAction = ({
     throw error
   }
 }
-
-export default createFetchAction

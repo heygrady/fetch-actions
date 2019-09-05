@@ -1,8 +1,10 @@
-import handleResponderActions, {
+import 'cross-fetch/polyfill'
+
+import {
   DEFAULT_HANDLER,
+  handleResponderActions,
   makeResponse,
 } from '../src/handleResponderActions'
-import 'cross-fetch/polyfill'
 
 const realConsole = console
 
