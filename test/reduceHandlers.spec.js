@@ -1,4 +1,6 @@
 import reduceHandlers, {
+  reduceConfigs,
+  someFatalHandlers,
   someRequestCreators,
   someResponders,
 } from '../src/reduceHandlers'
@@ -83,6 +85,75 @@ describe('reduceHandlers', () => {
     expect(final.second).toEqual(true)
   })
 
+  describe('reduceConfigs', () => {
+    let firstConfig
+    let response
+    let secondConfig
+
+    beforeEach(() => {
+      firstConfig = {
+        fatalHandler: jest.fn(() => undefined),
+        requestCreator: jest.fn(
+          (action) => action.type === 'FIRST' && 'http://example.com'
+        ),
+        transformer: jest.fn(() => 5),
+      }
+      secondConfig = {
+        fatalHandler: jest.fn(() => undefined),
+        requestCreator: jest.fn(
+          (action) => action.type === 'SECOND' && 'http://example.org'
+        ),
+        responseHandler: jest.fn(() => response),
+        transformer: jest.fn((data) => data * 3),
+      }
+    })
+
+    it('fatalHandler calls both fatalHandlers', () => {
+      const config = reduceConfigs(fetch, firstConfig, secondConfig)
+      const error = new Error()
+      const final = config.fatalHandler(error, action)
+      expect(firstConfig.fatalHandler).toBeCalled()
+      expect(secondConfig.fatalHandler).toBeCalled()
+      expect(final).toBeUndefined()
+    })
+
+    it('requestCreator calls first requestCreator', () => {
+      const config = reduceConfigs(fetch, firstConfig, secondConfig)
+      const final = config.requestCreator({ type: 'FIRST' })
+      expect(firstConfig.requestCreator).toBeCalled()
+      expect(secondConfig.requestCreator).not.toBeCalled()
+      expect(final).toBe('http://example.com')
+    })
+
+    it('requestCreator calls both requestCreators', () => {
+      const config = reduceConfigs(fetch, firstConfig, secondConfig)
+      const final = config.requestCreator({ type: 'SECOND' })
+      expect(firstConfig.requestCreator).toBeCalled()
+      expect(secondConfig.requestCreator).toBeCalled()
+      expect(final).toBe('http://example.org')
+    })
+
+    it('transformer calls both transformers', () => {
+      const config = reduceConfigs(fetch, firstConfig, secondConfig)
+      const final = config.transformer(undefined, action)
+      expect(firstConfig.transformer).toBeCalled()
+      expect(secondConfig.transformer).toBeCalled()
+      expect(final).toBe(15)
+    })
+
+    it('responseHandler calls second responseHandler', () => {
+      const config = reduceConfigs(fetch, firstConfig, secondConfig)
+      const final = config.responseHandler(undefined, action)
+      expect(secondConfig.responseHandler).toBeCalled()
+      expect(final).toBe(response)
+    })
+
+    it('responder is callable', () => {
+      const config = reduceConfigs(fetch, firstConfig, secondConfig)
+      config.responder(undefined, action)
+    })
+  })
+
   describe('someRequestCreators', () => {
     let firstrequestCreator
     let secondrequestCreator
@@ -148,6 +219,69 @@ describe('reduceHandlers', () => {
         }
       )
       handler(action)
+    })
+  })
+
+  describe('someFatalHandlers', () => {
+    let error
+    let firstresponder
+    let secondresponder
+
+    beforeEach(() => {
+      error = new Error('Something went wrong')
+      firstresponder = jest.fn((error, action) => undefined) // eslint-disable-line handle-callback-err
+      secondresponder = jest.fn((error, action) => undefined) // eslint-disable-line handle-callback-err
+    })
+
+    it('returns undefined on empty handlers, no action', () => {
+      const handler = someFatalHandlers()
+      const final = handler()
+      expect(final).toBeUndefined()
+    })
+
+    it('returns undefined on empty handlers', () => {
+      const handler = someFatalHandlers()
+      const final = handler(error, action)
+      expect(final).toBeUndefined()
+    })
+
+    it('calls all handlers', () => {
+      const handler = someFatalHandlers(firstresponder, secondresponder)
+      handler()
+      expect(firstresponder).toBeCalled()
+      expect(secondresponder).toBeCalled()
+    })
+
+    it('calls only first handler', () => {
+      const firstresponder = jest.fn(() => new Response(''))
+      const handler = someFatalHandlers(firstresponder, secondresponder)
+      handler()
+      expect(firstresponder).toBeCalled()
+      expect(secondresponder).not.toBeCalled()
+    })
+
+    it('return response from first handler', () => {
+      const response = new Response()
+      const firstresponder = jest.fn(() => response)
+      const handler = someFatalHandlers(firstresponder, secondresponder)
+      const final = handler()
+      expect(final).toEqual(response)
+    })
+
+    it('calls each handler with same error and action', () => {
+      const handler = someFatalHandlers(
+        (innerRequest, innerAction) => {
+          expect(innerAction).toEqual(action)
+          expect(innerRequest).toEqual(error)
+          return undefined
+        },
+        (innerRequest, innerAction) => {
+          expect(innerAction).toEqual(action)
+          expect(innerRequest).toEqual(error)
+          return undefined
+        }
+      )
+      handler(error, action)
     })
   })
 
