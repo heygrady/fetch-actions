@@ -112,6 +112,7 @@ export type LooseRequest =
   | Request
   | ConstructorParameters<typeof Request>
   | ConstructorParameters<typeof Request>[0]
+  | undefined
 export interface RequestCreator<ActionTypes extends AnyAction> {
   (action: ActionTypes): MaybePromise<Request | undefined>
 }
