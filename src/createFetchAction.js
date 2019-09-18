@@ -7,6 +7,7 @@ import { selectActionType } from './selectActionType'
 export const createFetchAction = ({
   fetch,
   requestCreator = identityRequestCreator,
+  requestTransformer = identityHandler,
   responder,
   responseHandler = identityHandler,
   transformer = identityHandler,
@@ -18,7 +19,8 @@ export const createFetchAction = ({
     '@@fetch-actions/createFetchAction action type must be defined. It is recommended that action be a valid flux-standard-action (https://github.com/acdlite/flux-standard-action)'
   )
   try {
-    const request = await requestCreator(action)
+    let request = await requestCreator(action)
+    request = await requestTransformer(request, action)
     let response
     if (typeof responder !== 'function' || fetch) {
       invariant(

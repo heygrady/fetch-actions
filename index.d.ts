@@ -60,6 +60,7 @@ export interface FetchAction<ActionTypes extends AnyAction> {
 export interface CreateFetchActionConfig<ActionTypes extends AnyAction> {
   fetch?: typeof fetch
   requestCreator?: RequestCreator<ActionTypes>
+  requestTransformer?: RequestTransformer<ActionTypes>
   responder?: Responder<ActionTypes>
   responseHandler?: ResponseHandler<ActionTypes>
   transformer?: ResponseTransformer<ActionTypes>
@@ -69,6 +70,12 @@ export interface CreateFetchActionConfig<ActionTypes extends AnyAction> {
 export interface Handler<State, ActionTypes extends AnyAction, Result = State> {
   (state: State, action: ActionTypes): Result
 }
+
+export type RequestTransformer<ActionTypes extends AnyAction> = Handler<
+  Request,
+  ActionTypes,
+  MaybePromise<Request>
+>
 
 export type ResponseHandler<ActionTypes extends AnyAction> = Handler<
   ResponseWithJson,

@@ -14,6 +14,7 @@ describe('createFetchAction', () => {
 
   let fetch
   let requestCreator
+  let requestTransformer
   let responder
   let responseHandler
   let transformer
@@ -23,6 +24,7 @@ describe('createFetchAction', () => {
     global.console = { warn: jest.fn(), log: realConsole.log }
     fetch = jest.fn(createFakeFetch(createResponse))
     requestCreator = jest.fn(() => request)
+    requestTransformer = jest.fn((request) => request)
     responder = jest.fn(() => false)
     responseHandler = jest.fn((response) => response)
     transformer = jest.fn((json) => json)
@@ -30,6 +32,7 @@ describe('createFetchAction', () => {
     fetchAction = createFetchAction({
       fetch,
       requestCreator,
+      requestTransformer,
       responder,
       responseHandler,
       transformer,
@@ -74,6 +77,28 @@ describe('createFetchAction', () => {
       await fetchAction(action)
     } catch (e) {}
     expect(console.warn).toBeCalled()
+  })
+
+  it('uses identity requestTransformer by default', async () => {
+    const fetchAction = createFetchAction({ fetch, requestCreator })
+    expect.assertions(1)
+    await fetchAction(action)
+    expect(fetch.mock.calls[0][0]).toBe(request)
+  })
+
+  it('allows requestTransformer to modify the request', async () => {
+    const fetchAction = createFetchAction({
+      fetch,
+      requestCreator,
+      requestTransformer: (request) =>
+        new Request(request.url, { method: 'POST' }),
+    })
+    expect.assertions(3)
+    await fetchAction(action)
+    const actualRequest = fetch.mock.calls[0][0]
+    expect(actualRequest.url).toBe(request.url)
+    expect(actualRequest.method).toBe('POST')
+    expect(actualRequest).not.toBe(request)
   })
 
   it('throws on bad fetch function', () => {
@@ -153,10 +178,11 @@ describe('createFetchAction', () => {
   })
 
   it('calls all handlers', async () => {
-    expect.assertions(5)
+    expect.assertions(6)
     await fetchAction(action)
     expect(fetch).toBeCalled()
     expect(requestCreator).toBeCalled()
+    expect(requestTransformer).toBeCalled()
     expect(responder).toBeCalled()
     expect(responseHandler).toBeCalled()
     expect(transformer).toBeCalled()
