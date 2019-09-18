@@ -130,7 +130,7 @@ describe('createFetchAction', () => {
     return fetchAction(action)
       .then((response) => realConsole.log(response))
       .catch((e) => {
-        expect(e.message).toContain('fetch is undefined')
+        expect(e.message).toContain('fetch should be a function')
       })
   })
 
