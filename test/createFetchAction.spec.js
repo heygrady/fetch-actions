@@ -130,7 +130,21 @@ describe('createFetchAction', () => {
     return fetchAction(action)
       .then((response) => realConsole.log(response))
       .catch((e) => {
-        expect(true).toEqual(true)
+        expect(e.message).toContain('fetch is undefined')
+      })
+  })
+
+  it('throws on good responder function when request is missing and responder returns false', () => {
+    const fetchAction = createFetchAction({
+      fetch,
+      requestCreator: () => {},
+      responder,
+    })
+    expect.assertions(1)
+    return fetchAction(action)
+      .then((response) => realConsole.log(fetch.mock.calls[0][0].url))
+      .catch((e) => {
+        expect(e.message).toContain('request is undefined')
       })
   })
 

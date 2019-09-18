@@ -37,10 +37,12 @@ export const createFetchAction = ({
     if (responder) {
       response = await responder(request, action)
     }
-    if (responder && !fetch) {
+    if (responder && (!fetch || !request)) {
       invariant(
         response,
-        '@@fetch-actions/createFetchAction responder must always return a valid (non-falsey) response when fetch is undefined'
+        `@@fetch-actions/createFetchAction responder must always return a valid (non-falsey) response when ${
+          fetch ? `request is ${request}` : 'fetch is undefined'
+        }`
       )
     }
     if (!response) {
