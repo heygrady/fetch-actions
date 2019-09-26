@@ -55,11 +55,11 @@
     "tiny-warning": "^1.0.3"
   },
   "devDependencies": {
-    "@babel/cli": "^7.6.0",
-    "@babel/core": "^7.6.0",
+    "@babel/cli": "^7.6.2",
+    "@babel/core": "^7.6.2",
     "@typescript-eslint/eslint-plugin": "^2.3.0",
     "@typescript-eslint/parser": "^2.3.0",
-    "@zumper/babel-preset-react-app": "^9.0.1-zumper.16",
+    "@zumper/babel-preset-react-app": "^9.0.2-zumper.18",
     "babel-eslint": "^10.0.3",
     "babel-jest": "^24.9.0",
     "babel-plugin-module-resolver": "^3.2.0",
@@ -67,7 +67,7 @@
     "cross-fetch": "^3.0.4",
     "eslint": "^6.4.0",
     "eslint-config-prettier": "^6.3.0",
-    "eslint-config-react-app": "^5.0.1",
+    "eslint-config-react-app": "^5.0.2",
     "eslint-config-standard": "^14.1.0",
     "eslint-import-resolver-babel-module": "^5.1.0",
     "eslint-plugin-flowtype": "^3.13.0",

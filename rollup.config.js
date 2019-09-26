@@ -1,14 +1,12 @@
-import babel from 'rollup-plugin-babel'
-import replace from 'rollup-plugin-replace'
-import commonjs from 'rollup-plugin-commonjs'
-import nodeResolve from 'rollup-plugin-node-resolve'
-import { terser } from 'rollup-plugin-terser'
-
+import * as fs from 'fs-extra'
 import camelCase from 'lodash/camelCase'
 import kebabCase from 'lodash/kebabCase'
 import upperFirst from 'lodash/upperFirst'
-
-import * as fs from 'fs-extra'
+import babel from 'rollup-plugin-babel'
+import commonjs from 'rollup-plugin-commonjs'
+import nodeResolve from 'rollup-plugin-node-resolve'
+import replace from 'rollup-plugin-replace'
+import { terser } from 'rollup-plugin-terser'
 
 import pkg from './package.json'
 
@@ -60,6 +58,7 @@ const createConfig = (env) => {
   }
 }
 
+// eslint-disable-next-line import/no-default-export
 export default [
   // UMD Development
   createConfig('development'),
