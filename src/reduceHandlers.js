@@ -40,6 +40,9 @@ export const reduceConfigs = (fetch, ...configs) => {
     requestCreator: someRequestCreators(
       ...configs.map((c) => c.requestCreator).filter(Boolean)
     ),
+    requestTransformer: reduceHandlers(
+      ...configs.map((c) => c.requestTransformer).filter(Boolean)
+    ),
     responder: someResponders(
       ...configs.map((c) => c.responder).filter(Boolean)
     ),

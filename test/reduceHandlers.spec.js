@@ -98,6 +98,9 @@ describe('reduceHandlers', () => {
         requestCreator: jest.fn(
           (action) => action.type === 'FIRST' && 'http://example.com'
         ),
+        requestTransformer: jest.fn(
+          (request) => new Request(request.url, { method: 'POST' })
+        ),
         transformer: jest.fn(() => 5),
       }
       secondConfig = {
@@ -105,6 +108,10 @@ describe('reduceHandlers', () => {
         requestCreator: jest.fn(
           (action) => action.type === 'SECOND' && 'http://example.org'
         ),
+        requestTransformer: jest.fn((request) => {
+          request.headers.set('x-custom', 'custom')
+          return request
+        }),
         responseHandler: jest.fn(() => response),
         transformer: jest.fn((data) => data * 3),
       }
@@ -133,6 +140,18 @@ describe('reduceHandlers', () => {
       expect(firstConfig.requestCreator).toBeCalled()
       expect(secondConfig.requestCreator).toBeCalled()
       expect(final).toBe('http://example.org')
+    })
+
+    it('requestTransformer calls both requestTransformers', () => {
+      const config = reduceConfigs(fetch, firstConfig, secondConfig)
+      const final = config.requestTransformer(
+        new Request('http://example.com/', action)
+      )
+      expect(firstConfig.requestTransformer).toBeCalled()
+      expect(secondConfig.requestTransformer).toBeCalled()
+      expect(final.url).toBe('http://example.com/')
+      expect(final.method).toBe('POST')
+      expect(final.headers.get('x-custom')).toBe('custom')
     })
 
     it('transformer calls both transformers', () => {
