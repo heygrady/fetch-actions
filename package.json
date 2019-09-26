@@ -51,6 +51,7 @@
     "coverage": "yarn test --coverage && npx http-server ./coverage/lcov-report -p4001 -c-1"
   },
   "dependencies": {
+    "@babel/runtime": "^7.0.0",
     "tiny-invariant": "^1.0.6",
     "tiny-warning": "^1.0.3"
   },
