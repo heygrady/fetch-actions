@@ -20,7 +20,9 @@ export const createFetchAction = ({
   )
   try {
     let request = await requestCreator(action)
-    request = await requestTransformer(request, action)
+    if (request) {
+      request = await requestTransformer(request, action)
+    }
     let response
     if (typeof responder !== 'function' || fetch) {
       invariant(

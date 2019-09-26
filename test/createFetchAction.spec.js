@@ -86,6 +86,16 @@ describe('createFetchAction', () => {
     expect(fetch.mock.calls[0][0]).toBe(request)
   })
 
+  it('does not call requestTransformer when request is falsy', async () => {
+    const fetchAction = createFetchAction({
+      fetch,
+      requestCreator: () => undefined,
+    })
+    expect.assertions(1)
+    await fetchAction(action)
+    expect(requestTransformer).not.toBeCalled()
+  })
+
   it('allows requestTransformer to modify the request', async () => {
     const fetchAction = createFetchAction({
       fetch,
