@@ -1,6 +1,11 @@
 export { createFetchAction } from './createFetchAction'
 
 export {
+  handleRequestTransformerActions,
+  DEFAULT_HANDLER as DEFAULT_REQUEST_TRANSFORMER,
+} from './handleRequestTransformerActions'
+
+export {
   handleRequestCreatorActions,
   DEFAULT_HANDLER as DEFAULT_REQUEST_CREATOR,
   makeRequest,
