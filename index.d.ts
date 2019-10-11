@@ -1,5 +1,6 @@
 export const DEFAULT_FATAL_HANDLER: '@@fetch-actions/handleFatalActions/DEFAULT_HANDLER'
 export const DEFAULT_REQUEST_CREATOR: '@@fetch-actions/handleRequestCreatorActions/DEFAULT_HANDLER'
+export const DEFAULT_REQUEST_TRANSFORMER: '@@fetch-actions/handleRequestTransformerActions/DEFAULT_HANDLER'
 export const DEFAULT_REQUEST_HANDLER: '@@fetch-actions/handleResponderActions/DEFAULT_HANDLER'
 export const DEFAULT_RESPONSE_HANDLER: '@@fetch-actions/handleResponseActions/DEFAULT_HANDLER'
 export const DEFAULT_TRANSFORMER: '@@fetch-actions/handleTransformerActions/DEFAULT_TRANSFORMER'
@@ -178,6 +179,22 @@ export interface HandleRequestCreatorActions {
   ): RequestCreator<ActionTypes>
 }
 
+export type RequestTransformerMap<ActionTypes extends AnyAction> = Partial<
+  {
+    readonly [K in ActionTypes['type']]: RequestTransformer<
+      NarrowedAction<ActionTypes, K>
+    >
+  } & {
+    readonly [DEFAULT_REQUEST_TRANSFORMER]: RequestTransformer<ActionTypes>
+  }
+>
+
+export interface HandleRequestTransformerActions {
+  <ActionTypes extends AnyAction>(
+    requestTransformerMap: RequestTransformerMap<ActionTypes>
+  ): RequestTransformer<ActionTypes>
+}
+
 export type TransformerMap<ActionTypes extends AnyAction> = Partial<
   {
     readonly [K in ActionTypes['type']]: ResponseTransformer<
@@ -249,6 +266,7 @@ export interface MakeResponse {
 export const createFetchAction: CreateFetchAction
 export const handleFatalActions: HandleFatalActions
 export const handleRequestCreatorActions: HandleRequestCreatorActions
+export const handleRequestTransformerActions: HandleRequestTransformerActions
 export const handleResponderActions: HandleResponderActions
 export const handleResponseActions: HandleResponseActions
 export const handleTransformerActions: HandleTransformerActions
