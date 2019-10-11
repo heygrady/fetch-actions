@@ -57,8 +57,13 @@ export interface FetchAction<ActionTypes extends AnyAction> {
   (action: ActionTypes): Promise<any>
 }
 
+export interface Finally<ActionTypes extends AnyAction> {
+  (action: ActionTypes, errored: boolean): MaybePromise<void>
+}
+
 export interface CreateFetchActionConfig<ActionTypes extends AnyAction> {
   fetch?: typeof fetch
+  finally?: Finally<ActionTypes>
   requestCreator?: RequestCreator<ActionTypes>
   requestTransformer?: RequestTransformer<ActionTypes>
   responder?: Responder<ActionTypes>
@@ -201,6 +206,12 @@ export interface ReduceConfigs {
   ): CreateFetchActionConfig<ActionTypes>
 }
 
+export interface ReduceFinallies {
+  <ActionTypes extends AnyAction>(
+    ...finallies: ReadonlyArray<Finally<ActionTypes>>
+  ): Finally<ActionTypes>
+}
+
 export interface ReduceHandlers {
   <State, ActionTypes extends AnyAction, Result>(
     ...handlers: ReadonlyArray<Handler<State, ActionTypes, Result>>
@@ -260,6 +271,7 @@ export const makeRequest: MakeRequest
 export const makeRequestResponse: MakeRequestResponse
 export const makeResponse: MakeResponse
 export const reduceConfigs: ReduceConfigs
+export const reduceFinallies: ReduceFinallies
 export const reduceHandlers: ReduceHandlers
 export const someFatalHandlers: SomeFatalHandlers
 export const someRequestCreators: SomeRequestCreators

@@ -32,6 +32,7 @@ export {
 export {
   reduceHandlers,
   reduceConfigs,
+  reduceFinallies,
   someFatalHandlers,
   someRequestCreators,
   someResponders,

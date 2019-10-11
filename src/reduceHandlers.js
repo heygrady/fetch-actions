@@ -37,6 +37,7 @@ export const reduceConfigs = (fetch, ...configs) => {
       ...configs.map((c) => c.fatalHandler).filter(Boolean)
     ),
     fetch,
+    finally: reduceFinallies(...configs.map((c) => c.finally).filter(Boolean)),
     requestCreator: someRequestCreators(
       ...configs.map((c) => c.requestCreator).filter(Boolean)
     ),
@@ -61,6 +62,17 @@ const isPromise = (anything) => {
     !!anything &&
     typeof anything.then === 'function'
   )
+}
+
+export const reduceFinallies = (...finallies) => {
+  return (action, errored) => {
+    return finallies.reduce((promise, handler) => {
+      if (isPromise(promise)) {
+        return promise.then(() => handler(action, errored))
+      }
+      return handler(action, errored)
+    }, undefined)
+  }
 }
 
 export const reduceHandlers = (...handlers) => {

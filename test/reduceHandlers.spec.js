@@ -2,6 +2,7 @@ import 'cross-fetch/polyfill'
 
 import {
   reduceConfigs,
+  reduceFinallies,
   reduceHandlers,
   someFatalHandlers,
   someRequestCreators,
@@ -366,6 +367,63 @@ describe('reduceHandlers', () => {
         }
       )
       handler(request, action)
+    })
+  })
+
+  describe('reduceFinallies', () => {
+    let firstFinally
+    let secondFinally
+
+    beforeEach(() => {
+      firstFinally = jest.fn((action) => undefined)
+      secondFinally = jest.fn((action) => 'ignored')
+    })
+
+    it('returns non-Promise on empty handlers, no action', () => {
+      const handler = reduceFinallies()
+      const final = handler()
+      expect(final && final.then).toBeUndefined()
+    })
+
+    it('returns non-Promise if handlers return non-Promises', () => {
+      const handler = reduceFinallies(firstFinally, secondFinally)
+      const final = handler(action, false)
+      expect(final && final.then).toBeUndefined()
+    })
+
+    it('returns Promise if handlers return Promises', () => {
+      const handler = reduceFinallies(
+        firstFinally,
+        async () => Promise.resolve(),
+        secondFinally
+      )
+      expect.assertions(1)
+      return handler(action, false).then(() => {
+        expect(true).toEqual(true)
+      })
+    })
+
+    it('calls all handlers', () => {
+      const handler = reduceFinallies(firstFinally, secondFinally)
+      handler()
+      expect(firstFinally).toBeCalled()
+      expect(secondFinally).toBeCalled()
+    })
+
+    it('calls each handler with same action and errored', () => {
+      const handler = reduceFinallies(
+        (innerAction, innerErrored) => {
+          expect(innerAction).toEqual(action)
+          expect(innerErrored).toEqual(true)
+          return undefined
+        },
+        (innerAction, innerErrored) => {
+          expect(innerAction).toEqual(action)
+          expect(innerErrored).toEqual(true)
+          return undefined
+        }
+      )
+      handler(action, true)
     })
   })
 })
