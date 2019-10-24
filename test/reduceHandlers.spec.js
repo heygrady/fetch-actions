@@ -230,7 +230,8 @@ describe('reduceHandlers', () => {
     })
 
     it('calls each handler with same action', () => {
-      const handler = someResponders(
+      expect.assertions(2)
+      const handler = someRequestCreators(
         (innerAction) => {
           expect(innerAction).toEqual(action)
           return undefined
@@ -241,6 +242,62 @@ describe('reduceHandlers', () => {
         }
       )
       handler(action)
+    })
+
+    describe('async', () => {
+      beforeEach(() => {
+        firstrequestCreator = jest.fn((action) => Promise.resolve(undefined))
+        secondrequestCreator = jest.fn((action) => Promise.resolve(undefined))
+      })
+
+      it('calls all handlers', async () => {
+        const handler = someRequestCreators(
+          firstrequestCreator,
+          secondrequestCreator
+        )
+        await handler()
+        expect(firstrequestCreator).toBeCalled()
+        expect(secondrequestCreator).toBeCalled()
+      })
+
+      it('calls only first handler', async () => {
+        const firstrequestCreator = jest.fn(() =>
+          Promise.resolve(new Request('http://first'))
+        )
+        const handler = someRequestCreators(
+          firstrequestCreator,
+          secondrequestCreator
+        )
+        await handler()
+        expect(firstrequestCreator).toBeCalled()
+        expect(secondrequestCreator).not.toBeCalled()
+      })
+
+      it('return request from first handler', async () => {
+        const request = new Request('http://first')
+        const firstrequestCreator = jest.fn(() => request)
+        const handler = someRequestCreators(
+          firstrequestCreator,
+          secondrequestCreator
+        )
+        const final = await handler()
+        expect(final).toEqual(request)
+      })
+
+      it('calls each handler with same action', async () => {
+        expect.assertions(2)
+        const handler = someRequestCreators(
+          async (innerAction) => {
+            expect(innerAction).toEqual(action)
+            return undefined
+          },
+          async (innerAction) => {
+            expect(innerAction).toEqual(action)
+            return undefined
+          }
+        )
+        await handler(action)
+      })
     })
   })
 
@@ -291,19 +348,103 @@ describe('reduceHandlers', () => {
     })
 
     it('calls each handler with same error and action', () => {
+      expect.assertions(4)
       const handler = someFatalHandlers(
-        (innerRequest, innerAction) => {
+        (innerError, innerAction) => {
           expect(innerAction).toEqual(action)
-          expect(innerRequest).toEqual(error)
+          expect(innerError).toEqual(error)
           return undefined
         },
-        (innerRequest, innerAction) => {
+        (innerError, innerAction) => {
           expect(innerAction).toEqual(action)
-          expect(innerRequest).toEqual(error)
+          expect(innerError).toEqual(error)
           return undefined
         }
       )
       handler(error, action)
+    })
+
+    it('if first handler throws, second is called with the new error', () => {
+      expect.assertions(4)
+      const newError = new Error('Something else went wrong')
+      const handler = someFatalHandlers(
+        (innerError, innerAction) => {
+          expect(innerAction).toEqual(action)
+          expect(innerError).toEqual(error)
+          throw newError
+        },
+        (innerError, innerAction) => {
+          expect(innerAction).toEqual(action)
+          expect(innerError).toEqual(newError)
+          return undefined
+        }
+      )
+      handler(error, action)
+    })
+
+    describe('async', () => {
+      beforeEach(() => {
+        firstresponder = jest.fn((error, action) => Promise.resolve(undefined)) // eslint-disable-line handle-callback-err
+        secondresponder = jest.fn((error, action) => Promise.resolve(undefined)) // eslint-disable-line handle-callback-err
+      })
+
+      it('calls all handlers', async () => {
+        const handler = someFatalHandlers(firstresponder, secondresponder)
+        await handler()
+        expect(firstresponder).toBeCalled()
+        expect(secondresponder).toBeCalled()
+      })
+
+      it('calls only first handler', async () => {
+        const firstresponder = jest.fn(() => new Response(''))
+        const handler = someFatalHandlers(firstresponder, secondresponder)
+        await handler()
+        expect(firstresponder).toBeCalled()
+        expect(secondresponder).not.toBeCalled()
+      })
+
+      it('return response from first handler', async () => {
+        const response = new Response()
+        const firstresponder = jest.fn(() => response)
+        const handler = someFatalHandlers(firstresponder, secondresponder)
+        const final = await handler()
+        expect(final).toEqual(response)
+      })
+
+      it('calls each handler with same error and action', async () => {
+        expect.assertions(4)
+        const handler = someFatalHandlers(
+          async (innerRequest, innerAction) => {
+            expect(innerAction).toEqual(action)
+            expect(innerRequest).toEqual(error)
+            return undefined
+          },
+          async (innerRequest, innerAction) => {
+            expect(innerAction).toEqual(action)
+            expect(innerRequest).toEqual(error)
+            return undefined
+          }
+        )
+        await handler(error, action)
+      })
+
+      it('if first handler throws, second is called with the new error', () => {
+        expect.assertions(4)
+        const newError = new Error('Something else went wrong')
+        const handler = someFatalHandlers(
+          async (innerError, innerAction) => {
+            expect(innerAction).toEqual(action)
+            expect(innerError).toEqual(error)
+            throw newError
+          },
+          async (innerError, innerAction) => {
+            expect(innerAction).toEqual(action)
+            expect(innerError).toEqual(newError)
+            return undefined
+          }
+        )
+        handler(error, action)
+      })
     })
   })
 
@@ -354,6 +495,7 @@ describe('reduceHandlers', () => {
     })
 
     it('calls each handler with same request and action', () => {
+      expect.assertions(4)
       const handler = someResponders(
         (innerRequest, innerAction) => {
           expect(innerAction).toEqual(action)
@@ -367,6 +509,57 @@ describe('reduceHandlers', () => {
         }
       )
       handler(request, action)
+    })
+
+    describe('async', () => {
+      beforeEach(() => {
+        firstresponder = jest.fn((request, action) =>
+          Promise.resolve(undefined)
+        )
+        secondresponder = jest.fn((request, action) =>
+          Promise.resolve(undefined)
+        )
+      })
+
+      it('calls all handlers', async () => {
+        const handler = someResponders(firstresponder, secondresponder)
+        await handler()
+        expect(firstresponder).toBeCalled()
+        expect(secondresponder).toBeCalled()
+      })
+
+      it('calls only first handler', async () => {
+        const firstresponder = jest.fn(() => new Response(''))
+        const handler = someResponders(firstresponder, secondresponder)
+        await handler()
+        expect(firstresponder).toBeCalled()
+        expect(secondresponder).not.toBeCalled()
+      })
+
+      it('return response from first handler', async () => {
+        const response = new Response()
+        const firstresponder = jest.fn(() => response)
+        const handler = someResponders(firstresponder, secondresponder)
+        const final = await handler()
+        expect(final).toEqual(response)
+      })
+
+      it('calls each handler with same request and action', async () => {
+        expect.assertions(4)
+        const handler = someResponders(
+          async (innerRequest, innerAction) => {
+            expect(innerAction).toEqual(action)
+            expect(innerRequest).toEqual(request)
+            return undefined
+          },
+          async (innerRequest, innerAction) => {
+            expect(innerAction).toEqual(action)
+            expect(innerRequest).toEqual(request)
+            return undefined
+          }
+        )
+        await handler(request, action)
+      })
     })
   })
 

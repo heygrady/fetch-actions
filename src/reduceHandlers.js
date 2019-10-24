@@ -1,33 +1,66 @@
 export const someFatalHandlers = (...handlers) => {
   return (error, action) => {
-    let data
-    handlers.some((handler) => {
-      data = handler(error, action)
-      return typeof data !== 'undefined'
-    })
-    return data
+    return handlers.reduce((data, handler) => {
+      if (typeof data !== 'undefined') {
+        if (isPromise(data)) {
+          return data
+            .catch((rejection) => {
+              error = rejection
+            })
+            .then((resolvedData) => {
+              if (typeof resolvedData !== 'undefined') {
+                return resolvedData
+              }
+              return handler(error, action)
+            })
+        }
+        return data
+      }
+      try {
+        return handler(error, action)
+      } catch (newError) {
+        error = newError
+        return undefined
+      }
+    }, undefined)
   }
 }
 
 export const someRequestCreators = (...handlers) => {
   return (action) => {
-    let request
-    handlers.some((handler) => {
-      request = handler(action)
-      return !!request
-    })
-    return request
+    return handlers.reduce((request, handler) => {
+      if (request) {
+        if (isPromise(request)) {
+          return request.then((resolvedRequest) => {
+            if (resolvedRequest) {
+              return resolvedRequest
+            }
+            return handler(action)
+          })
+        }
+        return request
+      }
+      return handler(action)
+    }, undefined)
   }
 }
 
 export const someResponders = (...handlers) => {
   return (request, action) => {
-    let response
-    handlers.some((handler) => {
-      response = handler(request, action)
-      return !!response
-    })
-    return response
+    return handlers.reduce((response, handler) => {
+      if (response) {
+        if (isPromise(response)) {
+          return response.then((resolvedResponse) => {
+            if (resolvedResponse) {
+              return resolvedResponse
+            }
+            return handler(request, action)
+          })
+        }
+        return response
+      }
+      return handler(request, action)
+    }, undefined)
   }
 }
 
