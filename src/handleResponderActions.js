@@ -18,7 +18,10 @@ const maybeStringify = (body) => {
 export const makeResponse = (response) => {
   if (typeof response.then === 'function') {
     return response.then((response) => makeResponse(response))
-  } else if (typeof response.json === 'function') {
+  } else if (
+    typeof response === 'undefined' ||
+    typeof response.json === 'function'
+  ) {
     return response
   } else if (Array.isArray(response) && response.length === 2) {
     let [body, init] = response
