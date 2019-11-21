@@ -162,10 +162,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
   }
 }
 
-const PostListContainer = connect(
-  undefined,
-  mapDispatchToProps
-)(PostList)
+const PostListContainer = connect(undefined, mapDispatchToProps)(PostList)
 export default PostListContainer
 ```
 
