@@ -48,6 +48,7 @@ export type LooseResponse =
   | number
   | boolean
   | object
+  | undefined
   | ReadonlyArray<string | number | boolean | object>
 
 export interface FatalHandler<ActionTypes extends AnyAction> {
