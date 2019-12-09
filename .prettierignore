@@ -1,5 +1,8 @@
-codecov
+build
+coverage
+declarations
 dist
 lib
 es
+examples
 node_modules
