@@ -1,6 +1,6 @@
 {
   "name": "fetch-actions",
-  "version": "0.7.0",
+  "version": "0.7.1",
   "description": "Manage fetch with flux-standard-actions dispatched from a saga or thunk.",
   "main": "lib/index.js",
   "types": "index.d.ts",
