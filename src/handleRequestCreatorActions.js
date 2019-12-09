@@ -8,7 +8,9 @@ export const DEFAULT_HANDLER =
   '@@fetch-actions/handleRequestCreatorActions/DEFAULT_HANDLER'
 
 export const makeRequest = (request) => {
-  if (typeof request.then === 'function') {
+  if (typeof request === 'undefined') {
+    return undefined
+  } else if (typeof request.then === 'function') {
     return request.then((request) => makeRequest(request))
   } else if (typeof request.url === 'string') {
     return request

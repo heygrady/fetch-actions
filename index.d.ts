@@ -87,7 +87,7 @@ export type RequestTransformer<ActionTypes extends AnyAction> = Handler<
 export type ResponseHandler<ActionTypes extends AnyAction> = Handler<
   ResponseWithJson,
   ActionTypes,
-  MaybePromise<ResponseWithJson | undefined>
+  MaybePromise<ResponseWithJson>
 >
 
 export type ResponseTransformer<ActionTypes extends AnyAction> = Handler<
@@ -264,7 +264,9 @@ export interface MakeRequest {
 }
 
 export interface MakeRequestResponse {
-  (response: MaybePromise<LooseResponse>): MaybePromise<ResponseWithJson>
+  (response: MaybePromise<LooseResponse>): MaybePromise<
+    ResponseWithJson | undefined
+  >
 }
 
 export interface MakeResponse {
